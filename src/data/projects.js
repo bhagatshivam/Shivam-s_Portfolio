@@ -1,0 +1,98 @@
+export const projects = [
+  {
+    id: 1,
+    title: "South Asian Culinary RAG Assistant",
+    status: "complete",
+    year: "2025",
+    description:
+      "Conversational AI for South Asian cuisine using retrieval-augmented generation. Achieved Recall@3 of 0.924 and intent classification accuracy of 0.93 across seven intent categories.",
+    tech: ["LangGraph", "FAISS", "BGE-Large", "Qwen2.5", "Python", "Streamlit"],
+    github: "https://github.com/Mithil21/Culinary_RAG_Assistant",
+    isDissertation: false,
+    color: "#8B5CF6",
+  },
+  {
+    id: 2,
+    title: "CI Pipeline Documentation Tool",
+    status: "in-progress",
+    year: "2026",
+    description:
+      "MSc dissertation project. LLM-powered tool that parses CI/CD YAML configs (GitHub Actions, GitLab CI) and auto-generates natural-language documentation and Mermaid.js pipeline diagrams.",
+    tech: ["Python", "LLM APIs", "YAML", "Mermaid.js", "Jinja2"],
+    github: null,
+    isDissertation: true,
+    color: "#4F8EF7",
+  },
+  {
+    id: 3,
+    title: "StoryWanderer",
+    status: "in-progress",
+    year: "2025",
+    description:
+      "Full-stack web novel publishing platform with chapter-level content management. Supabase handles authentication, PostgreSQL storage, and real-time data sync.",
+    tech: ["React 18", "TypeScript", "Supabase", "Tailwind", "Vite"],
+    github: null,
+    isDissertation: false,
+    color: "#10B981",
+  },
+  {
+    id: 4,
+    title: "Fashion-MNIST CNN Classifier",
+    status: "complete",
+    year: "2025",
+    description:
+      "Compact 2-block CNN (50,378 parameters, sub-100K constraint) achieving 92.35% validation and 91.72% test accuracy. Trained inside a Docker container with no network access.",
+    tech: ["PyTorch", "Docker", "CNN", "Python", "NumPy"],
+    github: null,
+    isDissertation: false,
+    color: "#F59E0B",
+  },
+  {
+    id: 5,
+    title: "Real-Time Drowsiness Detection",
+    status: "complete",
+    year: "2024",
+    description:
+      "Real-time driver fatigue detection using a custom-trained YOLOv5 model classifying awake/drowsy eye states from a live webcam feed, with debounce logic for false-positive suppression.",
+    tech: ["YOLOv5", "PyTorch", "OpenCV", "NumPy"],
+    github: "https://github.com/bhagatshivam/Drowsiness-Detection",
+    isDissertation: false,
+    color: "#EF4444",
+  },
+  {
+    id: 6,
+    title: "Ask the Doc",
+    status: "complete",
+    year: "2025",
+    description:
+      "Generative AI document assistant. Upload a PDF or paste text, get abstractive summarisation via Pegasus, extractive QA via RoBERTa-SQuAD2, and text-to-speech output via gTTS.",
+    tech: ["Streamlit", "HuggingFace Transformers", "Pegasus", "RoBERTa", "gTTS", "Python"],
+    github: "https://github.com/bhagatshivam/Ask-the-Doc",
+    isDissertation: false,
+    color: "#8B5CF6",
+  },
+  {
+    id: 7,
+    title: "Gantt Chart Task Manager",
+    status: "complete",
+    year: "2024",
+    description:
+      "Interactive project scheduling app for visualising and managing tasks. Dynamic task creation, editing, and dependency management built on React state.",
+    tech: ["React.js", "Bryntum Gantt", "JavaScript", "CSS"],
+    github: "https://github.com/bhagatshivam/my-gantt-app",
+    isDissertation: false,
+    color: "#4F8EF7",
+  },
+  {
+    id: 8,
+    title: "Transaction Data Analysis",
+    status: "complete",
+    year: "2024",
+    description:
+      "E-commerce business intelligence project. Analysed synthetic transaction data to extract customer trends, funnel analysis, and KPI dashboards.",
+    tech: ["Python", "Pandas", "NumPy", "Plotly", "Seaborn"],
+    github: "https://github.com/bhagatshivam/Business-Data-Analytics",
+    isDissertation: false,
+    color: "#10B981",
+  },
+];
