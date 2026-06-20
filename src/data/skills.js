@@ -32,7 +32,7 @@ export const skills = [
   // Tools cluster — green
   { id: "python", label: "Python", cluster: "tools", icon: `${DEVICON}/python/python-original.svg` },
   { id: "git", label: "Git", cluster: "tools", icon: `${DEVICON}/git/git-original.svg` },
-  { id: "github", label: "GitHub", cluster: "tools", icon: `${DEVICON}/github/github-original.svg` },
+  { id: "github", label: "GitHub", cluster: "tools", icon: null, isGithub: true },
   { id: "docker", label: "Docker", cluster: "tools", icon: `${DEVICON}/docker/docker-original.svg` },
   { id: "linux", label: "Linux", cluster: "tools", icon: `${DEVICON}/linux/linux-original.svg` },
   { id: "vscode", label: "VS Code", cluster: "tools", icon: `${DEVICON}/vscode/vscode-original.svg` },
