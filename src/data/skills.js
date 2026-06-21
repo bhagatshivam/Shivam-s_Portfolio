@@ -17,8 +17,8 @@ export const skills = [
   { id: "pytorch", label: "PyTorch", cluster: "ai", icon: `${DEVICON}/pytorch/pytorch-original.svg` },
   { id: "sklearn", label: "scikit-learn", cluster: "ai", icon: `${DEVICON}/scikitlearn/scikitlearn-original.svg` },
   { id: "pandas", label: "Pandas", cluster: "ai", icon: `${DEVICON}/pandas/pandas-original.svg` },
-  { id: "opencv", label: "OpenCV", cluster: "ai", icon: `${DEVICON}/opencv/opencv-original.svg` },
   { id: "numpy", label: "NumPy", cluster: "ai", icon: `${DEVICON}/numpy/numpy-original.svg` },
+  { id: "opencv", label: "OpenCV", cluster: "ai", icon: `${DEVICON}/opencv/opencv-original.svg` },
   { id: "langgraph", label: "LangGraph", cluster: "ai", icon: null, emoji: "🦜" },
   { id: "faiss", label: "FAISS", cluster: "ai", icon: null, emoji: "🔎" },
   // Web cluster — blue

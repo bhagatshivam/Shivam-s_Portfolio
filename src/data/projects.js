@@ -7,6 +7,7 @@ export const projects = [
     description:
       "Conversational AI for South Asian cuisine using retrieval-augmented generation. Achieved Recall@3 of 0.924 and intent classification accuracy of 0.93 across seven intent categories.",
     tech: ["LangGraph", "FAISS", "BGE-Large", "Qwen2.5", "Python", "Streamlit"],
+    skillIds: ["python"],
     github: "https://github.com/Mithil21/Culinary_RAG_Assistant",
     isDissertation: false,
     color: "#8B5CF6",
@@ -19,6 +20,7 @@ export const projects = [
     description:
       "MSc dissertation project. LLM-powered tool that parses CI/CD YAML configs (GitHub Actions, GitLab CI) and auto-generates natural-language documentation and Mermaid.js pipeline diagrams.",
     tech: ["Python", "LLM APIs", "YAML", "Mermaid.js", "Jinja2"],
+    skillIds: ["python"],
     github: null,
     isDissertation: true,
     color: "#4F8EF7",
@@ -31,6 +33,7 @@ export const projects = [
     description:
       "Full-stack web novel publishing platform with chapter-level content management. Supabase handles authentication, PostgreSQL storage, and real-time data sync.",
     tech: ["React 18", "TypeScript", "Supabase", "Tailwind", "Vite"],
+    skillIds: ["react", "typescript", "postgresql", "tailwind"],
     github: null,
     isDissertation: false,
     color: "#10B981",
@@ -43,6 +46,7 @@ export const projects = [
     description:
       "Compact 2-block CNN (50,378 parameters, sub-100K constraint) achieving 92.35% validation and 91.72% test accuracy. Trained inside a Docker container with no network access.",
     tech: ["PyTorch", "Docker", "CNN", "Python", "NumPy"],
+    skillIds: ["pytorch", "docker", "python", "numpy"],
     github: null,
     isDissertation: false,
     color: "#F59E0B",
@@ -55,6 +59,7 @@ export const projects = [
     description:
       "Real-time driver fatigue detection using a custom-trained YOLOv5 model classifying awake/drowsy eye states from a live webcam feed, with debounce logic for false-positive suppression.",
     tech: ["YOLOv5", "PyTorch", "OpenCV", "NumPy"],
+    skillIds: ["pytorch", "opencv", "numpy", "python"],
     github: "https://github.com/bhagatshivam/Drowsiness-Detection",
     isDissertation: false,
     color: "#EF4444",
@@ -67,6 +72,7 @@ export const projects = [
     description:
       "Generative AI document assistant. Upload a PDF or paste text, get abstractive summarisation via Pegasus, extractive QA via RoBERTa-SQuAD2, and text-to-speech output via gTTS.",
     tech: ["Streamlit", "HuggingFace Transformers", "Pegasus", "RoBERTa", "gTTS", "Python"],
+    skillIds: ["python"],
     github: "https://github.com/bhagatshivam/Ask-the-Doc",
     isDissertation: false,
     color: "#8B5CF6",
@@ -79,6 +85,7 @@ export const projects = [
     description:
       "Interactive project scheduling app for visualising and managing tasks. Dynamic task creation, editing, and dependency management built on React state.",
     tech: ["React.js", "Bryntum Gantt", "JavaScript", "CSS"],
+    skillIds: ["react", "javascript"],
     github: "https://github.com/bhagatshivam/my-gantt-app",
     isDissertation: false,
     color: "#4F8EF7",
@@ -91,6 +98,7 @@ export const projects = [
     description:
       "E-commerce business intelligence project. Analysed synthetic transaction data to extract customer trends, funnel analysis, and KPI dashboards.",
     tech: ["Python", "Pandas", "NumPy", "Plotly", "Seaborn"],
+    skillIds: ["python", "pandas", "numpy"],
     github: "https://github.com/bhagatshivam/Business-Data-Analytics",
     isDissertation: false,
     color: "#10B981",

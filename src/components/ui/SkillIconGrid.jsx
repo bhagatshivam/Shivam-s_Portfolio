@@ -1,25 +1,37 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { skills, clusterColors, clusterLabels } from "../../data/skills";
+import { useSkillFocus } from "../../context/SkillFocusContext";
 
-function SkillIcon({ skill, index }) {
+function SkillIcon({ skill, index, isFocused }) {
   const color = clusterColors[skill.cluster];
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: isFocused ? 1.08 : 1,
+      }}
       transition={{ duration: 0.4, delay: index * 0.04 }}
       whileHover={{ y: -4 }}
-      className="group flex flex-col items-center gap-3 p-4 rounded-xl border border-border bg-surface transition-all duration-200"
-      style={{ transition: "box-shadow 0.25s ease, border-color 0.25s ease" }}
+      className="group flex flex-col items-center gap-3 p-4 rounded-xl border bg-surface transition-all duration-300"
+      style={{
+        borderColor: isFocused ? color : "#1C2333",
+        boxShadow: isFocused ? `0 0 28px ${color}60` : "none",
+      }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 24px ${color}40`;
-        e.currentTarget.style.borderColor = `${color}80`;
+        if (!isFocused) {
+          e.currentTarget.style.boxShadow = `0 0 24px ${color}40`;
+          e.currentTarget.style.borderColor = `${color}80`;
+        }
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = "none";
-        e.currentTarget.style.borderColor = "";
+        if (!isFocused) {
+          e.currentTarget.style.boxShadow = "none";
+          e.currentTarget.style.borderColor = "#1C2333";
+        }
       }}
     >
       <div
@@ -45,7 +57,10 @@ function SkillIcon({ skill, index }) {
           <span className="text-2xl">{skill.emoji}</span>
         )}
       </div>
-      <span className="font-display text-xs text-text-secondary text-center leading-tight">
+      <span
+        className="font-display text-xs text-center leading-tight"
+        style={{ color: isFocused ? "#F0F6FF" : "#8B9EC7" }}
+      >
         {skill.label}
       </span>
     </motion.div>
@@ -54,9 +69,23 @@ function SkillIcon({ skill, index }) {
 
 export default function SkillIconGrid() {
   const clusters = ["ai", "web", "tools"];
+  const { focusedSkillIds, sourceProject } = useSkillFocus();
 
   return (
     <div className="space-y-12">
+      {sourceProject && focusedSkillIds.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          className="text-center -mt-4 mb-2"
+        >
+          <span className="font-display text-xs text-accent-blue bg-accent-blue bg-opacity-10 border border-accent-blue border-opacity-30 rounded-full px-4 py-1.5">
+            ↑ used in {sourceProject}
+          </span>
+        </motion.div>
+      )}
+
       {clusters.map((cluster) => {
         const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
         const clusterSkills = skills.filter((s) => s.cluster === cluster);
@@ -85,7 +114,12 @@ export default function SkillIconGrid() {
 
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4">
               {clusterSkills.map((skill, index) => (
-                <SkillIcon key={skill.id} skill={skill} index={index} />
+                <SkillIcon
+                  key={skill.id}
+                  skill={skill}
+                  index={index}
+                  isFocused={focusedSkillIds.includes(skill.id)}
+                />
               ))}
             </div>
           </motion.div>

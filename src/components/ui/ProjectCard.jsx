@@ -2,9 +2,12 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lock, X } from "lucide-react";
 import { usePerformance } from "../../context/PerformanceContext";
+import { useSkillFocus } from "../../context/SkillFocusContext";
+import { skills } from "../../data/skills";
 
 export default function ProjectCard({ project }) {
   const { isLiteMode } = usePerformance();
+  const { jumpToSkills } = useSkillFocus();
   const cardRef = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
@@ -25,6 +28,15 @@ export default function ProjectCard({ project }) {
 
   const handleMouseLeave = () => {
     setTilt({ x: 0, y: 0 });
+  };
+
+  const matchedSkills = (project.skillIds || [])
+    .map((id) => skills.find((s) => s.id === id))
+    .filter(Boolean);
+
+  const handleSkillChipClick = () => {
+    setIsExpanded(false);
+    jumpToSkills(project.skillIds || [], project.title);
   };
 
   return (
@@ -153,6 +165,36 @@ export default function ProjectCard({ project }) {
                   </span>
                 ))}
               </div>
+
+              {matchedSkills.length > 0 && (
+                <div className="mb-6 pt-5 border-t border-border">
+                  <p className="font-display text-[10px] text-text-secondary tracking-widest mb-3">
+                    BUILT WITH — CLICK TO SEE IN SKILLS
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {matchedSkills.map((skill) => (
+                      <button
+                        key={skill.id}
+                        onClick={handleSkillChipClick}
+                        className="flex items-center gap-1.5 font-display text-xs text-text-primary border rounded-full px-3 py-1.5 transition-all duration-200 hover:scale-105"
+                        style={{ borderColor: `${project.color}60` }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.boxShadow = `0 0 12px ${project.color}50`;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.boxShadow = "none";
+                        }}
+                      >
+                        {skill.icon && (
+                          <img src={skill.icon} alt="" className="w-3.5 h-3.5" />
+                        )}
+                        {skill.label}
+                        <span style={{ color: project.color }}>↓</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {project.github ? (
                 <a
