@@ -8,7 +8,7 @@ export const projects = [
       "Conversational AI for South Asian cuisine using retrieval-augmented generation. Achieved Recall@3 of 0.924 and intent classification accuracy of 0.93 across seven intent categories.",
     tech: ["LangGraph", "FAISS", "BGE-Large", "Qwen2.5", "Python", "Streamlit"],
     skillIds: ["python"],
-    github: "https://github.com/Mithil21/Culinary_RAG_Assistant",
+    github: "https://github.com/bhagatshivam/South-Asian-Culinary-RAG-Assistant",
     isDissertation: false,
     color: "#8B5CF6",
   },
