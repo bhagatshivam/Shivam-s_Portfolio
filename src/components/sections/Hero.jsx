@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <div className="pb-16 pt-28 md:pb-24 md:pt-40">
       <div className="page-container">
-        <Reveal>
+        <Reveal immediate>
           {/* Static dot: nothing on this page loops. */}
           <p className="inline-flex items-start gap-2.5 rounded-2xl border border-border bg-surface px-3.5 py-2 text-small text-text-secondary">
             <span aria-hidden="true" className="mt-[0.5em] h-2 w-2 shrink-0 rounded-full bg-accent" />

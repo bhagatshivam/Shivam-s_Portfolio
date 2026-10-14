@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { MotionConfig } from "framer-motion";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const PerformanceContext = createContext();
@@ -48,8 +47,7 @@ export function PerformanceProvider({ children }) {
         isSystemDefault: manualChoice === null,
       }}
     >
-      {/* Framer Motion skips transform/layout animation when set to "always". */}
-      <MotionConfig reducedMotion={isLiteMode ? "always" : "never"}>{children}</MotionConfig>
+      {children}
     </PerformanceContext.Provider>
   );
 }

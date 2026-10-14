@@ -49,6 +49,29 @@ html[data-lite="true"] .hover-lift:hover {
   transform: none;
 }
 
+/* Scroll reveal: one 8px fade/slide, once. Lite mode renders plain markup (see Reveal.jsx). */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes reveal-load {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.reveal-load {
+  animation: reveal-load 0.3s ease-out both;
+}
+
 /* Case-study figure numbers count only the figures that actually render. */
 .case-study {
   counter-reset: figure;
