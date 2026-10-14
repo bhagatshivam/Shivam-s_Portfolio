@@ -5,6 +5,7 @@ import { skills } from "./skills";
 //
 // Shape:
 //   id / slug     stable string id, used by skills.js `projectIds`
+//   shortTitle    short name for tight spots (skills section, chips)
 //   caseStudy     slug for /projects/:slug, or null when there is no case-study page
 //   featured      true = large card on the home page, false = compact card
 //   status        "complete" | "in-progress" (drives the status chip colour)
@@ -23,6 +24,7 @@ import { skills } from "./skills";
 const projectData = [
   {
     id: "ci-pipeline-docs",
+    shortTitle: "CI Pipeline Docs",
     caseStudy: "ci-pipeline-docs",
     featured: true,
     title: "What Is My CI Pipeline Doing?",
@@ -57,6 +59,7 @@ const projectData = [
   },
   {
     id: "vach",
+    shortTitle: "Vach",
     caseStudy: "vach",
     featured: true,
     title: "Vach: offline PDF & EPUB reader for Android",
@@ -101,6 +104,7 @@ const projectData = [
   },
   {
     id: "culinary-rag",
+    shortTitle: "Culinary RAG",
     caseStudy: null,
     featured: false,
     title: "South Asian Culinary RAG Assistant",
@@ -126,6 +130,7 @@ const projectData = [
   },
   {
     id: "storywanderer",
+    shortTitle: "StoryWanderer",
     caseStudy: null,
     featured: false,
     title: "StoryWanderer",
@@ -150,6 +155,7 @@ const projectData = [
   },
   {
     id: "ask-the-doc",
+    shortTitle: "Ask the Doc",
     caseStudy: null,
     featured: false,
     title: "Ask the Doc",
