@@ -138,7 +138,7 @@ export const caseStudies = [
           },
           {
             type: "paragraph",
-            text: "The deterministic and LLM-polished outputs both captured 192 of 201 facts, with none false. Polishing with the LLM neither added nor lost a fact. The baseline captured 107.",
+            text: "The deterministic and LLM-polished outputs scored identically: 192 of 201 facts each, with none false. The baseline captured 107.",
           },
           {
             type: "callout",
