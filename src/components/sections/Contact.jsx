@@ -5,7 +5,7 @@ import SectionHeader from "../ui/SectionHeader";
 import { site } from "../../data/site";
 import { useAssetExists } from "../../hooks/useAssetExists";
 
-const ROW = "flex items-center gap-4 rounded-lg border bg-surface p-4";
+const ROW = "flex items-center gap-4 card rounded-lg border p-4";
 const ICON = "flex h-9 w-9 items-center justify-center rounded-full border border-border text-accent";
 
 function ContactRow({ icon, label, value, href, external = true }) {

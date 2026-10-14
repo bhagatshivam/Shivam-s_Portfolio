@@ -7,6 +7,8 @@
 
 export const colors = {
   background: "#0B0D12",
+  // Alternate section background ("band"); cards inside a band use surface-raised.
+  band: "#10131A",
   surface: "#11141B",
   "surface-raised": "#161A23",
   // Decorative hairlines and card borders.
@@ -15,7 +17,9 @@ export const colors = {
   "border-strong": "#657089",
   "text-primary": "#E8ECF3",
   "text-secondary": "#9AA3B5",
-  accent: "#6EA8FF",
+  accent: "#5CA4FF",
+  // Second accent for gradients, glows and per-project visuals.
+  "accent-2": "#B49CFF",
   // Text on a filled accent surface (the CV button).
   "accent-ink": "#0B0D12",
   status: "#E5A44C",
@@ -46,8 +50,8 @@ export const fonts = {
 
 // [font-size, { lineHeight, letterSpacing, fontWeight }]
 export const fontSize = {
-  display: ["clamp(2.5rem, 1.5rem + 4.5vw, 4.5rem)", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "600" }],
-  h2: ["clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "600" }],
+  display: ["clamp(2.75rem, 1.5rem + 6vw, 5.75rem)", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "600" }],
+  h2: ["clamp(1.875rem, 1.3rem + 2.4vw, 3rem)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "600" }],
   h3: ["1.25rem", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
   lead: ["clamp(1.125rem, 1rem + 0.7vw, 1.5rem)", { lineHeight: "1.45" }],
   body: ["1rem", { lineHeight: "1.65" }],

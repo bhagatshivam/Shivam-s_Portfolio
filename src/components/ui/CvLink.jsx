@@ -4,9 +4,9 @@ import { useAssetExists } from "../../hooks/useAssetExists";
 
 const STYLES = {
   hero: {
-    link: "inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-small font-medium text-accent-ink hover:bg-accent/90",
+    link: "inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-3 text-body font-medium text-text-primary hover:border-accent hover:bg-accent/10",
     missing:
-      "inline-flex items-center gap-2 rounded-md border border-dashed border-border-strong px-4 py-2.5 text-small font-medium text-text-secondary",
+      "inline-flex items-center gap-2 rounded-md border border-dashed border-border-strong px-5 py-3 text-body font-medium text-text-secondary",
   },
   nav: {
     link: "rounded-md border border-accent px-3 py-1.5 text-small font-medium text-accent hover:bg-accent hover:text-accent-ink",
@@ -25,7 +25,8 @@ export default function CvLink({ variant = "hero" }) {
     return (
       <span className={styles.missing} title="The CV PDF is not available yet">
         {variant === "hero" && <FileText size={16} aria-hidden="true" />}
-        CV<span className="sr-only"> (not available yet)</span>
+        {variant === "hero" ? "Download CV" : "CV"}
+        <span className="sr-only"> (not available yet)</span>
       </span>
     );
   }
@@ -33,7 +34,7 @@ export default function CvLink({ variant = "hero" }) {
   return (
     <a href={site.contact.cv} target="_blank" rel="noopener noreferrer" className={styles.link}>
       {variant === "hero" && <FileText size={16} aria-hidden="true" />}
-      CV
+      {variant === "hero" ? "Download CV" : "CV"}
     </a>
   );
 }

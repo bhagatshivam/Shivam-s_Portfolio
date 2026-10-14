@@ -34,7 +34,7 @@ const meta = (entry) => [entry.org, entry.location].filter(Boolean).join(" · ")
 // Education: a bordered card with a prominent heading.
 function Education({ entry }) {
   return (
-    <div className="rounded-lg border border-border bg-surface p-5 [overflow-wrap:anywhere]">
+    <div className="rounded-lg card border border-border p-5 [overflow-wrap:anywhere]">
       <h3 className="text-h3 text-text-primary">
         <span className="sr-only">{KIND_LABEL.education}: </span>
         {entry.title}
@@ -110,7 +110,7 @@ export default function Experience() {
 
         <p className="mt-8 max-w-[70ch] text-small text-text-secondary">{workFraming}</p>
 
-        <details className="group/details mt-10 max-w-4xl rounded-lg border border-border bg-surface">
+        <details className="group/details mt-10 max-w-4xl rounded-lg card border border-border">
           <summary className="cursor-pointer px-5 py-3 font-mono text-label text-text-primary">
             Volunteering and certifications
           </summary>

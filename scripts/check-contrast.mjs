@@ -16,9 +16,9 @@ const ratio = (a, b) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-const surfaces = ["background", "surface", "surface-raised"];
+const surfaces = ["background", "band", "surface", "surface-raised"];
 const pairs = [];
-for (const fg of ["text-primary", "text-secondary", "accent", "status"]) {
+for (const fg of ["text-primary", "text-secondary", "accent", "accent-2", "status"]) {
   for (const bg of surfaces) pairs.push({ fg, bg, min: 4.5, use: "text" });
 }
 pairs.push({ fg: "accent-ink", bg: "accent", min: 4.5, use: "text on filled accent button" });

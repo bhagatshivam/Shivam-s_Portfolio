@@ -64,13 +64,20 @@ export default {
           [`@media (min-width: ${md})`]: { paddingInline: layout.gutter.md },
           [`@media (min-width: ${lg})`]: { paddingInline: layout.gutter.lg },
         },
-        // Flat cards: hover lift is the only card motion. Lite mode removes the transform.
+        // Cards: hover lift is the only card motion (CSS only). Lite mode removes the transform.
         ".hover-lift": {
-          transitionProperty: "transform, border-color",
+          transitionProperty: "transform, border-color, box-shadow",
           transitionDuration: "200ms",
           transitionTimingFunction: "ease-out",
-          "&:hover": { transform: "translateY(-2px)" },
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow: "0 12px 32px -12px rgb(var(--color-accent) / 0.35)",
+          },
         },
+        // Alternating section background. Cards sit on surface, or on surface-raised in a band.
+        ".band": { backgroundColor: "rgb(var(--color-band))" },
+        ".card": { backgroundColor: "rgb(var(--color-surface))" },
+        ".band .card": { backgroundColor: "rgb(var(--color-surface-raised))" },
         ".section-y": {
           paddingBlock: layout.sectionY.base,
           [`@media (min-width: ${md})`]: { paddingBlock: layout.sectionY.md },

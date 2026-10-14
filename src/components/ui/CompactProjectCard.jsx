@@ -11,7 +11,7 @@ export default function CompactProjectCard({ project }) {
   return (
     <article
       id={`project-${project.id}`}
-      className={`hover-lift flex h-full flex-col gap-3 rounded-xl border bg-surface p-5 hover:border-accent/50 has-[:focus-visible]:border-accent ${
+      className={`hover-lift flex h-full flex-col gap-3 rounded-xl border card p-5 hover:border-accent/50 has-[:focus-visible]:border-accent ${
         highlighted ? "border-accent" : "border-border"
       }`}
     >

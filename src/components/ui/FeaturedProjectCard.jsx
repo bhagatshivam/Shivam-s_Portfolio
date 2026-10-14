@@ -15,7 +15,7 @@ export default function FeaturedProjectCard({ project }) {
   return (
     <article
       id={`project-${project.id}`}
-      className={`hover-lift group relative flex h-full flex-col overflow-hidden rounded-xl border bg-surface hover:border-accent/50 has-[:focus-visible]:border-accent ${
+      className={`hover-lift group relative flex h-full flex-col overflow-hidden rounded-xl border card hover:border-accent/50 has-[:focus-visible]:border-accent ${
         highlighted ? "border-accent" : "border-border"
       }`}
     >

@@ -1,68 +1,77 @@
-import { Mail } from "lucide-react";
+import { Link } from "react-router";
+import { ArrowRight } from "lucide-react";
 import { site } from "../../data/site";
-import { GithubGlyph, LinkedinGlyph } from "../ui/icons";
+import { projects } from "../../data/projects";
 import Reveal from "../ui/Reveal";
 import CvLink from "../ui/CvLink";
+import HeroVisual from "../ui/HeroVisual";
 
 const outlineButton =
-  "inline-flex items-center gap-2 rounded-md border border-border-strong px-4 py-2.5 text-small font-medium text-text-primary hover:border-accent";
+  "inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-3 text-body font-medium text-text-primary hover:border-accent hover:bg-accent/10";
+
+function chipTarget(chip) {
+  const project = projects.find((p) => p.id === chip.project);
+  return project?.caseStudy ? `/projects/${project.caseStudy}` : { pathname: "/", hash: "#projects" };
+}
 
 export default function Hero() {
   return (
-    <div className="pb-16 pt-28 md:pb-24 md:pt-40">
-      <div className="page-container">
+    <div className="hero-glow relative overflow-hidden pb-12 pt-28 md:pb-16 md:pt-36">
+      <HeroVisual />
+      <div className="page-container relative">
         <Reveal immediate>
           {/* Static dot: nothing on this page loops. */}
-          <p className="inline-flex items-start gap-2.5 rounded-2xl border border-border bg-surface px-3.5 py-2 text-small text-text-secondary">
+          <p className="inline-flex items-start gap-2.5 rounded-2xl border border-accent/40 bg-accent/10 px-3.5 py-2 text-small text-text-primary">
             <span aria-hidden="true" className="mt-[0.5em] h-2 w-2 shrink-0 rounded-full bg-accent" />
             {site.availability}
           </p>
 
-          <h1 className="mt-6 text-display text-text-primary">{site.name}</h1>
+          <h1 className="mt-7 text-display text-text-primary">{site.name}</h1>
 
-          <p className="mt-5 max-w-3xl text-lead text-text-secondary">{site.degreeLine}</p>
-          <p className="mt-2 max-w-3xl text-lead text-text-primary">{site.positioning}</p>
+          <p className="mt-5 max-w-4xl text-lead text-text-primary">
+            <span className="text-gradient font-semibold">{site.identity}</span> {site.identityDetail}
+          </p>
+          <p className="mt-4 max-w-3xl text-body text-text-secondary">{site.heroProof}</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <CvLink variant="hero" />
-            <a href={site.contact.github} target="_blank" rel="noopener noreferrer" className={outlineButton}>
-              <GithubGlyph size={16} />
-              GitHub
-            </a>
-            <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className={outlineButton}>
-              <LinkedinGlyph size={16} />
-              LinkedIn
-            </a>
-            <a href={`mailto:${site.contact.email}`} className={outlineButton}>
-              <Mail size={16} aria-hidden="true" />
-              Email
-            </a>
-          </div>
-
-          {/* Work-rights sentence (site.workRights) is deliberately not rendered until confirmed. */}
-
-          <ul
-            aria-label="Dissertation results"
-            className="mt-14 grid divide-y divide-border border-y border-border sm:grid-cols-3 sm:divide-x sm:divide-y-0"
-          >
-            {site.proofStrip.map((item, i) => (
-              <li
-                key={item.label}
-                className="flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4 sm:flex-col sm:items-start sm:gap-2 sm:px-6 sm:py-6 sm:first:pl-0"
-              >
-                <span
-                  className={`min-w-[6rem] shrink-0 text-stat tabular-nums sm:min-w-0 ${
-                    i === 0 ? "text-accent" : "text-text-primary"
-                  }`}
+          <ul className="mt-6 flex flex-wrap gap-2.5" aria-label="Featured work">
+            {site.heroChips.map((chip) => (
+              <li key={chip.project}>
+                <Link
+                  to={chipTarget(chip)}
+                  className="inline-flex flex-wrap items-baseline gap-x-2 rounded-full border border-border-strong bg-surface/80 px-4 py-2 text-small hover:border-accent hover:bg-accent/10"
                 >
-                  {item.value}
-                </span>
-                <span className="min-w-[10rem] flex-1 font-mono text-label text-text-secondary sm:min-w-0">{item.label}</span>
+                  <span className="font-semibold text-text-primary">{chip.label}</span>
+                  <span className="text-text-secondary">{chip.detail}</span>
+                </Link>
               </li>
             ))}
           </ul>
-          <p className="mt-3 font-mono text-label text-text-secondary">From my MSc dissertation evaluation.</p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link
+              to={{ pathname: "/", hash: "#projects" }}
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-body font-semibold text-accent-ink hover:bg-accent/90"
+            >
+              View work
+              <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+            <CvLink variant="hero" />
+            <Link to={{ pathname: "/", hash: "#contact" }} className={outlineButton}>
+              Contact
+            </Link>
+          </div>
+
+          {/* Work-rights sentence (site.workRights) is deliberately not rendered until confirmed. */}
         </Reveal>
+
+        <dl className="mt-14 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+          {site.heroFacts.map((fact) => (
+            <div key={fact.label} className="bg-background/90 px-5 py-4">
+              <dt className="font-mono text-label text-text-secondary">{fact.label}</dt>
+              <dd className="mt-1 text-small font-medium text-text-primary">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
   );

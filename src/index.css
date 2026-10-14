@@ -47,6 +47,20 @@ html[data-lite="true"] *::after {
 
 html[data-lite="true"] .hover-lift:hover {
   transform: none;
+  box-shadow: none;
+}
+
+/* Hero backdrop: two static colour glows. No animation, so nothing to switch off in lite mode. */
+.hero-glow {
+  background-image: radial-gradient(48rem 26rem at 88% -4%, rgb(var(--color-accent) / 0.2), transparent 70%),
+    radial-gradient(36rem 22rem at 6% 78%, rgb(var(--color-accent-2) / 0.12), transparent 70%);
+}
+
+.text-gradient {
+  background-image: linear-gradient(90deg, rgb(var(--color-accent)), rgb(var(--color-accent-2)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Scroll reveal: one 8px fade/slide, once. Lite mode renders plain markup (see Reveal.jsx). */

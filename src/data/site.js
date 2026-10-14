@@ -12,6 +12,24 @@ export const site = {
   // TODO(confirm): exact programme title vs degree paperwork (CV: "Advanced Computer Science").
   degreeLine: "MSc Advanced Computer Science, University of Manchester",
   positioning: "I build developer tools and AI-backed systems, and I test them properly.",
+  // Hero identity line.
+  identity: "Software engineer.",
+  identityDetail: "I build developer tools and small, practical software.",
+  // One line of proof, from the dissertation evaluation (§9: Table 3.2, §3.2).
+  heroProof:
+    "My MSc dissertation tool captured 95.5% of 201 pre-registered facts across 10 held-out pipelines; a naive raw-YAML-to-LLM baseline captured 53.2%.",
+  // Proof chips under the proof line; `project` links to that project's page when it has one.
+  heroChips: [
+    { project: "ci-pipeline-docs", label: "MSc dissertation", detail: "CI pipeline documentation tool" },
+    { project: "vach", label: "Vach", detail: "Android PDF/EPUB reader" },
+    { project: "storywanderer", label: "StoryWanderer", detail: "full-stack reading platform" },
+  ],
+  // Facts strip at the foot of the hero.
+  heroFacts: [
+    { label: "Master's", value: "MSc Advanced Computer Science, Manchester" },
+    { label: "Bachelor's", value: "B.E. Computer Engineering, Pune" },
+    { label: "Looking for", value: "UK roles from November 2026" },
+  ],
 
   // Exact wording; keep identical on the site, CV and LinkedIn.
   availability: "Available for full-time software engineering roles in the UK from November 2026",
@@ -39,6 +57,10 @@ export const site = {
   },
 
   contactIntro: "I'm looking for full-time software engineering roles in the UK from November 2026.",
+
+  // The first three sentences of `about`, shown directly under the hero.
+  aboutShort:
+    "I'm an MSc Advanced Computer Science student at the University of Manchester. I studied in Pune, India before moving here for the degree. I like building developer tools and small, practical software, and I care about being able to show that it works.",
 
   // TODO(confirm): add "Karate black belt" to the last sentence if you want it public.
   about:
