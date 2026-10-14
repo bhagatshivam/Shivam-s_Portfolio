@@ -1,27 +1,8 @@
+import { Step, Arrow } from "./parts";
+
 // Four-layer pipeline with the IR firewall. Built as semantic HTML (not an SVG) so the text
 // stays at full size at 375px: source side on top, generation side below; side by side from
 // the md breakpoint up.
-function Step({ label, children, dashed = false }) {
-  return (
-    <li className="list-none">
-      <div
-        className={`rounded-lg border bg-surface-raised px-3.5 py-2.5 ${
-          dashed ? "border-dashed border-border-strong" : "border-border-strong"
-        }`}
-      >
-        <p className="font-mono text-label text-accent">{label}</p>
-        <div className="mt-1 text-small text-text-secondary">{children}</div>
-      </div>
-    </li>
-  );
-}
-
-const Arrow = () => (
-  <li aria-hidden="true" className="list-none py-1 text-center font-mono text-label text-text-secondary">
-    ↓
-  </li>
-);
-
 export default function ArchitectureFigure() {
   return (
     <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:gap-0">

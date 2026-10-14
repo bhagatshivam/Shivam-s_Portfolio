@@ -7,6 +7,7 @@ import { GithubGlyph } from "../ui/icons";
 import StatusChip from "../ui/StatusChip";
 import Tag from "../ui/Tag";
 import SectionHeader from "../ui/SectionHeader";
+import { getCaseStudy } from "../../data/caseStudies";
 import Block from "./Blocks";
 
 const OTHER_LINK = "text-small font-medium text-accent hover:underline";
@@ -116,7 +117,7 @@ export default function CaseStudyLayout({ entry }) {
             />
             <div className="space-y-6">
               {section.blocks.map((block, b) => (
-                <Block key={b} block={block} number={figureNumbers.get(block)} />
+                <Block key={b} block={block} number={figureNumbers.get(block)} project={project} />
               ))}
             </div>
           </section>
@@ -131,7 +132,7 @@ export default function CaseStudyLayout({ entry }) {
               <span className="inline-flex items-center gap-1.5 font-mono text-label text-text-secondary">
                 <ArrowLeft size={14} aria-hidden="true" /> Previous
               </span>
-              <span className="mt-2 block text-h3 text-text-primary">{prev.title}</span>
+              <span className="mt-2 block text-h3 text-text-primary">{getCaseStudy(prev.caseStudy)?.title ?? prev.title}</span>
             </Link>
           ) : (
             <span aria-hidden="true" className="hidden sm:block" />
@@ -144,7 +145,7 @@ export default function CaseStudyLayout({ entry }) {
               <span className="inline-flex items-center gap-1.5 font-mono text-label text-text-secondary">
                 Next <ArrowRight size={14} aria-hidden="true" />
               </span>
-              <span className="mt-2 block text-h3 text-text-primary">{next.title}</span>
+              <span className="mt-2 block text-h3 text-text-primary">{getCaseStudy(next.caseStudy)?.title ?? next.title}</span>
             </Link>
           )}
         </nav>

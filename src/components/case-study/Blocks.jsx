@@ -34,6 +34,29 @@ function List({ block }) {
   );
 }
 
+function Panel({ block }) {
+  // A bordered block of labelled lists (used for "Limits and what is not verified").
+  return (
+    <aside className={`${PROSE} rounded-xl border border-border-strong bg-surface p-5 md:p-6`}>
+      <p className="font-mono text-label text-accent">{block.title}</p>
+      <div className="mt-4 space-y-6">
+        {block.groups.map((group) => (
+          <div key={group.heading}>
+            <h3 className="text-small font-semibold text-text-primary">{group.heading}</h3>
+            <ul className="mt-2 list-disc space-y-1.5 pl-5 text-small text-text-secondary marker:text-accent">
+              {group.items.map((item) => (
+                <li key={item} className="pl-1">
+                  <Inline text={item} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </aside>
+  );
+}
+
 function Table({ block }) {
   return (
     <figure className={WIDE}>
@@ -47,7 +70,7 @@ function Table({ block }) {
                   key={i}
                   scope="col"
                   className={`px-4 py-2.5 font-mono text-label font-normal text-text-secondary ${
-                    i > 0 ? "text-right tabular-nums" : ""
+                    i > 0 && !block.textual ? "text-right tabular-nums" : ""
                   }`}
                 >
                   {col || <span className="sr-only">Condition</span>}
@@ -60,12 +83,21 @@ function Table({ block }) {
               <tr key={r} className="border-b border-border last:border-0">
                 {row.map((cell, i) =>
                   i === 0 ? (
-                    <th key={i} scope="row" className="px-4 py-2.5 font-normal text-text-primary">
+                    <th
+                      key={i}
+                      scope="row"
+                      className={`px-4 py-2.5 font-normal text-text-primary ${block.textual ? "w-[34%] align-top" : ""}`}
+                    >
                       {cell}
                     </th>
                   ) : (
-                    <td key={i} className="px-4 py-2.5 text-right tabular-nums text-text-primary">
-                      {cell}
+                    <td
+                      key={i}
+                      className={`px-4 py-2.5 text-text-primary ${
+                        block.textual ? "align-top text-text-secondary" : "text-right tabular-nums"
+                      }`}
+                    >
+                      {block.textual ? <Inline text={cell} /> : cell}
                     </td>
                   )
                 )}
@@ -106,14 +138,14 @@ function Callout({ block }) {
   );
 }
 
-function Figure({ block, number }) {
+function Figure({ block, number, project }) {
   const Component = figures[block.figure];
   if (!Component) return null;
 
   return (
     <figure className={WIDE}>
       <div className="rounded-xl border border-border bg-surface p-4 md:p-6">
-        <Component data={block.data} />
+        <Component data={block.data} project={project} />
       </div>
       <figcaption className="mt-3 font-mono text-label text-text-secondary">
         <span className="text-text-primary">Figure {number}.</span> <Inline text={block.caption} />
@@ -129,10 +161,11 @@ const renderers = {
   table: Table,
   stats: Stats,
   callout: Callout,
+  panel: Panel,
   figure: Figure,
 };
 
-export default function Block({ block, number }) {
+export default function Block({ block, number, project }) {
   const Renderer = renderers[block.type];
-  return Renderer ? <Renderer block={block} number={number} /> : null;
+  return Renderer ? <Renderer block={block} number={number} project={project} /> : null;
 }

@@ -293,6 +293,246 @@ export const caseStudies = [
       },
     ],
   },
+  {
+    slug: "vach",
+    projectId: "vach",
+    title: "Vach: offline PDF & EPUB reader for Android",
+    summary:
+      "An Android app (React/TypeScript in a Capacitor native shell) for reading a personal library of PDF and EPUB novels offline, with continuous scroll like a webnovel app.",
+    description:
+      "Vach: an offline PDF and EPUB reader for Android, built with React and TypeScript in a Capacitor shell. Persistent folder access, continuous scroll, no ads.",
+    sections: [
+      {
+        id: "problem",
+        label: "Problem",
+        title: "I wanted a reader that felt like a webnovel app.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I read a large personal library of downloaded PDF and EPUB novels offline on my phone. None of the options fitted. Adobe is paid, and free readers are full of ads. KOReader is open source and works, but I found its scrolling, its orientation and settings friction, and its lack of a clean day/night toggle rough on my phone.",
+          },
+          { type: "paragraph", text: "What I wanted:" },
+          {
+            type: "list",
+            items: [
+              "Continuous, smooth scroll like a webnovel app, not page-flip.",
+              "Simple font and background customisation.",
+              "Offline access to a folder of books already on the phone, without re-picking files each session.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "why-an-app",
+        label: "Why an app",
+        title: "Why not a PWA.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Vach is not a PWA. Browsers cannot hold persistent access to a whole folder on Android, so I would have had to re-approve file access constantly. Only an app that uses Android's Storage Access Framework (SAF, `takePersistableUriPermission`) gets durable folder permission. That was the core requirement, so Vach has been a Capacitor app from day one.",
+          },
+        ],
+      },
+      {
+        id: "how-it-works",
+        label: "How it works",
+        title: "Persistent folder access, three rendering paths, one stream.",
+        blocks: [
+          {
+            type: "figure",
+            figure: "vach-architecture",
+            caption: "Vach's runtime flow.",
+          },
+          {
+            type: "list",
+            items: [
+              "**File access.** First launch opens a SAF folder picker, and the permission persists across restarts and reboots. The app scans the folder and its subfolders for `.pdf` and `.epub` files and detects new ones on each open. Files are read in place; nothing is copied into app storage. If access is revoked, it falls back to a “no folder selected” state instead of crashing.",
+              "**Reading interface.** Continuous vertical scroll, tuned for smoothness because that was the top UX priority. Curated fonts, size, line height and themes (sepia, night, beige, plus a custom slot). Reading position is saved per book and restored on reopen.",
+              "**Offline.** No network calls anywhere in the reading flow. No ads, accounts or telemetry.",
+            ],
+          },
+          {
+            type: "table",
+            textual: true,
+            caption: "Rendering pipeline: how each kind of source is handled.",
+            columns: ["Source", "How Vach handles it"],
+            rows: [
+              [
+                "EPUB",
+                "Unzipped and parsed directly (OPF plus XHTML/CSS) with my own stylesheet, so font, size, spacing and colour are fully controllable. No external EPUB library.",
+              ],
+              [
+                "Text-based PDF",
+                "Embedded text is extracted page by page with pdf.js and reflowed into the same continuous stream as EPUB.",
+              ],
+              [
+                "Image-only PDF pages (covers, illustrations)",
+                "Rendered as an image with a colour overlay, so they stay consistent with the active theme.",
+              ],
+              [
+                "Fully scanned PDF",
+                "The same image fallback for the whole book. No OCR; that is out of scope.",
+              ],
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "During planning I validated text extraction against a real 246-page light-novel PDF. About 90% of its pages had clean, well-ordered text, at roughly 2,600 characters per page in a single column.",
+          },
+          {
+            type: "figure",
+            figure: "screenshots",
+            caption: "Library and reading screens.",
+          },
+        ],
+      },
+      {
+        id: "build",
+        label: "Build and release",
+        title: "Debug builds on every push, signed releases on tags.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The stack is Capacitor, React, TypeScript, Vite, Vitest, oxlint, pdf.js and a custom EPUB parser.",
+          },
+          {
+            type: "figure",
+            figure: "vach-release",
+            caption: "The GitHub Actions build and release flow.",
+            data: {
+              steps: [
+                {
+                  label: "Push",
+                  title: "Push to any branch",
+                  text: "GitHub Actions builds a debug APK. Its package is `com.vach.reader.debug`, so it installs side by side with the release build.",
+                },
+                {
+                  label: "Tag",
+                  title: "Push a `v*` tag",
+                  text: "GitHub Actions builds a release-signed APK.",
+                },
+                {
+                  label: "Release",
+                  title: "GitHub Release",
+                  text: "The signed APK is published as a GitHub Release.",
+                },
+              ],
+            },
+          },
+          {
+            type: "paragraph",
+            text: "I have not linked a release from this page. For now, build it from source: [github.com/bhagatshivam/Vach](https://github.com/bhagatshivam/Vach).",
+          },
+        ],
+      },
+      {
+        id: "process",
+        label: "Process",
+        title: "How I worked on it.",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "I wrote a project brief before any code: motivation, requirements, constraints, a phased roadmap and success criteria.",
+              "Work went phase by phase, with explicit success criteria for each phase.",
+              "Implementation was AI-assisted: I used Claude Code against the repository, with planning and architecture done separately. All commits are authored under my name, with Claude credited as co-author.",
+              "The release process is documented in `docs/RELEASING.md`, and the README has a manual device-verification checklist.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "limits",
+        label: "Verification",
+        title: "What is verified, and what is not.",
+        blocks: [
+          {
+            type: "panel",
+            title: "Limits and what is not verified",
+            groups: [
+              {
+                heading: "Verified on a real device",
+                items: [
+                  "SAF folder selection with persisted access.",
+                  "EPUB and text-PDF continuous scroll with font, size, spacing and theme controls.",
+                  "Image-page fallback for textless and scanned pages.",
+                  "Reading position across sessions.",
+                  "Fully offline operation.",
+                ],
+              },
+              {
+                heading: "Manual checks",
+                // TODO(confirm): the README checklist items are held back until you say which
+                // you have run yourself. Candidates: force-stop and reopen with no prompt;
+                // full device reboot with no prompt; revoked permission falls back to
+                // "no folder selected". Add only the ones you ran.
+                items: [
+                  "CI cannot drive the system folder picker or reboot a device, so the README has a manual device-verification checklist.",
+                ],
+              },
+              {
+                heading: "Not verified, and limits",
+                // TODO(confirm): add the device model and Android version to the first item
+                // if you want them shown.
+                items: [
+                  "Tested on one device, and only on my own library of clean single-column novels and light novels. Not tested on other devices or Android versions.",
+                  "No external users yet.",
+                  "No automated end-to-end or UI tests.",
+                  "Complex PDFs (multi-column, heavy footnotes or tables) reflow worse. That is a deliberate low-priority edge case.",
+                  "Text customisation is impossible on scanned or image-only pages. That is a hard limit of the source material.",
+                  "Sideloaded APK only, no Play Store.",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "status",
+        label: "Status",
+        title: "Status and what is next.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Vach is about 95% complete, in daily use, and still being refined.",
+          },
+          {
+            type: "list",
+            items: [
+              "**Phase 1, complete:** SAF folder access and the CI pipeline.",
+              "**Phase 2, complete:** EPUB and PDF reflow with controls and continuous scroll.",
+              "**Phase 3, complete:** image-page fallback, progress persistence and real-world fixes.",
+            ],
+          },
+          {
+            type: "subheading",
+            text: "Not started",
+          },
+          {
+            type: "paragraph",
+            text: "Extracting embedded images from PDF pages that also contain text. Mixed pages currently reflow the text without the embedded image.",
+          },
+          {
+            type: "subheading",
+            text: "Optional phase 4",
+          },
+          {
+            type: "list",
+            items: [
+              "Per-book settings override.",
+              "In-book search.",
+              "Custom font uploads.",
+              "Cloud sync.",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "The code is public: [github.com/bhagatshivam/Vach](https://github.com/bhagatshivam/Vach).",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const getCaseStudy = (slug) => caseStudies.find((c) => c.slug === slug);
