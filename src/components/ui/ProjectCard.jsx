@@ -1,34 +1,12 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lock, X } from "lucide-react";
-import { usePerformance } from "../../context/PerformanceContext";
 import { useSkillFocus } from "../../context/SkillFocusContext";
 import { skills } from "../../data/skills";
 
 export default function ProjectCard({ project }) {
-  const { isLiteMode } = usePerformance();
   const { jumpToSkills } = useSkillFocus();
-  const cardRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const handleMouseMove = (e) => {
-    if (isLiteMode || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const offsetX = (e.clientX - centerX) / (rect.width / 2);
-    const offsetY = (e.clientY - centerY) / (rect.height / 2);
-
-    setTilt({
-      x: offsetY * -8,
-      y: offsetX * 8,
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-  };
 
   const statusText =
     project.statusLabel || (project.status === "complete" ? "COMPLETE" : "IN PROGRESS");
@@ -45,23 +23,8 @@ export default function ProjectCard({ project }) {
   return (
     <>
       <motion.div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         onClick={() => setIsExpanded(true)}
-        animate={{
-          rotateX: tilt.x,
-          rotateY: tilt.y,
-        }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        style={{
-          transformPerspective: 800,
-        }}
-        whileHover={
-          !isLiteMode
-            ? { boxShadow: `0 0 30px ${project.color}40` }
-            : { borderColor: project.color }
-        }
+        whileHover={{ borderColor: project.color }}
         className="relative w-full max-w-[400px] h-[280px] rounded-xl bg-surface border border-border p-6 cursor-pointer flex flex-col justify-between overflow-hidden"
       >
         <div

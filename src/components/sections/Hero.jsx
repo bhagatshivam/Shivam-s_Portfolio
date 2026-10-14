@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePerformance } from "../../context/PerformanceContext";
-import ParticleField from "../ui/ParticleField";
 import { site } from "../../data/site";
 
 const phrases = [...site.heroPhrases, site.availability];
 
 export default function Hero() {
-  const { isLiteMode } = usePerformance();
   const [phraseIndex, setPhraseIndex] = useState(0);
 
   useEffect(() => {
@@ -24,11 +21,7 @@ export default function Hero() {
   return (
     <div className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
 
-      {!isLiteMode && <ParticleField />}
-
-      {isLiteMode && (
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-surface" />
-      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-surface" />
 
       <div className="relative z-10 flex flex-col items-center text-center px-6">
 
