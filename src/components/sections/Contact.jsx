@@ -1,25 +1,26 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Mail } from "lucide-react";
+import { site } from "../../data/site";
 
 const contactLinks = [
   {
     icon: "mail",
     label: "Email",
-    value: "bhagatshivam082@gmail.com",
-    href: "mailto:bhagatshivam082@gmail.com",
+    value: site.contact.email,
+    href: `mailto:${site.contact.email}`,
   },
   {
     icon: "linkedin",
     label: "LinkedIn",
-    value: "linkedin.com/in/shivam-bhagat",
-    href: "https://www.linkedin.com/in/shivam-bhagat",
+    value: site.contact.linkedinLabel,
+    href: site.contact.linkedin,
   },
   {
     icon: "github",
     label: "GitHub",
-    value: "github.com/bhagatshivam",
-    href: "https://github.com/bhagatshivam",
+    value: site.contact.githubLabel,
+    href: site.contact.github,
   },
 ];
 
@@ -68,8 +69,7 @@ export default function Contact() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="font-body text-text-secondary text-sm md:text-base mb-12 leading-relaxed"
         >
-          I'm currently finishing my MSc at Manchester and looking for my next challenge.
-          Whether it's a graduate role, a collaboration, or just a conversation about AI — I'm reachable.
+          {site.contactIntro}
         </motion.p>
 
         <div className="flex flex-col gap-4 mb-12">

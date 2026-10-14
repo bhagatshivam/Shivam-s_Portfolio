@@ -2,12 +2,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePerformance } from "../../context/PerformanceContext";
 import ParticleField from "../ui/ParticleField";
+import { site } from "../../data/site";
 
-const phrases = [
-  "I build things that think.",
-  "RAG pipelines. Neural nets. CI tools.",
-  "Open to roles from October 2026.",
-];
+const phrases = [...site.heroPhrases, site.availability];
 
 export default function Hero() {
   const { isLiteMode } = usePerformance();
@@ -39,9 +36,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="mb-6 font-display text-xs text-accent-green tracking-widest flex items-center gap-2"
+          className="mb-6 font-display text-xs text-accent-green tracking-widest flex items-center justify-center gap-2 text-center"
         >
-          [ AVAILABLE FOR GRADUATE ROLES ]
+          [ {site.availability} ]
           <span className="animate-pulse">|</span>
         </motion.div>
 
@@ -52,7 +49,7 @@ export default function Hero() {
           className="font-display font-bold text-4xl md:text-6xl lg:text-7xl text-text-primary mb-4 leading-tight"
           style={{ textShadow: "0 0 40px rgba(79,142,247,0.3)" }}
         >
-          Shivam Balasaheb Bhagat
+          {site.fullName}
         </motion.h1>
 
         <motion.p
@@ -61,7 +58,7 @@ export default function Hero() {
           transition={{ delay: 0.9, duration: 0.5 }}
           className="font-body text-text-secondary text-base md:text-lg mb-6"
         >
-          MSc Advanced Computer Science — University of Manchester
+          {site.degreeLine}
         </motion.p>
 
         <motion.div
@@ -98,7 +95,7 @@ export default function Hero() {
             View My Work
           </button>
           <a
-            href="/Shivam_Bhagat_CV.pdf"
+            href={site.contact.cv}
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-md font-display text-sm text-accent-blue border border-accent-blue hover:bg-accent-blue hover:text-background transition-all duration-200"

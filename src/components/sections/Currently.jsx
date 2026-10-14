@@ -1,24 +1,14 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import TerminalText from "../ui/TerminalText";
+import { site } from "../../data/site";
 
-const lines = [
-  { command: "status", value: "open to graduate roles" },
-  { command: "location", value: "Manchester, UK (open to relocation)" },
-  { command: "availability", value: "October 2026 onwards" },
-  { command: "thesis", value: "CI Pipeline Documentation Tool [IN PROGRESS]", valueColor: "#4F8EF7" },
-];
+const lines = site.currentlyLines;
 
 const focusAreas = [
   { label: "Software Engineering", color: "#4F8EF7" },
   { label: "AI / ML Engineering", color: "#8B5CF6" },
   { label: "Data Engineering", color: "#10B981" },
-];
-
-const stats = [
-  { value: "8", label: "Projects shipped" },
-  { value: "3", label: "Years of CS study" },
-  { value: "5+", label: "ML/AI frameworks" },
 ];
 
 export default function Currently() {
@@ -64,11 +54,11 @@ export default function Currently() {
           </div>
 
           <p className="font-body text-text-secondary text-sm leading-relaxed border-t border-border pt-6">
-            I'm actively applying for Software Engineering, AI/ML, and Data Engineering roles across the UK.
+            {site.availability}.
           </p>
         </motion.div>
 
-        {/* Right column — focus areas + stats */}
+        {/* Right column — focus areas */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -94,27 +84,6 @@ export default function Currently() {
                     style={{ backgroundColor: area.color, boxShadow: `0 0 8px ${area.color}` }}
                   />
                   <span className="font-body text-sm text-text-primary">{area.label}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick stats */}
-          <div className="rounded-xl border border-border bg-surface p-6 flex-1">
-            <p className="font-display text-xs text-text-secondary tracking-widest mb-4">
-              AT A GLANCE
-            </p>
-            <div className="grid grid-cols-3 gap-3">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <p className="font-display text-2xl text-accent-blue mb-1">{stat.value}</p>
-                  <p className="font-body text-[11px] text-text-secondary leading-tight">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
