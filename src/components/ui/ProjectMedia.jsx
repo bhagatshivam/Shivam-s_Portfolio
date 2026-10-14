@@ -1,72 +1,46 @@
-import { useState } from "react";
+import { useScreenshots } from "../../hooks/useScreenshots";
+import MediaFallback from "./MediaFallback";
+import PhoneFrame from "./PhoneFrame";
 
-// 16:10 media slot. Uses the first real screenshot when one exists and loads; otherwise
-// shows the architecture words from the project data so the card never looks broken.
+// 16:10 media slot on the project cards. Shows up to three real screenshots (phone projects)
+// or the first one (panel projects); a screenshot that fails to load is dropped, and with none
+// left the architecture words are shown instead.
 export default function ProjectMedia({ project }) {
-  const [failed, setFailed] = useState(false);
-  const shot = project.screenshots?.[0];
-  const { variant = "panel", architecture = [], alt = project.title } = project.media ?? {};
-  const showImage = shot && !failed;
+  const { visible, markFailed } = useScreenshots(project.screenshots);
+  const { variant = "panel", alt = project.title } = project.media ?? {};
 
-  return (
-    <div className="aspect-[16/10] overflow-hidden border-b border-border bg-surface-raised">
-      {showImage ? (
-        variant === "phone" ? (
-          <div className="flex h-full items-center justify-center py-4">
-            <img
-              src={shot.src}
-              alt={shot.alt || alt}
-              onError={() => setFailed(true)}
-              loading="lazy"
-              className="h-full w-auto rounded-2xl border border-border-strong object-cover"
-            />
-          </div>
-        ) : (
-          <img
+  let content;
+  if (visible.length === 0) {
+    content = <MediaFallback project={project} />;
+  } else if (variant === "phone") {
+    content = (
+      <div className="flex h-full items-center justify-center gap-3 px-4 py-4">
+        {visible.slice(0, 3).map((shot) => (
+          <PhoneFrame
+            key={shot.src}
             src={shot.src}
-            alt={shot.alt || alt}
-            onError={() => setFailed(true)}
-            loading="lazy"
-            className="h-full w-full object-cover object-top"
+            alt={shot.alt}
+            className="h-full"
+            onError={() => markFailed(shot.src)}
           />
-        )
-      ) : variant === "phone" ? (
-        <div className="flex h-full items-center justify-center gap-6 px-6">
-          <div
-            aria-hidden="true"
-            className="flex h-[78%] aspect-[9/17] shrink-0 items-center justify-center rounded-2xl border border-border-strong bg-surface"
-          >
-            <span className="font-mono text-label text-text-secondary">Vach</span>
-          </div>
-          <ul className="space-y-2 font-mono text-label text-text-secondary">
-            {architecture.map((word, i) => (
-              <li key={word}>
-                {i > 0 && (
-                  <span aria-hidden="true" className="mb-2 block text-accent">
-                    +
-                  </span>
-                )}
-                {word}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <ol className="flex h-full flex-col items-center justify-center gap-1.5 px-6 font-mono text-label text-text-secondary">
-          {architecture.map((word, i) => (
-            <li key={word} className="flex w-full max-w-[16rem] flex-col items-center gap-1.5">
-              {i > 0 && (
-                <span aria-hidden="true" className="text-accent">
-                  ↓
-                </span>
-              )}
-              <span className="w-full rounded border border-border-strong bg-surface px-3 py-1.5 text-center">
-                {word}
-              </span>
-            </li>
-          ))}
-        </ol>
-      )}
-    </div>
-  );
+        ))}
+      </div>
+    );
+  } else {
+    const shot = visible[0];
+    content = (
+      <img
+        src={shot.src}
+        alt={shot.alt || alt}
+        width={1280}
+        height={800}
+        loading="lazy"
+        decoding="async"
+        onError={() => markFailed(shot.src)}
+        className="h-full w-full object-cover object-top"
+      />
+    );
+  }
+
+  return <div className="aspect-[16/10] overflow-hidden border-b border-border bg-surface-raised">{content}</div>;
 }

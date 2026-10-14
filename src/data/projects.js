@@ -12,7 +12,7 @@ import { skills } from "./skills";
 //   summary       short card copy (home page cards)
 //   description   full blurb (case-study pages)
 //   media         card image fallback: variant "phone" | "panel" + architecture words;
-//                 real images go in `screenshots` as { src, alt } under public/projects/<id>/
+//                 real images go in `screenshots` as { src, alt, caption } under public/projects/<id>/
 //   year          only where the plan gives one; do not add years that do not trace to it
 //   highlights    longer bullets (CV wording) for compact cards and case studies
 //   tech          chips shown on the card, exactly as in the source
@@ -82,7 +82,21 @@ const projectData = [
     },
     github: "https://github.com/bhagatshivam/Vach",
     releaseNote: "Build from source",
-    screenshots: [],
+    // Real screenshots and an optional screen recording. Files go in public/projects/vach/.
+    // Missing files never render as broken images: they are skipped, and if none load the
+    // card and the case study fall back to the architecture words in `media`.
+    screenshots: [
+      { src: "/projects/vach/library.png", alt: "Vach library screen", caption: "Library" },
+      { src: "/projects/vach/reading-sepia.png", alt: "Vach reading screen in the sepia theme", caption: "Reading: sepia" },
+      { src: "/projects/vach/reading-night.png", alt: "Vach reading screen in the night theme", caption: "Reading: night" },
+      { src: "/projects/vach/reading-beige.png", alt: "Vach reading screen in the beige theme", caption: "Reading: beige" },
+    ],
+    // Optional. Rendered only if the file exists; never autoplays.
+    video: {
+      src: "/projects/vach/demo.mp4",
+      poster: "/projects/vach/poster.jpg",
+      alt: "Screen recording of Vach on an Android phone",
+    },
     color: "#06B6D4",
   },
   {

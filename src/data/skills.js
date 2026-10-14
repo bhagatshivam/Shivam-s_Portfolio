@@ -36,7 +36,7 @@ export const skills = [
 
   // Web
   { id: "react", label: "React", cluster: "web", projectIds: ["vach", "storywanderer"] },
-  { id: "vite", label: "Vite", cluster: "web", projectIds: ["storywanderer"] },
+  { id: "vite", label: "Vite", cluster: "web", projectIds: ["vach", "storywanderer"] },
   { id: "tailwind", label: "Tailwind CSS", cluster: "web", projectIds: ["storywanderer"] },
   { id: "shadcn", label: "shadcn/ui", cluster: "web", projectIds: ["storywanderer"] },
   { id: "supabase", label: "Supabase", cluster: "web", projectIds: ["storywanderer"] },
