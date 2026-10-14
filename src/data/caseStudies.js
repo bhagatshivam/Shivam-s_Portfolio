@@ -537,6 +537,268 @@ export const caseStudies = [
       },
     ],
   },
+  {
+    slug: "storywanderer",
+    projectId: "storywanderer",
+    title: "StoryWanderer",
+    // Wording rule for this page: only facts the owner has approved. Anything not confirmed as
+    // built is phrased as designed or investigated, and carries a TODO(confirm) comment.
+    summary:
+      "A reading and writing platform for serialised fiction, built full stack on React, TypeScript and Supabase/PostgreSQL. It is in development and has no public users yet.",
+    description:
+      "StoryWanderer: a reading and writing platform for serialised fiction, built with React, TypeScript and Supabase/PostgreSQL. In development, no public users yet.",
+    sections: [
+      {
+        id: "what-it-is",
+        label: "What it is",
+        title: "A reading and writing platform for serialised fiction.",
+        blocks: [
+          {
+            type: "callout",
+            title: "Status",
+            text: "In development. No public users yet.",
+          },
+          {
+            type: "paragraph",
+            text: "StoryWanderer is a novel reading and writing platform. Authors manage their work chapter by chapter; readers get a custom long-form reading interface tuned for serialised fiction.",
+          },
+          {
+            type: "paragraph",
+            text: "The stack is React 18, TypeScript, Vite, Tailwind CSS and shadcn/ui on the front end, with Supabase (PostgreSQL, authentication and real-time data sync) behind it, deployed on Vercel.",
+          },
+          // TODO(confirm): "Partly built with Lovable-generated scaffolding on a Supabase backend."
+          // The owner has not said whether to keep this line, so it is not rendered.
+        ],
+      },
+      {
+        id: "why",
+        label: "Why I built it",
+        title: "A whole product, from schema to deployment.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "I designed and built StoryWanderer end to end: the database schema, authentication, chapter-level content management, the security rules around the data, and a reading interface for long-form fiction, through to a deployment on Vercel.",
+          },
+          // TODO(confirm): the personal motivation, in the owner's own words. Nothing is invented here.
+        ],
+      },
+      {
+        id: "architecture",
+        label: "Architecture",
+        title: "A React front end on Supabase, with the security rules in the database.",
+        blocks: [
+          {
+            type: "figure",
+            figure: "storywanderer-architecture",
+            caption: "StoryWanderer's layers. Names are those of the Postgres features used; table names are omitted.",
+          },
+          {
+            type: "paragraph",
+            text: "The browser app handles reading, writing and chapter management and talks to Supabase for authentication, data and real-time sync. The data layer is PostgreSQL, and the rules about who can see and change what live there rather than only in the interface:",
+          },
+          {
+            type: "list",
+            items: [
+              "**Row-level security.** Postgres row-level security policies guard the data.",
+              "**Comment authorship.** A dedicated security view, `comment_authors`, handles comment authorship.",
+              "**Search.** Stored `tsvector` columns support full-text search.",
+            ],
+          },
+          // TODO(confirm): table and column names, and what each policy allows; add a data-model
+          // table once they are supplied.
+        ],
+      },
+      {
+        id: "decisions",
+        label: "Decisions",
+        title: "Decisions and trade-offs.",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "**Supabase as the backend.** PostgreSQL, authentication and real-time sync come from one service instead of a custom server. The cost is that the database design carries the security model, so the schema and its policies have to be right.",
+              "**Security in the database.** Row-level security and the `comment_authors` view keep the rules next to the data they protect.",
+              "**Stored search columns.** Full-text search uses stored `tsvector` columns, not text matching at query time.",
+              "**A custom reading UI.** The reader is built for serialised fiction rather than being a generic content page.",
+            ],
+          },
+          // TODO(confirm): the reasoning behind each decision, and any alternatives that were
+          // weighed, in the owner's words. The trade-offs above are limited to what follows from the
+          // stack itself.
+        ],
+      },
+      {
+        id: "works-today",
+        label: "What works today",
+        title: "What is in place.",
+        blocks: [
+          // Renders only when the screenshot files exist (public/projects/storywanderer/).
+          { type: "figure", figure: "screenshots", caption: "StoryWanderer: home, chapter reader and chapter editor." },
+          {
+            type: "list",
+            items: [
+              "Authentication.",
+              "Chapter-level content management.",
+              "Real-time data sync through Supabase/PostgreSQL.",
+              "Row-level security and the `comment_authors` security view.",
+              "Full-text search over stored `tsvector` columns.",
+              "A custom long-form reading interface.",
+              "A deployment on Vercel.",
+            ],
+          },
+          { type: "paragraph", text: "It has no public users yet." },
+        ],
+      },
+      {
+        id: "limitations",
+        label: "Limitations and next steps",
+        title: "What is not done.",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "**No public users.** It is in development and has not launched.",
+              "**Chapter release scheduling.** A scheduling design exists for releasing chapters on a date.",
+              "**Investigated, not shipped.** Unicode zero-width watermarking and anti-scraping measures.",
+            ],
+          },
+          // TODO(confirm): is chapter scheduling implemented or design only? Do Playwright tests and
+          // GitHub Actions exist? (Neither is claimed above.) Live URL and repo link: the repo is
+          // treated as private until confirmed.
+        ],
+      },
+    ],
+  },
+  {
+    slug: "culinary-rag",
+    projectId: "culinary-rag",
+    title: "South Asian Culinary RAG Assistant",
+    // Sources: the CV bullets, the project README and assistant_core.py. The README's benchmark
+    // numbers are quoted as reported.
+    // TODO(confirm): the repository's file headers and README clone URL name a teammate as the
+    // author of several files. Role wording below is limited to the CV ("Group project, 4
+    // members"; "Owned the retrieval core"). Confirm which parts were yours before this goes live.
+    summary:
+      "A group project (4 members): a fully local retrieval-augmented chatbot for South Asian recipes, built on FAISS, BGE-Large embeddings, a LangGraph intent router and a local Qwen2.5 model.",
+    description:
+      "South Asian Culinary RAG Assistant: a fully local RAG chatbot using FAISS, BGE-Large and LangGraph, with 92.4% Recall@3 and 93% intent accuracy on a 100-query benchmark.",
+    sections: [
+      {
+        id: "what-it-is",
+        label: "What it is",
+        title: "A recipe assistant that runs entirely on the local machine.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The assistant answers questions about South Asian cooking. It remembers the ingredients you mention across turns, finds the best-matching recipe by semantic search, and rewrites it as clean Markdown. The embedding model, the vector store and the language models all run locally; nothing is sent to an external API.",
+          },
+          {
+            type: "paragraph",
+            text: "It was a group project with four members. I owned the retrieval core: the FAISS vector store, the BGE-Large embedding pipeline, and the LangGraph intent-routing state machine spanning seven intent categories.",
+          },
+          {
+            type: "stats",
+            items: [
+              { value: "92.4%", label: "mean Recall@3" },
+              { value: "93%", label: "intent-classification accuracy" },
+              { value: "88.6%", label: "generation faithfulness" },
+              { value: "100", label: "evaluation queries" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "how-it-works",
+        label: "How it works",
+        title: "A state machine that decides whether to retrieve at all.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "LangGraph models the assistant as a graph. A shared state travels between nodes: the question, the chat history, the detected intent, the extracted ingredients and the retrieved chunks.",
+          },
+          {
+            type: "figure",
+            figure: "rag-pipeline",
+            caption: "The assistant's LangGraph flow.",
+          },
+          {
+            type: "paragraph",
+            text: "Routing happens before retrieval. A casual message, a vague request or a request outside South Asian cuisine goes straight to a fallback node that asks a question or explains the limit, so retrieval and generation run only for real recipe requests.",
+          },
+        ],
+      },
+      {
+        id: "retrieval",
+        label: "Retrieval",
+        title: "Three chunks per recipe, normalised embeddings, a hard distance cut-off.",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "**Chunking.** Each recipe is split into three metadata-rich chunks: introduction, ingredients and instructions.",
+              "**Embeddings.** `BAAI/bge-large-en-v1.5` with normalised embeddings, giving 1024-dimensional vectors stored in FAISS.",
+              "**Distance cut-off.** The search fetches up to 15 chunks and keeps those within an L2 distance of 0.55, so the language model only sees close matches.",
+              "**Hybrid scoring.** Chunks are grouped by dish and re-scored with a bonus when an ingredient appears in the dish title (0.15) or in the recipe text (0.05). This stops \"Eggplant\" winning a search for \"egg\".",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Generation uses a local Qwen2.5 model (0.5B Instruct) with sampling switched off.",
+          },
+        ],
+      },
+      {
+        id: "evaluation",
+        label: "Evaluation",
+        title: "A 100-query benchmark.",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The benchmark covers dish lookups, ingredient-based searches, vague inputs and out-of-scope requests. Mean Recall@3 was 0.9241, intent classification accuracy 0.93 and generation faithfulness 0.8861. Mean latency was 7.5 seconds (maximum 18.6), dominated by local model inference.",
+          },
+          // TODO(confirm): how faithfulness was scored, and the hardware the latency was measured on.
+          {
+            type: "table",
+            caption: "Intent classification by type, from the project README.",
+            columns: ["Intent", "Correct", "Total", "Accuracy"],
+            rows: [
+              ["DISH_QUERY", "36", "40", "0.90"],
+              ["RECIPE_REQUEST", "38", "41", "0.93"],
+              ["INGREDIENTS_ONLY", "11", "11", "1.00"],
+              ["SUGGESTION_REQUEST", "5", "5", "1.00"],
+              ["ALTERNATIVE_REQUEST", "1", "1", "1.00"],
+              ["NON_SOUTH_ASIAN", "1", "1", "1.00"],
+              ["VAGUE_REQUEST", "1", "1", "1.00"],
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Most queries fall into two intents, and those are the two with errors. Three of the seven intents have a single query each, so their 100% is not a strong result.",
+          },
+        ],
+      },
+      {
+        id: "limitations",
+        label: "Limitations",
+        title: "Where it falls short.",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "**Dish-specific queries are the weakest intent.** Accuracy is 0.90 there, which points to room for better disambiguation.",
+              "**Latency.** Local inference makes answers slow: 7.5 seconds on average.",
+              "**Scope.** The corpus is South Asian cuisine only; other requests get a fallback reply.",
+              "**Small benchmark.** 100 queries, with several intents represented by one query.",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "The code is public: [github.com/bhagatshivam/South-Asian-Culinary-RAG-Assistant](https://github.com/bhagatshivam/South-Asian-Culinary-RAG-Assistant).",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const getCaseStudy = (slug) => caseStudies.find((c) => c.slug === slug);

@@ -10,7 +10,9 @@ import { skills } from "./skills";
 //   featured      true = large card on the home page, false = compact card
 //   status        "complete" | "in-progress" (drives the status chip colour)
 //   statusLabel   optional text that replaces the default chip text
-//   summary       short card copy (home page cards)
+//   tagline       one short line for the home page cards (two lines at most)
+//   summary       longer card copy (meta descriptions, fallbacks)
+//   visual        branded card visual when there is no screenshot: kicker, facts, motif, accent
 //   description   full blurb (case-study pages)
 //   media         card image fallback: variant "phone" | "panel" + architecture words;
 //                 real images go in `screenshots` as { src, alt, caption } under public/projects/<id>/
@@ -18,7 +20,7 @@ import { skills } from "./skills";
 //   highlights    longer bullets (CV wording) for compact cards and case studies
 //   tech          chips shown on the card, exactly as in the source
 //   skillIds      DERIVED from skills.js `projectIds`, do not edit here
-//   links         github / apk (apk stays null until a signed release is confirmed)
+//   links         github / live / apk (live and apk stay null until real; apk until a signed release is confirmed)
 //   github        kept for the existing ProjectCard; same value as links.github
 
 const projectData = [
@@ -33,6 +35,13 @@ const projectData = [
     year: "2026",
     description:
       "Generates documentation for GitHub Actions pipelines automatically. A parser turns workflow YAML into a platform-agnostic intermediate representation; deterministic generators render Markdown and Mermaid; an optional LLM layer only rewrites already-extracted, validated facts and never sees the YAML. Captured 95.5% of 201 pre-registered facts across 10 held-out pipelines, against 53.2% for a naive raw-YAML-to-LLM baseline.",
+    tagline: "Documents GitHub Actions pipelines. 95.5% of 201 facts captured.",
+    visual: {
+      accent: "#4F8EF7",
+      motif: "pipeline",
+      kicker: "MSc dissertation",
+      facts: ["95.5% of 201 facts captured", "53.2% for a naive LLM baseline", "10 held-out pipelines"],
+    },
     summary:
       "Generates documentation for GitHub Actions pipelines automatically. Captured 95.5% of 201 pre-registered facts across 10 held-out pipelines, against 53.2% for a naive raw-YAML-to-LLM baseline.",
     media: {
@@ -68,6 +77,13 @@ const projectData = [
     year: "2026",
     description:
       "Android reader (React/TypeScript in a Capacitor native shell) for a personal offline library of EPUB and PDF novels. Pick a folder once; the app is designed to keep access across restarts and reboots through Android's Storage Access Framework. Webnovel-style continuous scroll, font/size/theme controls, per-book reading position, image-page fallback for scanned PDFs. Fully offline, no ads, no telemetry. GitHub Actions builds a debug APK on every push and a signed release APK on version tags.",
+    tagline: "Offline PDF and EPUB reader for Android. No ads, no telemetry.",
+    visual: {
+      accent: "#06B6D4",
+      motif: "phone",
+      kicker: "Android app",
+      facts: ["EPUB and PDF", "Fully offline", "No ads, no telemetry"],
+    },
     summary:
       "Android reader (React/TypeScript in a Capacitor native shell) for a personal offline library of EPUB and PDF novels. Fully offline, no ads, no telemetry.",
     media: {
@@ -103,15 +119,65 @@ const projectData = [
     color: "#06B6D4",
   },
   {
+    id: "storywanderer",
+    shortTitle: "StoryWanderer",
+    caseStudy: "storywanderer",
+    featured: true,
+    title: "StoryWanderer",
+    context: "No public users yet",
+    status: "in-progress",
+    statusLabel: "IN DEVELOPMENT",
+    description:
+      "Full-stack novel-publishing platform designed and built end-to-end, from schema design to a Vercel deployment: authentication, chapter-level content management, and real-time data sync via Supabase/PostgreSQL. In development, no public users yet.",
+    tagline: "Reading and writing platform on Supabase and PostgreSQL.",
+    visual: {
+      accent: "#10B981",
+      motif: "pages",
+      kicker: "In development",
+      facts: ["Supabase / PostgreSQL", "Row-level security", "Full-text search"],
+    },
+    summary:
+      "Full-stack novel-publishing platform on Supabase/PostgreSQL with row-level security and full-text search. In development, no public users yet.",
+    highlights: [
+      "Designed and built a full-stack novel-publishing platform end-to-end, from schema design to a Vercel deployment, handling authentication, chapter-level content management, and real-time data sync via Supabase/PostgreSQL.",
+      "Secured the data layer with Postgres row-level security and a dedicated security view for comment authorship, and added stored tsvector columns for full-text search.",
+      "Built a component-driven frontend in React 18, TypeScript, and shadcn/ui, including a custom long-form reading UI optimised for serialised fiction.",
+    ],
+    tech: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "Supabase"],
+    media: {
+      variant: "browser",
+      alt: "StoryWanderer screens",
+    },
+    // Repo stays private; only link it if it can be made public.
+    // TODO(confirm): repo public or private, and the live URL (links.live) once it exists.
+    links: { github: null, live: null, apk: null },
+    repoNote: "Private repo",
+    github: null,
+    // Files go in public/projects/storywanderer/. Missing files are skipped (same pattern as Vach).
+    screenshots: [
+      { src: "/projects/storywanderer/home.png", alt: "StoryWanderer home page", caption: "Home" },
+      { src: "/projects/storywanderer/reader.png", alt: "StoryWanderer chapter reader", caption: "Reader" },
+      { src: "/projects/storywanderer/editor.png", alt: "StoryWanderer chapter editor", caption: "Editor" },
+    ],
+    color: "#10B981",
+  },
+  {
     id: "culinary-rag",
     shortTitle: "Culinary RAG",
-    caseStudy: null,
-    featured: false,
+    caseStudy: "culinary-rag",
+    featured: true,
     title: "South Asian Culinary RAG Assistant",
     context: "Group project, 4 members",
     status: "complete",
     description:
       "Owned the retrieval core of a fully local RAG chatbot: built the FAISS vector store, BGE-Large embedding pipeline, and a LangGraph intent-routing state machine spanning seven intent categories. Delivered 92.4% Recall@3, 93% intent-classification accuracy, and 88.6% generation faithfulness across a 100-query evaluation benchmark.",
+    tagline: "Fully local RAG chatbot. 92.4% Recall@3 on a 100-query benchmark.",
+    visual: {
+      accent: "#8B5CF6",
+      motif: "vectors",
+      kicker: "Group project, 4 members",
+      facts: ["92.4% Recall@3", "93% intent accuracy", "100-query benchmark"],
+    },
     summary:
       "Owned the retrieval core of a fully local RAG chatbot: FAISS, BGE-Large and a LangGraph intent router. 92.4% Recall@3 and 93% intent accuracy on a 100-query benchmark.",
     highlights: [
@@ -129,40 +195,22 @@ const projectData = [
     color: "#8B5CF6",
   },
   {
-    id: "storywanderer",
-    shortTitle: "StoryWanderer",
-    caseStudy: null,
-    featured: false,
-    title: "StoryWanderer",
-    context: "No public users yet",
-    status: "in-progress",
-    statusLabel: "IN DEVELOPMENT",
-    description:
-      "Full-stack novel-publishing platform designed and built end-to-end, from schema design to a Vercel deployment: authentication, chapter-level content management, and real-time data sync via Supabase/PostgreSQL. In development, no public users yet.",
-    summary:
-      "Full-stack novel-publishing platform on Supabase/PostgreSQL with row-level security and full-text search. In development, no public users yet.",
-    highlights: [
-      "Designed and built a full-stack novel-publishing platform end-to-end, from schema design to a Vercel deployment, handling authentication, chapter-level content management, and real-time data sync via Supabase/PostgreSQL.",
-      "Secured the data layer with Postgres row-level security and a dedicated security view for comment authorship, and added stored tsvector columns for full-text search.",
-      "Built a component-driven frontend in React 18, TypeScript, and shadcn/ui, including a custom long-form reading UI optimised for serialised fiction.",
-    ],
-    tech: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "Supabase"],
-    // Repo stays private; only link it if it can be made public.
-    links: { github: null, apk: null },
-    github: null,
-    screenshots: [],
-    color: "#10B981",
-  },
-  {
     id: "ask-the-doc",
     shortTitle: "Ask the Doc",
     caseStudy: null,
-    featured: false,
+    featured: true,
     title: "Ask the Doc",
     context: "Bachelor's final-year project",
     status: "complete",
     description:
       "Final-year undergraduate project. An end-to-end document-intelligence app combining abstractive summarisation (Pegasus) with extractive QA (RoBERTa-SQuAD2), plus text-to-speech output via gTTS.",
+    tagline: "Document summaries and question answering, with spoken output.",
+    visual: {
+      accent: "#F59E0B",
+      motif: "document",
+      kicker: "Final-year project",
+      facts: ["Pegasus summaries", "RoBERTa-SQuAD2 QA", "gTTS audio"],
+    },
     summary:
       "Final-year undergraduate project: abstractive summarisation (Pegasus) plus extractive QA (RoBERTa-SQuAD2), with text-to-speech output via gTTS.",
     highlights: [
@@ -186,4 +234,3 @@ export const projects = projectData.map((project) => ({
 }));
 
 export const featuredProjects = projects.filter((p) => p.featured);
-export const otherProjects = projects.filter((p) => !p.featured);

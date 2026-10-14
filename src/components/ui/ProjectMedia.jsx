@@ -1,48 +1,47 @@
 import { useScreenshots } from "../../hooks/useScreenshots";
-import MediaFallback from "./MediaFallback";
+import { useExistingAssets } from "../../hooks/useAssetExists";
+import BrowserFrame from "./BrowserFrame";
 import PhoneFrame from "./PhoneFrame";
+import ProjectVisual from "./ProjectVisual";
 
-// 16:10 media slot on the project cards. Shows up to three real screenshots (phone projects)
-// or the first one (panel projects); a screenshot that fails to load is dropped, and with none
-// left the architecture words are shown instead.
+// Media slot on the project cards. Real screenshots when their files exist (up to three phone
+// screens, or the first browser screen); otherwise the generated branded visual, so the slot
+// is never empty and a missing file never renders as a broken image.
 export default function ProjectMedia({ project }) {
   const { visible, markFailed } = useScreenshots(project.screenshots);
-  const { variant = "panel", alt = project.title } = project.media ?? {};
+  const existing = useExistingAssets((project.screenshots || []).map((s) => s.src), "image/");
+  const shots = visible.filter((shot) => existing.has(shot.src));
+  const variant = project.media?.variant;
 
   let content;
-  if (visible.length === 0) {
-    content = <MediaFallback project={project} />;
+  if (shots.length === 0 || !variant) {
+    content = <ProjectVisual project={project} />;
   } else if (variant === "phone") {
     content = (
-      <div className="flex h-full items-center justify-center gap-3 px-4 py-4">
-        {visible.slice(0, 3).map((shot) => (
-          <PhoneFrame
-            key={shot.src}
-            src={shot.src}
-            alt={shot.alt}
-            className="h-full"
-            onError={() => markFailed(shot.src)}
-          />
+      <div
+        className="flex h-72 items-center justify-center gap-3 px-4 py-4"
+        style={{
+          backgroundImage: `radial-gradient(26rem 14rem at 50% 0%, color-mix(in srgb, ${project.visual.accent} 25%, transparent), transparent 70%)`,
+        }}
+      >
+        {shots.slice(0, 3).map((shot) => (
+          <PhoneFrame key={shot.src} src={shot.src} alt={shot.alt} className="h-full" onError={() => markFailed(shot.src)} />
         ))}
       </div>
     );
   } else {
-    const shot = visible[0];
+    const shot = shots[0];
     content = (
-      <img
-        src={shot.src}
-        alt={shot.alt || alt}
-        width={1280}
-        height={800}
-        loading="lazy"
-        decoding="async"
-        onError={() => markFailed(shot.src)}
-        className="h-full w-full object-cover object-top"
-      />
+      <div
+        className="flex h-full items-center justify-center px-5 py-5"
+        style={{
+          backgroundImage: `radial-gradient(26rem 14rem at 50% 0%, color-mix(in srgb, ${project.visual.accent} 25%, transparent), transparent 70%)`,
+        }}
+      >
+        <BrowserFrame src={shot.src} alt={shot.alt} className="w-full" onError={() => markFailed(shot.src)} />
+      </div>
     );
   }
 
-  // No overflow-hidden here: the card clips its own corners, and without it the box can grow
-  // past 16:10 when the text is enlarged instead of cutting the fallback words off.
-  return <div className="aspect-[16/10] border-b border-border bg-surface-raised">{content}</div>;
+  return <div className="min-h-[11rem] sm:min-h-[14rem] border-b border-border bg-surface-raised">{content}</div>;
 }

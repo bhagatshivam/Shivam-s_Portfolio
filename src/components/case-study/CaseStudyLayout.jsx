@@ -64,6 +64,14 @@ export default function CaseStudyLayout({ entry }) {
                 View on GitHub
               </a>
             )}
+            {project.links.live && (
+              <a href={project.links.live} target="_blank" rel="noopener noreferrer" className={OTHER_LINK}>
+                Live site
+              </a>
+            )}
+            {!project.links.github && project.repoNote && (
+              <span className="font-mono text-label text-text-secondary">{project.repoNote}</span>
+            )}
             <button
               type="button"
               onClick={() => jumpToSkills(project.skillIds, project.title)}
@@ -123,7 +131,7 @@ export default function CaseStudyLayout({ entry }) {
           {prev ? (
             <Link
               to={`/projects/${prev.caseStudy}`}
-              className="hover-lift rounded-xl border border-border bg-surface p-5 hover:border-accent/50"
+              className="hover-lift card rounded-xl border border-border p-5 hover:border-accent/50"
             >
               <span className="inline-flex items-center gap-1.5 font-mono text-label text-text-secondary">
                 <ArrowLeft size={14} aria-hidden="true" /> Previous
@@ -136,7 +144,7 @@ export default function CaseStudyLayout({ entry }) {
           {next && (
             <Link
               to={`/projects/${next.caseStudy}`}
-              className="hover-lift rounded-xl border border-border bg-surface p-5 text-left hover:border-accent/50 sm:text-right"
+              className="hover-lift card rounded-xl border border-border p-5 text-left hover:border-accent/50 sm:text-right"
             >
               <span className="inline-flex items-center gap-1.5 font-mono text-label text-text-secondary">
                 Next <ArrowRight size={14} aria-hidden="true" />

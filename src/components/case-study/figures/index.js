@@ -4,7 +4,9 @@ import FailurePathFigure from "./FailurePathFigure";
 import OutputFigure from "./OutputFigure";
 import VachArchitectureFigure from "./VachArchitectureFigure";
 import VachReleaseFigure from "./VachReleaseFigure";
+import RagPipelineFigure from "./RagPipelineFigure";
 import ScreenshotsFigure from "./ScreenshotsFigure";
+import StoryWandererArchitectureFigure from "./StoryWandererArchitectureFigure";
 
 // Figure ids usable in a caseStudies.js `figure` block. Add new ones here.
 export const figures = {
@@ -15,4 +17,6 @@ export const figures = {
   "vach-architecture": VachArchitectureFigure,
   "vach-release": VachReleaseFigure,
   screenshots: ScreenshotsFigure,
+  "rag-pipeline": RagPipelineFigure,
+  "storywanderer-architecture": StoryWandererArchitectureFigure,
 };
