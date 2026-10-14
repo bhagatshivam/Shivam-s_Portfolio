@@ -31,5 +31,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Contrast check
+        run: npm run check:contrast
+
       - name: Build
         run: npm run build

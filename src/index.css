@@ -1,14 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* Design tokens live in design-tokens.js and are emitted as CSS variables by tailwind.config.js. */
 
 /* Lite mode (manual toggle or prefers-reduced-motion) turns off all CSS motion. */
 html[data-lite="true"] *,
@@ -20,26 +14,19 @@ html[data-lite="true"] *::after {
   scroll-behavior: auto !important;
 }
 
-body {
-  background-color: #060810;
-  color: #F0F6FF;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
-
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #060810;
+  background: rgb(var(--color-background));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1C2333;
-  border-radius: 3px;
+  background: rgb(var(--color-border));
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4F8EF7;
+  background: rgb(var(--color-border-strong));
 }
