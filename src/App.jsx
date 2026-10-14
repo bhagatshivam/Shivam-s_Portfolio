@@ -13,11 +13,11 @@ function App() {
     <BrowserRouter>
       <PerformanceProvider>
         <SkillFocusProvider>
-          <div className="bg-background text-text-primary font-body">
+          <div className="bg-background text-text-primary font-sans">
             <ScrollManager />
             <Navbar />
             <PerformanceToggle />
-            <main>
+            <main id="main" tabIndex={-1} className="outline-none">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/projects/:slug" element={<CaseStudyPage />} />

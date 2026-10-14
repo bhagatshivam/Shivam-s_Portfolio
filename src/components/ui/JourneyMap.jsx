@@ -24,16 +24,15 @@ function MilestoneCard({ milestone, index }) {
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.1 }}
       className="flex items-start gap-4 p-4 rounded-lg border border-border bg-surface"
-      style={{ boxShadow: "0 0 20px rgba(79,142,247,0.08)" }}
-    >
+          >
       <div className="flex-shrink-0">
-        <span className="font-display text-xs text-accent-blue bg-background px-2 py-1 rounded border border-accent-blue border-opacity-30">
+        <span className="font-mono text-label text-accent bg-background px-2 py-1 rounded border border-accent border-opacity-30">
           {milestone.period}
         </span>
       </div>
       <div>
-        <p className="font-display text-sm text-text-primary mb-1">{milestone.title}</p>
-        <p className="font-body text-xs text-text-secondary">{milestone.summary}</p>
+        <p className="text-small font-medium text-text-primary mb-1">{milestone.title}</p>
+        <p className="font-sans text-xs text-text-secondary">{milestone.summary}</p>
       </div>
     </motion.div>
   );
@@ -78,49 +77,44 @@ export default function JourneyMap({ sectionRef }) {
         >
           {/* Simple world landmass shapes — stylised, not detailed */}
           {/* North America */}
-          <path d="M 120 80 L 180 70 L 230 90 L 250 130 L 240 170 L 210 200 L 180 220 L 150 210 L 120 180 L 100 140 Z" fill="#1C2333" />
+          <path d="M 120 80 L 180 70 L 230 90 L 250 130 L 240 170 L 210 200 L 180 220 L 150 210 L 120 180 L 100 140 Z" fill="#232834" />
           {/* South America */}
-          <path d="M 180 240 L 220 230 L 240 260 L 235 320 L 210 360 L 185 350 L 170 310 L 165 270 Z" fill="#1C2333" />
+          <path d="M 180 240 L 220 230 L 240 260 L 235 320 L 210 360 L 185 350 L 170 310 L 165 270 Z" fill="#232834" />
           {/* Europe */}
-          <path d="M 420 80 L 480 75 L 510 95 L 500 125 L 470 135 L 440 130 L 415 110 Z" fill="#1C2333" />
+          <path d="M 420 80 L 480 75 L 510 95 L 500 125 L 470 135 L 440 130 L 415 110 Z" fill="#232834" />
           {/* Africa */}
-          <path d="M 440 150 L 490 145 L 520 170 L 530 230 L 510 290 L 480 310 L 450 290 L 430 240 L 425 190 Z" fill="#1C2333" />
+          <path d="M 440 150 L 490 145 L 520 170 L 530 230 L 510 290 L 480 310 L 450 290 L 430 240 L 425 190 Z" fill="#232834" />
           {/* Asia */}
-          <path d="M 520 70 L 680 60 L 780 80 L 800 130 L 760 170 L 700 180 L 640 170 L 580 155 L 530 130 L 515 100 Z" fill="#1C2333" />
+          <path d="M 520 70 L 680 60 L 780 80 L 800 130 L 760 170 L 700 180 L 640 170 L 580 155 L 530 130 L 515 100 Z" fill="#232834" />
           {/* India subcontinent */}
-          <path d="M 620 170 L 660 165 L 675 190 L 670 230 L 650 255 L 630 240 L 615 210 L 612 185 Z" fill="#1C2333" />
+          <path d="M 620 170 L 660 165 L 675 190 L 670 230 L 650 255 L 630 240 L 615 210 L 612 185 Z" fill="#232834" />
           {/* Australia */}
-          <path d="M 730 270 L 800 260 L 840 290 L 835 340 L 800 360 L 755 350 L 725 320 L 720 290 Z" fill="#1C2333" />
+          <path d="M 730 270 L 800 260 L 840 290 L 835 340 L 800 360 L 755 350 L 725 320 L 720 290 Z" fill="#232834" />
 
           {/* Arc path from Pune to Manchester */}
           <path
             ref={pathRef}
             d={pathD}
             fill="none"
-            stroke="#4F8EF7"
+            stroke="#6EA8FF"
             strokeWidth="2"
             strokeLinecap="round"
-            style={{ filter: "drop-shadow(0 0 6px rgba(79,142,247,0.8))" }}
           />
 
           {/* Pune dot */}
-          <circle cx={PUNE.x} cy={PUNE.y} r="5" fill="#4F8EF7" style={{ filter: "drop-shadow(0 0 8px #4F8EF7)" }}>
-            <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+          <circle cx={PUNE.x} cy={PUNE.y} r="5" fill="#6EA8FF">
           </circle>
-          <text x={PUNE.x + 10} y={PUNE.y + 4} fill="#8B9EC7" fontSize="12" fontFamily="Space Mono">Pune</text>
+          <text x={PUNE.x + 10} y={PUNE.y + 4} fill="#9AA3B5" fontSize="12" fontFamily="IBM Plex Mono">Pune</text>
 
           {/* Manchester dot */}
-          <circle cx={MANCHESTER.x} cy={MANCHESTER.y} r="5" fill="#10B981" style={{ filter: "drop-shadow(0 0 8px #10B981)" }}>
-            <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+          <circle cx={MANCHESTER.x} cy={MANCHESTER.y} r="5" fill="#6EA8FF">
           </circle>
-          <text x={MANCHESTER.x + 10} y={MANCHESTER.y + 4} fill="#8B9EC7" fontSize="12" fontFamily="Space Mono">Manchester</text>
+          <text x={MANCHESTER.x + 10} y={MANCHESTER.y + 4} fill="#9AA3B5" fontSize="12" fontFamily="IBM Plex Mono">Manchester</text>
         </svg>
       </div>
 
       {/* Milestone cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto px-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {experience.map((milestone, index) => (
           <MilestoneCard key={milestone.id} milestone={milestone} index={index} />
         ))}

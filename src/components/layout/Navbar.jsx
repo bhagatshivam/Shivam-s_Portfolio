@@ -1,104 +1,90 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router";
+import { Menu, X } from "lucide-react";
+import { site } from "../../data/site";
 
 const navLinks = [
-  { label: "Journey", href: "#journey" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Currently", href: "#currently" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", hash: "#projects" },
+  { label: "Skills", hash: "#skills" },
+  { label: "Experience", hash: "#experience" },
+  { label: "Contact", hash: "#contact" },
 ];
 
+const linkClass = "text-small text-text-secondary hover:text-text-primary";
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  // The menu is open only for the location it was opened at, so any navigation closes it.
+  const [openedAt, setOpenedAt] = useState(null);
+  const { key } = useLocation();
+  const menuOpen = openedAt === key;
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleNavClick = (href) => {
-    setMenuOpen(false);
-    // Hash links go through the router so they also work from the case-study routes.
-    navigate({ pathname: "/", hash: href });
-  };
+    if (!menuOpen) return;
+    const onKey = (e) => e.key === "Escape" && setOpenedAt(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between transition-all duration-300 ${
-          scrolled
-            ? "bg-surface border-b border-border backdrop-blur-md"
-            : "bg-transparent"
-        }`}
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:rounded focus:bg-accent focus:px-3 focus:py-1.5 focus:text-small focus:text-accent-ink"
       >
-        {/* Monogram */}
-        <button
-          onClick={() => handleNavClick("#hero")}
-          className="font-display font-bold text-xl text-text-primary hover:text-accent-blue transition-colors duration-200"
-          style={{
-            textShadow: scrolled ? "0 0 12px #4F8EF7" : "none",
-          }}
-        >
-          SB
-        </button>
+        Skip to content
+      </a>
 
-        {/* Desktop nav links */}
-        <ul className="hidden md:flex items-center gap-8">
+      <div className="page-container flex h-14 items-center justify-between gap-4">
+        <Link to="/" className="text-small font-semibold text-text-primary">
+          {site.name}
+        </Link>
+
+        <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
-            <li key={link.label}>
-              <button
-                onClick={() => handleNavClick(link.href)}
-                className="relative font-display text-sm text-text-secondary hover:text-text-primary transition-colors duration-200 group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent-blue transition-all duration-300 group-hover:w-full" />
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-6 h-px bg-text-primary transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-6 h-px bg-text-primary transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-px bg-text-primary transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
-      </motion.nav>
-
-      {/* Mobile full-screen overlay */}
-      {menuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-40 bg-background flex flex-col items-center justify-center gap-10"
-        >
-          {navLinks.map((link, i) => (
-            <motion.button
-              key={link.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              onClick={() => handleNavClick(link.href)}
-              className="font-display text-2xl text-text-primary hover:text-accent-blue transition-colors duration-200"
-            >
+            <Link key={link.hash} to={{ pathname: "/", hash: link.hash }} className={linkClass}>
               {link.label}
-            </motion.button>
+            </Link>
           ))}
-        </motion.div>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href={site.contact.cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-accent px-3 py-1.5 text-small font-medium text-accent hover:bg-accent hover:text-accent-ink"
+          >
+            CV
+          </a>
+          <button
+            type="button"
+            className="rounded-md p-2 text-text-primary md:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setOpenedAt(menuOpen ? null : key)}
+          >
+            {menuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <nav id="mobile-nav" aria-label="Primary" className="border-t border-border bg-background md:hidden">
+          <ul className="page-container py-2">
+            {navLinks.map((link) => (
+              <li key={link.hash}>
+                <Link
+                  to={{ pathname: "/", hash: link.hash }}
+                  className="block py-3 text-body text-text-primary"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       )}
-    </>
+    </header>
   );
 }

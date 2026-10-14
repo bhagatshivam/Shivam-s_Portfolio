@@ -9,13 +9,13 @@ import Contact from "../components/sections/Contact";
 export default function Home() {
   return (
     <>
-      <section id="hero"><Hero /></section>
-      <section id="journey"><Journey /></section>
-      <section id="projects"><Projects /></section>
-      <section id="skills"><Skills /></section>
-      <section id="currently"><Currently /></section>
-      <section id="interests"><Interests /></section>
-      <section id="contact"><Contact /></section>
+      <section id="hero" aria-label="Introduction"><Hero /></section>
+      <section id="projects" aria-labelledby="projects-title" className="border-t border-border"><Projects /></section>
+      <section id="skills" aria-labelledby="skills-title" className="border-t border-border"><Skills /></section>
+      <section id="experience" aria-labelledby="experience-title" className="border-t border-border"><Journey /></section>
+      <section id="currently" aria-labelledby="currently-title" className="border-t border-border"><Currently /></section>
+      <section id="interests" aria-labelledby="interests-title" className="border-t border-border"><Interests /></section>
+      <section id="contact" aria-labelledby="contact-title" className="border-t border-border"><Contact /></section>
     </>
   );
 }

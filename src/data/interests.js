@@ -5,7 +5,6 @@ export const interests = [
     blurb: "Avid reader since childhood. Inspired by Shoe Dog by Phil Knight on self-improvement and perseverance.",
     favorite: "Shoe Dog · Bhagavad Gita",
     icon: "BookOpen",
-    color: "#8B5CF6",
   },
   {
     id: 2,
@@ -13,7 +12,6 @@ export const interests = [
     blurb: "Love exploring nature and going on hiking adventures. It helps me disconnect and find new perspectives.",
     favorite: "Mountain trails & nature walks",
     icon: "Mountain",
-    color: "#10B981",
   },
   {
     id: 3,
@@ -21,6 +19,5 @@ export const interests = [
     blurb: "Enjoy watching anime for its storytelling, creativity, and unique art styles.",
     favorite: "Action · Mystery · Sci-fi",
     icon: "Sparkles",
-    color: "#4F8EF7",
   },
 ];

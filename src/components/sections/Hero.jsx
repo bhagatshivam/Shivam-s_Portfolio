@@ -1,119 +1,73 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Mail, FileText } from "lucide-react";
 import { site } from "../../data/site";
+import { GithubGlyph, LinkedinGlyph } from "../ui/icons";
+import Reveal from "../ui/Reveal";
 
-const phrases = [...site.heroPhrases, site.availability];
+const primaryButton =
+  "inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-small font-medium text-accent-ink hover:bg-accent/90";
+const outlineButton =
+  "inline-flex items-center gap-2 rounded-md border border-border-strong px-4 py-2.5 text-small font-medium text-text-primary hover:border-accent";
 
 export default function Hero() {
-  const [phraseIndex, setPhraseIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPhraseIndex((prev) => (prev + 1) % phrases.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleScrollToProjects = () => {
-    document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <div className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+    <div className="pb-16 pt-28 md:pb-24 md:pt-40">
+      <div className="page-container">
+        <Reveal>
+          {/* Static dot: nothing on this page loops. */}
+          <p className="inline-flex items-start gap-2.5 rounded-2xl border border-border bg-surface px-3.5 py-2 text-small text-text-secondary">
+            <span aria-hidden="true" className="mt-[0.5em] h-2 w-2 shrink-0 rounded-full bg-accent" />
+            {site.availability}
+          </p>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-surface" />
+          <h1 className="mt-6 text-display text-text-primary">{site.fullName}</h1>
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6">
+          <p className="mt-5 max-w-3xl text-lead text-text-secondary">{site.degreeLine}</p>
+          <p className="mt-2 max-w-3xl text-lead text-text-primary">{site.positioning}</p>
 
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="mb-6 font-display text-xs text-accent-green tracking-widest flex items-center justify-center gap-2 text-center"
-        >
-          [ {site.availability} ]
-          <span className="animate-pulse">|</span>
-        </motion.div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={site.contact.cv} target="_blank" rel="noopener noreferrer" className={primaryButton}>
+              <FileText size={16} aria-hidden="true" />
+              CV
+            </a>
+            <a href={site.contact.github} target="_blank" rel="noopener noreferrer" className={outlineButton}>
+              <GithubGlyph size={16} />
+              GitHub
+            </a>
+            <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className={outlineButton}>
+              <LinkedinGlyph size={16} />
+              LinkedIn
+            </a>
+            <a href={`mailto:${site.contact.email}`} className={outlineButton}>
+              <Mail size={16} aria-hidden="true" />
+              Email
+            </a>
+          </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="font-display font-bold text-4xl md:text-6xl lg:text-7xl text-text-primary mb-4 leading-tight"
-          style={{ textShadow: "0 0 40px rgba(79,142,247,0.3)" }}
-        >
-          {site.fullName}
-        </motion.h1>
+          {/* Work-rights sentence (site.workRights) is deliberately not rendered until confirmed. */}
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-          className="font-body text-text-secondary text-base md:text-lg mb-6"
-        >
-          {site.degreeLine}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.5 }}
-          className="h-8 mb-10 flex items-center justify-center"
-        >
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={phraseIndex}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4 }}
-              className="font-display text-sm md:text-base text-accent-blue"
-            >
-              {phrases[phraseIndex]}
-            </motion.p>
-          </AnimatePresence>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 items-center"
-        >
-          <button
-            onClick={handleScrollToProjects}
-            className="px-6 py-3 rounded-md font-display text-sm text-background bg-accent-blue hover:bg-opacity-90 transition-all duration-200"
-            style={{ boxShadow: "0 0 20px rgba(79,142,247,0.4)" }}
+          <ul
+            aria-label="Dissertation results"
+            className="mt-14 grid divide-y divide-border border-y border-border sm:grid-cols-3 sm:divide-x sm:divide-y-0"
           >
-            View My Work
-          </button>
-          <a
-            href={site.contact.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-md font-display text-sm text-accent-blue border border-accent-blue hover:bg-accent-blue hover:text-background transition-all duration-200"
-          >
-            Download CV
-          </a>
-        </motion.div>
+            {site.proofStrip.map((item, i) => (
+              <li
+                key={item.label}
+                className="flex items-baseline gap-4 py-4 sm:flex-col sm:items-start sm:gap-2 sm:px-6 sm:py-6 sm:first:pl-0"
+              >
+                <span
+                  className={`w-24 shrink-0 text-stat tabular-nums sm:w-auto ${
+                    i === 0 ? "text-accent" : "text-text-primary"
+                  }`}
+                >
+                  {item.value}
+                </span>
+                <span className="font-mono text-label text-text-secondary">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 font-mono text-label text-text-secondary">From my MSc dissertation evaluation.</p>
+        </Reveal>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 0.5 }}
-        className="absolute bottom-10 flex flex-col items-center gap-2"
-      >
-        <span className="font-display text-xs text-text-secondary tracking-widest">SCROLL</span>
-        <div className="w-px h-12 bg-border relative overflow-hidden">
-          <motion.div
-            animate={{ y: ["-100%", "200%"] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 left-0 w-full h-1/2 bg-accent-blue"
-          />
-        </div>
-      </motion.div>
-
     </div>
   );
 }

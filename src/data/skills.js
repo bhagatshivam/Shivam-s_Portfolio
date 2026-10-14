@@ -21,43 +21,39 @@ export const clusterLabels = {
   devops: "DevOps / CI",
 };
 
-const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
-
-// Icons are Devicon URLs where the icon was already in use on the site. New chips use an
-// emoji fallback until icons are checked in the design chunk.
 export const skills = [
   // Languages
-  { id: "python", label: "Python", cluster: "languages", icon: `${DEVICON}/python/python-original.svg`, projectIds: ["ci-pipeline-docs", "culinary-rag", "ask-the-doc"] },
-  { id: "typescript", label: "TypeScript", cluster: "languages", icon: `${DEVICON}/typescript/typescript-original.svg`, projectIds: ["vach", "storywanderer"] },
+  { id: "python", label: "Python", cluster: "languages", projectIds: ["ci-pipeline-docs", "culinary-rag", "ask-the-doc"] },
+  { id: "typescript", label: "TypeScript", cluster: "languages", projectIds: ["vach", "storywanderer"] },
 
   // AI / ML
-  { id: "langgraph", label: "LangGraph", cluster: "ai", icon: null, emoji: "🦜", projectIds: ["culinary-rag"] },
-  { id: "faiss", label: "FAISS", cluster: "ai", icon: null, emoji: "🔎", projectIds: ["culinary-rag"] },
-  { id: "bge-large", label: "BGE-Large embeddings", cluster: "ai", icon: null, emoji: "🧭", projectIds: ["culinary-rag"] },
-  { id: "qwen", label: "Qwen2.5", cluster: "ai", icon: null, emoji: "💬", projectIds: ["culinary-rag"] },
-  { id: "transformers", label: "HuggingFace Transformers", cluster: "ai", icon: null, emoji: "🤗", projectIds: ["ask-the-doc"] },
-  { id: "gemini", label: "Gemini 2.5 Flash", cluster: "ai", icon: null, emoji: "✨", projectIds: ["ci-pipeline-docs"] },
+  { id: "langgraph", label: "LangGraph", cluster: "ai", projectIds: ["culinary-rag"] },
+  { id: "faiss", label: "FAISS", cluster: "ai", projectIds: ["culinary-rag"] },
+  { id: "bge-large", label: "BGE-Large embeddings", cluster: "ai", projectIds: ["culinary-rag"] },
+  { id: "qwen", label: "Qwen2.5", cluster: "ai", projectIds: ["culinary-rag"] },
+  { id: "transformers", label: "HuggingFace Transformers", cluster: "ai", projectIds: ["ask-the-doc"] },
+  { id: "gemini", label: "Gemini 2.5 Flash", cluster: "ai", projectIds: ["ci-pipeline-docs"] },
 
   // Web
-  { id: "react", label: "React", cluster: "web", icon: `${DEVICON}/react/react-original.svg`, projectIds: ["vach", "storywanderer"] },
-  { id: "vite", label: "Vite", cluster: "web", icon: null, emoji: "⚡", projectIds: ["storywanderer"] },
-  { id: "tailwind", label: "Tailwind CSS", cluster: "web", icon: `${DEVICON}/tailwindcss/tailwindcss-original.svg`, projectIds: ["storywanderer"] },
-  { id: "shadcn", label: "shadcn/ui", cluster: "web", icon: null, emoji: "🧩", projectIds: ["storywanderer"] },
-  { id: "supabase", label: "Supabase", cluster: "web", icon: null, emoji: "🗄️", projectIds: ["storywanderer"] },
-  { id: "postgresql", label: "PostgreSQL", cluster: "web", icon: `${DEVICON}/postgresql/postgresql-original.svg`, projectIds: ["storywanderer"] },
-  { id: "streamlit", label: "Streamlit", cluster: "web", icon: null, emoji: "📊", projectIds: ["culinary-rag", "ask-the-doc"] },
+  { id: "react", label: "React", cluster: "web", projectIds: ["vach", "storywanderer"] },
+  { id: "vite", label: "Vite", cluster: "web", projectIds: ["storywanderer"] },
+  { id: "tailwind", label: "Tailwind CSS", cluster: "web", projectIds: ["storywanderer"] },
+  { id: "shadcn", label: "shadcn/ui", cluster: "web", projectIds: ["storywanderer"] },
+  { id: "supabase", label: "Supabase", cluster: "web", projectIds: ["storywanderer"] },
+  { id: "postgresql", label: "PostgreSQL", cluster: "web", projectIds: ["storywanderer"] },
+  { id: "streamlit", label: "Streamlit", cluster: "web", projectIds: ["culinary-rag", "ask-the-doc"] },
 
   // Mobile and tooling
-  { id: "capacitor", label: "Capacitor", cluster: "mobile", icon: null, emoji: "📱", projectIds: ["vach"] },
-  { id: "android-saf", label: "Android SAF", cluster: "mobile", icon: null, emoji: "📂", projectIds: ["vach"] },
-  { id: "pdfjs", label: "pdf.js", cluster: "mobile", icon: null, emoji: "📄", projectIds: ["vach"] },
-  { id: "vitest", label: "Vitest", cluster: "mobile", icon: null, emoji: "🧪", projectIds: ["vach"] },
-  { id: "mermaid", label: "Mermaid", cluster: "mobile", icon: null, emoji: "🧜", projectIds: ["ci-pipeline-docs"] },
-  { id: "golden-file-testing", label: "Golden-file testing", cluster: "mobile", icon: null, emoji: "✅", projectIds: ["ci-pipeline-docs"] },
+  { id: "capacitor", label: "Capacitor", cluster: "mobile", projectIds: ["vach"] },
+  { id: "android-saf", label: "Android SAF", cluster: "mobile", projectIds: ["vach"] },
+  { id: "pdfjs", label: "pdf.js", cluster: "mobile", projectIds: ["vach"] },
+  { id: "vitest", label: "Vitest", cluster: "mobile", projectIds: ["vach"] },
+  { id: "mermaid", label: "Mermaid", cluster: "mobile", projectIds: ["ci-pipeline-docs"] },
+  { id: "golden-file-testing", label: "Golden-file testing", cluster: "mobile", projectIds: ["ci-pipeline-docs"] },
 
   // DevOps / CI
-  { id: "github-actions", label: "GitHub Actions", cluster: "devops", icon: null, isGithub: true, projectIds: ["ci-pipeline-docs", "vach"] },
-  { id: "yaml", label: "YAML", cluster: "devops", icon: null, emoji: "📝", projectIds: ["ci-pipeline-docs"] },
+  { id: "github-actions", label: "GitHub Actions", cluster: "devops", projectIds: ["ci-pipeline-docs", "vach"] },
+  { id: "yaml", label: "YAML", cluster: "devops", projectIds: ["ci-pipeline-docs"] },
 ];
 
 // Chips from the old site that no remaining project uses. They are not rendered: a chip

@@ -18,11 +18,6 @@ export const site = {
   // The wording must be true on the day the site goes live. NOT rendered anywhere yet.
   workRights: "Graduate Route right to work, no sponsorship required",
 
-  heroPhrases: [
-    "Developer tools and AI-backed systems.",
-    "A CI documentation tool, an Android reader, a RAG assistant.",
-  ],
-
   // Proof strip (not rendered yet). Sources are the dissertation tables in the plan's §9.
   // TODO(confirm): which three numbers lead the strip.
   proofStrip: [
@@ -49,6 +44,6 @@ export const site = {
     // TODO(confirm): "open to relocation" is carried over from the old site.
     { command: "location", value: "Manchester, UK (open to relocation)" },
     { command: "availability", value: "UK, from November 2026" },
-    { command: "dissertation", value: "What Is My CI Pipeline Doing? [SUBMITTED]", valueColor: "#4F8EF7" },
+    { command: "dissertation", value: "What Is My CI Pipeline Doing? [SUBMITTED]" },
   ],
 };

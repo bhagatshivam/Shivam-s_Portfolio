@@ -23,9 +23,6 @@ export default {
       fontFamily: {
         sans: fonts.sans,
         mono: fonts.mono,
-        // Legacy names still used by sections that have not been rebuilt yet.
-        display: fonts.sans,
-        body: fonts.sans,
       },
       fontSize,
       maxWidth: { page: layout.maxWidth },
@@ -51,7 +48,7 @@ export default {
         "::selection": {
           backgroundColor: "rgb(var(--color-accent) / 0.3)",
         },
-        "section[id], div[id]": { scrollMarginTop: "4.5rem" },
+        "[id]": { scrollMarginTop: "4.5rem" },
       });
 
       const md = theme("screens.md");
@@ -64,6 +61,13 @@ export default {
           paddingInline: layout.gutter.base,
           [`@media (min-width: ${md})`]: { paddingInline: layout.gutter.md },
           [`@media (min-width: ${lg})`]: { paddingInline: layout.gutter.lg },
+        },
+        // Flat cards: hover lift is the only card motion. Lite mode removes the transform.
+        ".hover-lift": {
+          transitionProperty: "transform, border-color",
+          transitionDuration: "200ms",
+          transitionTimingFunction: "ease-out",
+          "&:hover": { transform: "translateY(-2px)" },
         },
         ".section-y": {
           paddingBlock: layout.sectionY.base,

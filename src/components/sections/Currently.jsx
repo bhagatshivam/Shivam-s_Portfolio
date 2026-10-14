@@ -1,32 +1,25 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import SectionHeader from "../ui/SectionHeader";
 import TerminalText from "../ui/TerminalText";
 import { site } from "../../data/site";
 
 const lines = site.currentlyLines;
 
 const focusAreas = [
-  { label: "Software Engineering", color: "#4F8EF7" },
-  { label: "AI / ML Engineering", color: "#8B5CF6" },
-  { label: "Data Engineering", color: "#10B981" },
+  { label: "Software Engineering" },
+  { label: "AI / ML Engineering" },
+  { label: "Data Engineering" },
 ];
 
 export default function Currently() {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   return (
-    <div ref={ref} className="py-24 px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-14"
-      >
-        <p className="font-display text-xs text-accent-green tracking-widest mb-3">[ SECTION 05 ]</p>
-        <h2 className="font-display text-3xl md:text-4xl text-text-primary">Right Now</h2>
-      </motion.div>
+    <div ref={ref} className="section-y page-container">
+      <SectionHeader id="currently-title" label="Right now" title="Where things stand." />
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
         {/* Terminal block — left, wider */}
         <motion.div
@@ -34,11 +27,9 @@ export default function Currently() {
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="lg:col-span-3 rounded-xl border border-border bg-surface p-6 md:p-8"
-          style={{ boxShadow: "0 0 30px rgba(16,185,129,0.06)" }}
         >
-          <p className="font-display text-sm text-text-primary mb-6 flex items-center gap-2">
-            <span className="text-accent-green">&gt;</span> currently
-            <span className="animate-pulse text-accent-green">|</span>
+          <p className="font-mono text-sm text-text-primary mb-6 flex items-center gap-2">
+            <span className="text-accent">&gt;</span> currently
           </p>
 
           <div className="space-y-4 mb-8">
@@ -47,13 +38,12 @@ export default function Currently() {
                 key={line.command}
                 command={line.command}
                 value={line.value}
-                valueColor={line.valueColor}
                 delay={inView ? 0.2 + 0.12 * index : 0}
               />
             ))}
           </div>
 
-          <p className="font-body text-text-secondary text-sm leading-relaxed border-t border-border pt-6">
+          <p className="font-sans text-text-secondary text-sm leading-relaxed border-t border-border pt-6">
             {site.availability}.
           </p>
         </motion.div>
@@ -67,7 +57,7 @@ export default function Currently() {
         >
           {/* Focus areas */}
           <div className="rounded-xl border border-border bg-surface p-6">
-            <p className="font-display text-xs text-text-secondary tracking-widest mb-4">
+            <p className="font-mono text-label text-text-secondary mb-4">
               FOCUS AREAS
             </p>
             <div className="flex flex-col gap-3">
@@ -79,11 +69,8 @@ export default function Currently() {
                   transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <span
-                    className="w-2 h-2 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: area.color, boxShadow: `0 0 8px ${area.color}` }}
-                  />
-                  <span className="font-body text-sm text-text-primary">{area.label}</span>
+                  <span className="w-2 h-2 rounded-full flex-shrink-0 bg-accent" />
+                  <span className="font-sans text-sm text-text-primary">{area.label}</span>
                 </motion.div>
               ))}
             </div>
