@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { milestones } from "../../data/journey";
+import { experience } from "../../data/experience";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,12 +28,12 @@ function MilestoneCard({ milestone, index }) {
     >
       <div className="flex-shrink-0">
         <span className="font-display text-xs text-accent-blue bg-background px-2 py-1 rounded border border-accent-blue border-opacity-30">
-          {milestone.year}
+          {milestone.period}
         </span>
       </div>
       <div>
-        <p className="font-display text-sm text-text-primary mb-1">{milestone.label}</p>
-        <p className="font-body text-xs text-text-secondary">{milestone.detail}</p>
+        <p className="font-display text-sm text-text-primary mb-1">{milestone.title}</p>
+        <p className="font-body text-xs text-text-secondary">{milestone.summary}</p>
       </div>
     </motion.div>
   );
@@ -121,7 +121,7 @@ export default function JourneyMap({ sectionRef }) {
 
       {/* Milestone cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto px-6">
-        {milestones.map((milestone, index) => (
+        {experience.map((milestone, index) => (
           <MilestoneCard key={milestone.id} milestone={milestone} index={index} />
         ))}
       </div>

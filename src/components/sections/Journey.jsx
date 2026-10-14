@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { usePerformance } from "../../context/PerformanceContext";
 import JourneyMap from "../ui/JourneyMap";
-import { milestones } from "../../data/journey";
+import { experience } from "../../data/experience";
 
 function LiteMilestone({ milestone }) {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
@@ -21,9 +21,9 @@ function LiteMilestone({ milestone }) {
         <div className="w-px flex-1 bg-border mt-2" />
       </div>
       <div className="pb-8">
-        <span className="font-display text-xs text-accent-blue">{milestone.year}</span>
-        <p className="font-display text-sm text-text-primary mt-1">{milestone.label}</p>
-        <p className="font-body text-xs text-text-secondary mt-1">{milestone.detail}</p>
+        <span className="font-display text-xs text-accent-blue">{milestone.period}</span>
+        <p className="font-display text-sm text-text-primary mt-1">{milestone.title}</p>
+        <p className="font-body text-xs text-text-secondary mt-1">{milestone.summary}</p>
       </div>
     </motion.div>
   );
@@ -65,7 +65,7 @@ export default function Journey() {
         {/* Lite mode — vertical timeline */}
         {isLiteMode && (
           <div className="max-w-lg mx-auto">
-            {milestones.map((milestone) => (
+            {experience.map((milestone) => (
               <LiteMilestone key={milestone.id} milestone={milestone} />
             ))}
           </div>
