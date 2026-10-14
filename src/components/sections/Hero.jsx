@@ -19,7 +19,7 @@ export default function Hero() {
             {site.availability}
           </p>
 
-          <h1 className="mt-6 text-display text-text-primary">{site.fullName}</h1>
+          <h1 className="mt-6 text-display text-text-primary">{site.name}</h1>
 
           <p className="mt-5 max-w-3xl text-lead text-text-secondary">{site.degreeLine}</p>
           <p className="mt-2 max-w-3xl text-lead text-text-primary">{site.positioning}</p>

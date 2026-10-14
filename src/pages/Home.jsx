@@ -1,3 +1,5 @@
+import { usePageMeta } from "../hooks/usePageMeta";
+import { site } from "../data/site";
 import Hero from "../components/sections/Hero";
 import Journey from "../components/sections/Journey";
 import Projects from "../components/sections/Projects";
@@ -7,6 +9,8 @@ import Interests from "../components/sections/Interests";
 import Contact from "../components/sections/Contact";
 
 export default function Home() {
+  usePageMeta({ title: site.title, description: site.metaDescription });
+
   return (
     <>
       <section id="hero" aria-label="Introduction"><Hero /></section>

@@ -2,9 +2,11 @@
 // Never "graduated", never "Available now", no graduate-role wording.
 
 export const site = {
+  // Used in the navbar, the hero heading and the page titles. The full legal name stays on the CV.
   name: "Shivam Bhagat",
-  // Display name used by the hero heading today.
-  fullName: "Shivam Balasaheb Bhagat",
+  title: "Shivam Bhagat — Software Engineer",
+  metaDescription:
+    "Shivam Bhagat, software engineer. MSc Advanced Computer Science, University of Manchester. I build developer tools and AI-backed systems, and I test them properly.",
 
   // TODO(confirm): exact programme title vs degree paperwork (CV: "Advanced Computer Science").
   degreeLine: "MSc Advanced Computer Science, University of Manchester",
