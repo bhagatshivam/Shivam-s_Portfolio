@@ -1,24 +1,26 @@
 import { Link, useParams } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { projects } from "../data/projects";
+import { getCaseStudy } from "../data/caseStudies";
 import { useSkillFocus } from "../context/SkillFocusContext";
+import { usePageMeta } from "../hooks/usePageMeta";
+import CaseStudyLayout from "../components/case-study/CaseStudyLayout";
 import StatusChip from "../components/ui/StatusChip";
 import NotFound from "./NotFound";
 
-// Placeholder: the long-form case studies arrive in their own chunks. Until then the page
-// shows the project's card copy so the routes exist and can be linked to.
-export default function CaseStudyPage() {
-  const { slug } = useParams();
+// Placeholder for a case-study route whose entry is not written yet (Vach, until its chunk).
+function ComingSoon({ project }) {
   const { jumpToSkills } = useSkillFocus();
-  const project = projects.find((p) => p.caseStudy === slug);
-
-  if (!project) return <NotFound />;
+  usePageMeta({
+    title: `${project.title} | Case study | Shivam Bhagat`,
+    description: project.summary,
+  });
 
   return (
     <div className="page-container pb-24 pt-28 md:pt-36">
       <div className="max-w-3xl">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-small text-text-secondary hover:text-text-primary">
-          <ArrowLeft size={14} aria-hidden="true" /> Back to home
+        <Link to={{ pathname: "/", hash: "#projects" }} className="inline-flex items-center gap-1.5 text-small text-text-secondary hover:text-text-primary">
+          <ArrowLeft size={14} aria-hidden="true" /> Back to projects
         </Link>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <StatusChip project={project} />
@@ -31,12 +33,7 @@ export default function CaseStudyPage() {
         <p className="mt-8 font-mono text-label text-text-secondary">Full case study coming soon.</p>
         <div className="mt-6 flex flex-wrap items-center gap-6">
           {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-small font-medium text-accent hover:underline"
-            >
+            <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-small font-medium text-accent hover:underline">
               View on GitHub
             </a>
           )}
@@ -51,4 +48,13 @@ export default function CaseStudyPage() {
       </div>
     </div>
   );
+}
+
+export default function CaseStudyPage() {
+  const { slug } = useParams();
+  const entry = getCaseStudy(slug);
+  if (entry) return <CaseStudyLayout entry={entry} />;
+
+  const project = projects.find((p) => p.caseStudy === slug);
+  return project ? <ComingSoon project={project} /> : <NotFound />;
 }
