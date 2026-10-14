@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { usePerformance } from "../../context/PerformanceContext";
 
 export default function PerformanceToggle() {
-  const { isLiteMode, toggleLiteMode } = usePerformance();
+  const { isLiteMode, toggleLiteMode, isSystemDefault } = usePerformance();
 
   return (
     <motion.button
@@ -12,7 +12,13 @@ export default function PerformanceToggle() {
       transition={{ delay: 2, duration: 0.3 }}
       onClick={toggleLiteMode}
       aria-label={isLiteMode ? "Switch to full experience" : "Switch to lite mode"}
-      title={isLiteMode ? "Full experience" : "Lite mode"}
+      title={
+        isLiteMode
+          ? isSystemDefault
+            ? "Lite mode (your system prefers reduced motion). Click for full experience"
+            : "Full experience"
+          : "Lite mode"
+      }
       className="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full flex items-center justify-center border border-border bg-surface hover:border-accent-blue transition-all duration-300 group"
       style={{
         boxShadow: isLiteMode ? "none" : "0 0 12px rgba(79,142,247,0.3)",

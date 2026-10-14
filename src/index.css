@@ -10,8 +10,14 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Lite mode (manual toggle or prefers-reduced-motion) turns off all CSS motion. */
+html[data-lite="true"] *,
+html[data-lite="true"] *::before,
+html[data-lite="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
 }
 
 body {
