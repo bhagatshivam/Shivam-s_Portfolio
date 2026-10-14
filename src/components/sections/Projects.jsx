@@ -26,7 +26,7 @@ export default function Projects() {
         <p className="font-display text-xs text-accent-purple tracking-widest mb-3">[ SECTION 03 ]</p>
         <h2 className="font-display text-3xl md:text-4xl text-text-primary">Projects</h2>
         <p className="font-body text-text-secondary mt-3 text-sm">
-          RAG pipelines, computer vision, and full-stack platforms.
+          Developer tooling, a shipped Android app, full-stack, and applied AI.
         </p>
       </motion.div>
 

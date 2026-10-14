@@ -30,6 +30,9 @@ export default function ProjectCard({ project }) {
     setTilt({ x: 0, y: 0 });
   };
 
+  const statusText =
+    project.statusLabel || (project.status === "complete" ? "COMPLETE" : "IN PROGRESS");
+
   const matchedSkills = (project.skillIds || [])
     .map((id) => skills.find((s) => s.id === id))
     .filter(Boolean);
@@ -75,7 +78,7 @@ export default function ProjectCard({ project }) {
                 project.status === "complete" ? "#10B98120" : "#F59E0B20",
             }}
           >
-            {project.status === "complete" ? "COMPLETE" : "IN PROGRESS"}
+            {statusText}
           </span>
           <span className="font-display text-xs text-text-secondary">{project.year}</span>
         </div>
@@ -144,7 +147,7 @@ export default function ProjectCard({ project }) {
                     project.status === "complete" ? "#10B98120" : "#F59E0B20",
                 }}
               >
-                {project.status === "complete" ? "COMPLETE" : "IN PROGRESS"} · {project.year}
+                {statusText} · {project.year}
               </span>
 
               <h3 className="font-display text-2xl text-text-primary mb-4">
@@ -212,8 +215,12 @@ export default function ProjectCard({ project }) {
               ) : (
                 <span className="inline-flex items-center gap-2 font-display text-sm text-text-secondary">
                   <Lock size={16} />
-                  {project.isDissertation ? "Private — Dissertation" : "No public repo yet"}
+                  No public repo yet
                 </span>
+              )}
+
+              {project.releaseNote && (
+                <p className="font-body text-xs text-text-secondary mt-3">{project.releaseNote}</p>
               )}
             </motion.div>
           </motion.div>
