@@ -7,6 +7,8 @@ import { homeMeta, caseStudyTitle, absoluteUrl, OG_IMAGE, personJsonLd, SITE_URL
 //    (projects/vach.html, ...) so crawlers and link previews that do not run JavaScript still
 //    see the right title, description and og:url. With cleanUrls on, Vercel serves
 //    projects/vach.html at /projects/vach; the SPA rewrite in vercel.json is the fallback.
+//  - preloads the one critical font (Inter, Latin) and inlines the stylesheet into the HTML,
+//    which removes the render-blocking CSS request and the HTML -> CSS -> font chain
 //  - emits robots.txt and sitemap.xml
 // Everything comes from src/data (site.js, caseStudies.js, seo.js) and site.config.js.
 
@@ -51,7 +53,24 @@ export default function sitePlugin() {
     generateBundle(_, bundle) {
       const index = bundle["index.html"];
       if (!index) return;
-      const template = index.source.toString();
+      let template = index.source.toString();
+
+      // Preload the critical font.
+      const font = Object.keys(bundle).find((f) => /inter-latin-wght-normal.*\.woff2$/.test(f));
+      if (font) {
+        template = template.replace(
+          "</head>",
+          `    <link rel="preload" href="/${font}" as="font" type="font/woff2" crossorigin />\n  </head>`
+        );
+      }
+
+      // Inline the stylesheet.
+      template = template.replace(/<link rel="stylesheet"[^>]*href="\/(assets\/[^"]+\.css)"[^>]*>/, (tag, file) => {
+        const css = bundle[file];
+        if (!css) return tag;
+        delete bundle[file];
+        return `<style>${css.source.toString()}</style>`;
+      });
 
       index.source = fill(template, homeMeta);
       for (const route of routes.slice(1)) {

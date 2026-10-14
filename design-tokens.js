@@ -24,6 +24,7 @@ export const colors = {
 export const fonts = {
   sans: [
     '"Inter Variable"',
+    '"Inter Fallback"',
     "Inter",
     "ui-sans-serif",
     "system-ui",
