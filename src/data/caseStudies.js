@@ -104,7 +104,7 @@ export const caseStudies = [
         blocks: [
           {
             type: "paragraph",
-            text: "This is the deterministic layer's real output for urllib3's CI workflow, copied unedited from the evaluation files in the repository. Underneath is the Mermaid diagram the tool emits for the same workflow, redrawn here as a simple diagram.",
+            text: "This is the deterministic layer's real output for urllib3's CI workflow, copied from the evaluation files in the repository, with one file path shortened. Underneath is the Mermaid diagram the tool emits for the same workflow, redrawn here as a simple diagram.",
           },
           {
             type: "figure",
@@ -274,7 +274,7 @@ export const caseStudies = [
             items: [
               "Render step-level conditions.",
               "Warn when a secret-like expression fails classification.",
-              "Add a parser for a second platform, to test the platform-agnostic claim.",
+              "Add a second platform parser (e.g. GitLab CI, not implemented) to test the platform-agnostic claim.",
             ],
           },
           {

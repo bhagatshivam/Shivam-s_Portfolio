@@ -69,8 +69,8 @@ export default function OutputFigure({ data }) {
       </details>
 
       <p className="font-mono text-label text-text-secondary">
-        Copied unedited from <span className="text-text-primary [overflow-wrap:anywhere]">{data.path}</span> in the repository
-        (generated {data.generated}).
+        Copied from <span className="text-text-primary [overflow-wrap:anywhere]">{data.path}</span> in the repository
+        (generated {data.generated}).{data.pathShortened && " Path shortened."}
       </p>
     </div>
   );

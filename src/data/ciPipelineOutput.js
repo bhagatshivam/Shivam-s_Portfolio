@@ -3,14 +3,18 @@
 //   https://github.com/bhagatshivam/what-is-my-pipeline-doing
 //   evaluation/tier4_scoring/urllib3_ci.scoring.md ("Condition A"; repo commit 977e5be)
 // The input workflow is evaluation/held_out_workflows/urllib3_ci.yml in the same repo.
+// One edit: the "Source:" line had an absolute path from the machine that generated it
+// (/home/user/what-is-my-pipeline-doing/...); it is shortened to the repo-relative path.
+// Every other line is unchanged.
 // Stored as an array of lines so `${{ ... }}` sequences are plain strings.
 
 export const urllib3Output = {
   path: "evaluation/tier4_scoring/urllib3_ci.scoring.md",
   generated: "22 Aug 2026",
+  pathShortened: true,
   lines: [
     "Pipeline: CI",
-    "Source: /home/user/what-is-my-pipeline-doing/evaluation/held_out_workflows/urllib3_ci.yml (GitHub Actions)",
+    "Source: evaluation/held_out_workflows/urllib3_ci.yml (GitHub Actions)",
     "Permissions: contents: read",
     "",
     "AT A GLANCE",
