@@ -28,16 +28,8 @@ export default function CaseStudyLayout({ entry }) {
   const prev = withStudies[index - 1];
   const next = withStudies[index + 1];
 
-  // Figures are numbered in reading order.
-  const figureNumbers = new Map();
-  for (const section of entry.sections) {
-    for (const block of section.blocks) {
-      if (block.type === "figure") figureNumbers.set(block, figureNumbers.size + 1);
-    }
-  }
-
   return (
-    <article className="pt-14">
+    <article className="case-study pt-14">
       {/* Sticky back link, tucked under the fixed navbar. */}
       <div className="sticky top-14 z-40 border-b border-border bg-background/95">
         <div className="page-container flex h-11 items-center">
@@ -117,7 +109,7 @@ export default function CaseStudyLayout({ entry }) {
             />
             <div className="space-y-6">
               {section.blocks.map((block, b) => (
-                <Block key={b} block={block} number={figureNumbers.get(block)} project={project} />
+                <Block key={b} block={block} project={project} />
               ))}
             </div>
           </section>

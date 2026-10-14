@@ -18,6 +18,17 @@ html[data-lite="true"] .hover-lift:hover {
   transform: none;
 }
 
+/* Case-study figure numbers count only the figures that actually render. */
+.case-study {
+  counter-reset: figure;
+}
+
+.figure-caption::before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ". ";
+  color: rgb(var(--color-text-primary));
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

@@ -138,17 +138,19 @@ function Callout({ block }) {
   );
 }
 
-function Figure({ block, number, project }) {
+function Figure({ block, project }) {
   const Component = figures[block.figure];
   if (!Component) return null;
+  if (Component.bare) return <Component data={block.data} project={project} caption={block.caption} />;
 
   return (
     <figure className={WIDE}>
       <div className="rounded-xl border border-border bg-surface p-4 md:p-6">
         <Component data={block.data} project={project} />
       </div>
-      <figcaption className="mt-3 font-mono text-label text-text-secondary">
-        <span className="text-text-primary">Figure {number}.</span> <Inline text={block.caption} />
+      {/* "Figure N." comes from a CSS counter, so a figure that renders nothing is skipped. */}
+      <figcaption className="figure-caption mt-3 font-mono text-label text-text-secondary">
+        <Inline text={block.caption} />
       </figcaption>
     </figure>
   );
@@ -165,7 +167,7 @@ const renderers = {
   figure: Figure,
 };
 
-export default function Block({ block, number, project }) {
+export default function Block({ block, project }) {
   const Renderer = renderers[block.type];
-  return Renderer ? <Renderer block={block} number={number} project={project} /> : null;
+  return Renderer ? <Renderer block={block} project={project} /> : null;
 }

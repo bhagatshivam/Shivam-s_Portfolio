@@ -298,7 +298,7 @@ export const caseStudies = [
     projectId: "vach",
     title: "Vach: offline PDF & EPUB reader for Android",
     summary:
-      "An Android app (React/TypeScript in a Capacitor native shell) for reading a personal library of PDF and EPUB novels offline, with continuous scroll like a webnovel app.",
+      "Vach (वाच) is Marathi for “read”. It is an Android app (React/TypeScript in a Capacitor native shell) for reading a personal library of PDF and EPUB novels offline, with continuous scroll like a webnovel app.",
     description:
       "Vach: an offline PDF and EPUB reader for Android, built with React and TypeScript in a Capacitor shell. Persistent folder access, continuous scroll, no ads.",
     sections: [
@@ -345,8 +345,10 @@ export const caseStudies = [
           },
           {
             type: "list",
+            // TODO(confirm): "designed to persist" is deliberately not stated as verified. Upgrade
+            // it to a plain statement once the reboot check below has been run on the device.
             items: [
-              "**File access.** First launch opens a SAF folder picker, and the permission persists across restarts and reboots. The app scans the folder and its subfolders for `.pdf` and `.epub` files and detects new ones on each open. Files are read in place; nothing is copied into app storage. If access is revoked, it falls back to a “no folder selected” state instead of crashing.",
+              "**File access.** First launch opens a SAF folder picker, and the permission is designed to persist across restarts and reboots (`takePersistableUriPermission`). The app scans the folder and its subfolders for `.pdf` and `.epub` files and detects new ones on each open. Files are read in place; nothing is copied into app storage. If access is revoked, it falls back to a “no folder selected” state instead of crashing.",
               "**Reading interface.** Continuous vertical scroll, tuned for smoothness because that was the top UX priority. Curated fonts, size, line height and themes (sepia, night, beige, plus a custom slot). Reading position is saved per book and restored on reopen.",
               "**Offline.** No network calls anywhere in the reading flow. No ads, accounts or telemetry.",
             ],
