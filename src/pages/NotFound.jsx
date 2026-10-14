@@ -1,10 +1,13 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function NotFound() {
+  const { pathname } = useLocation();
   usePageMeta({
     title: "Page not found | Shivam Bhagat",
     description: "This page does not exist.",
+    path: pathname,
+    noindex: true,
   });
 
   return (

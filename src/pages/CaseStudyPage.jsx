@@ -4,6 +4,7 @@ import { projects } from "../data/projects";
 import { getCaseStudy } from "../data/caseStudies";
 import { useSkillFocus } from "../context/SkillFocusContext";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { caseStudyTitle } from "../data/seo";
 import CaseStudyLayout from "../components/case-study/CaseStudyLayout";
 import StatusChip from "../components/ui/StatusChip";
 import NotFound from "./NotFound";
@@ -12,8 +13,9 @@ import NotFound from "./NotFound";
 function ComingSoon({ project }) {
   const { jumpToSkills } = useSkillFocus();
   usePageMeta({
-    title: `${project.title} | Case study | Shivam Bhagat`,
+    title: caseStudyTitle(project.title),
     description: project.summary,
+    path: `/projects/${project.caseStudy}`,
   });
 
   return (

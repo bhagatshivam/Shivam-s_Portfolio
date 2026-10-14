@@ -4,9 +4,10 @@
 export const site = {
   // Used in the navbar, the hero heading and the page titles. The full legal name stays on the CV.
   name: "Shivam Bhagat",
-  title: "Shivam Bhagat — Software Engineer",
+  title: "Shivam Bhagat | Software Engineer",
+  // Under 160 characters, from approved text only.
   metaDescription:
-    "Shivam Bhagat, software engineer. MSc Advanced Computer Science, University of Manchester. I build developer tools and AI-backed systems, and I test them properly.",
+    "MSc Advanced Computer Science student at the University of Manchester. Dissertation on generating CI pipeline documentation; Vach, an Android PDF/EPUB reader.",
 
   // TODO(confirm): exact programme title vs degree paperwork (CV: "Advanced Computer Science").
   degreeLine: "MSc Advanced Computer Science, University of Manchester",

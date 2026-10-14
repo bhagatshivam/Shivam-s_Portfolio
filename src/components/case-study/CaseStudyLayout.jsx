@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { projects } from "../../data/projects";
 import { useSkillFocus } from "../../context/SkillFocusContext";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { caseStudyTitle } from "../../data/seo";
 import { GithubGlyph } from "../ui/icons";
 import StatusChip from "../ui/StatusChip";
 import Tag from "../ui/Tag";
@@ -18,8 +19,10 @@ export default function CaseStudyLayout({ entry }) {
   const project = projects.find((p) => p.id === entry.projectId);
 
   usePageMeta({
-    title: `${entry.title} | Case study | Shivam Bhagat`,
+    title: caseStudyTitle(entry.title),
     description: entry.description,
+    path: `/projects/${entry.slug}`,
+    type: "article",
   });
 
   // Prev / next among the projects that have a case study.

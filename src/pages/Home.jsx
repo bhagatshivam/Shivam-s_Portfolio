@@ -1,5 +1,5 @@
 import { usePageMeta } from "../hooks/usePageMeta";
-import { site } from "../data/site";
+import { homeMeta } from "../data/seo";
 import Hero from "../components/sections/Hero";
 import Projects from "../components/sections/Projects";
 import Skills from "../components/sections/Skills";
@@ -9,7 +9,7 @@ import Contact from "../components/sections/Contact";
 import Footer from "../components/layout/Footer";
 
 export default function Home() {
-  usePageMeta({ title: site.title, description: site.metaDescription });
+  usePageMeta(homeMeta);
 
   return (
     <>
