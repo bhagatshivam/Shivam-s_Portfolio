@@ -112,14 +112,15 @@ function Table({ block }) {
 }
 
 function Stats({ block }) {
+  // Cells reflow by available width, so large text sizes drop to fewer columns instead of
+  // overlapping. The 1px grid gap over a border-coloured background draws the hairlines.
   return (
-    <ul className={`${WIDE} grid grid-cols-2 divide-border rounded-lg border border-border bg-surface md:grid-cols-4 md:divide-x`}>
-      {block.items.map((item, i) => (
-        <li
-          key={item.label}
-          className={`p-4 ${i < 2 ? "border-b border-border md:border-b-0" : ""} ${i % 2 === 0 ? "border-r border-border md:border-r-0" : ""}`}
-        >
-          <p className="text-stat tabular-nums text-text-primary">{item.value}</p>
+    <ul
+      className={`${WIDE} grid grid-cols-[repeat(auto-fit,minmax(min(9rem,100%),1fr))] gap-px overflow-hidden rounded-lg border border-border bg-border`}
+    >
+      {block.items.map((item) => (
+        <li key={item.label} className="min-w-0 bg-surface p-4">
+          <p className="text-stat tabular-nums text-text-primary [overflow-wrap:anywhere]">{item.value}</p>
           <p className="mt-2 text-small text-text-secondary">{item.label}</p>
         </li>
       ))}

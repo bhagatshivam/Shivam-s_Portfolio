@@ -3,8 +3,8 @@ import { Step, Arrow } from "./parts";
 const Branch = ({ label, children }) => (
   <li className="list-none">
     <div className="h-full rounded-lg border border-border-strong bg-surface-raised px-3.5 py-2.5">
-      <p className="font-mono text-label text-accent">{label}</p>
-      <p className="mt-1 text-small text-text-secondary">{children}</p>
+      <p className="font-mono text-label text-accent [overflow-wrap:anywhere]">{label}</p>
+      <p className="mt-1 text-small text-text-secondary [overflow-wrap:anywhere]">{children}</p>
     </div>
   </li>
 );
@@ -17,7 +17,7 @@ export default function VachArchitectureFigure() {
         Capacitor native shell · <span className="text-text-primary">React/TypeScript UI</span>
       </p>
 
-      <div className="mt-4 grid gap-5 lg:grid-cols-[1fr_15rem]">
+      <div className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-[minmax(0,1fr)_15rem]">
         <div>
           <ol>
             <Step label="SAF folder picker">Persistent permission via takePersistableUriPermission.</Step>
@@ -28,7 +28,7 @@ export default function VachArchitectureFigure() {
             <Arrow />
           </ol>
 
-          <ul className="grid gap-2 sm:grid-cols-3" aria-label="Three rendering paths">
+          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(10.5rem,100%),1fr))] gap-2" aria-label="Three rendering paths">
             <Branch label="EPUB parser">OPF and XHTML/CSS, with my own stylesheet.</Branch>
             <Branch label="pdf.js text extraction">Embedded text, page by page.</Branch>
             <Branch label="Image fallback">Page rendered as an image, with a theme colour overlay.</Branch>

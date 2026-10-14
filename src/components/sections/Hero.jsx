@@ -48,16 +48,16 @@ export default function Hero() {
             {site.proofStrip.map((item, i) => (
               <li
                 key={item.label}
-                className="flex items-baseline gap-4 py-4 sm:flex-col sm:items-start sm:gap-2 sm:px-6 sm:py-6 sm:first:pl-0"
+                className="flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4 sm:flex-col sm:items-start sm:gap-2 sm:px-6 sm:py-6 sm:first:pl-0"
               >
                 <span
-                  className={`w-24 shrink-0 text-stat tabular-nums sm:w-auto ${
+                  className={`min-w-[6rem] shrink-0 text-stat tabular-nums sm:min-w-0 ${
                     i === 0 ? "text-accent" : "text-text-primary"
                   }`}
                 >
                   {item.value}
                 </span>
-                <span className="font-mono text-label text-text-secondary">{item.label}</span>
+                <span className="min-w-[10rem] flex-1 font-mono text-label text-text-secondary sm:min-w-0">{item.label}</span>
               </li>
             ))}
           </ul>

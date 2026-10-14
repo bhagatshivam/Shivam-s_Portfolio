@@ -12,7 +12,7 @@ export default function MediaFallback({ project }) {
         >
           <span className="font-mono text-label text-text-secondary">Vach</span>
         </div>
-        <ul className="space-y-2 font-mono text-label text-text-secondary">
+        <ul className="min-w-0 space-y-2 font-mono text-label text-text-secondary [overflow-wrap:anywhere]">
           {architecture.map((word, i) => (
             <li key={word}>
               {i > 0 && (
@@ -31,13 +31,13 @@ export default function MediaFallback({ project }) {
   return (
     <ol className="flex h-full flex-col items-center justify-center gap-1.5 px-6 font-mono text-label text-text-secondary">
       {architecture.map((word, i) => (
-        <li key={word} className="flex w-full max-w-[16rem] flex-col items-center gap-1.5">
+        <li key={word} className="flex w-full max-w-[min(16rem,100%)] flex-col items-center gap-1.5">
           {i > 0 && (
             <span aria-hidden="true" className="text-accent">
               ↓
             </span>
           )}
-          <span className="w-full rounded border border-border-strong bg-surface px-3 py-1.5 text-center">
+          <span className="w-full rounded border border-border-strong bg-surface px-3 py-1.5 text-center [overflow-wrap:anywhere]">
             {word}
           </span>
         </li>

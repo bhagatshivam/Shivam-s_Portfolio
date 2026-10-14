@@ -59,6 +59,7 @@ export default function FeaturedProjectCard({ project }) {
             <button
               type="button"
               onClick={() => jumpToSkills(project.skillIds, project.title)}
+              aria-label={`Skills used in ${project.title}`}
               className="font-mono text-label text-text-secondary hover:text-text-primary"
             >
               Skills used ↓

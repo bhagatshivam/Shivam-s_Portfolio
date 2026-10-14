@@ -42,5 +42,7 @@ export default function ProjectMedia({ project }) {
     );
   }
 
-  return <div className="aspect-[16/10] overflow-hidden border-b border-border bg-surface-raised">{content}</div>;
+  // No overflow-hidden here: the card clips its own corners, and without it the box can grow
+  // past 16:10 when the text is enlarged instead of cutting the fallback words off.
+  return <div className="aspect-[16/10] border-b border-border bg-surface-raised">{content}</div>;
 }

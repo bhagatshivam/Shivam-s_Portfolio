@@ -49,6 +49,8 @@ export default {
           backgroundColor: "rgb(var(--color-accent) / 0.3)",
         },
         "[id]": { scrollMarginTop: "4.5rem" },
+        // Long tokens (identifiers, repo URLs) wrap instead of overflowing at large text sizes.
+        "code, a": { overflowWrap: "anywhere" },
       });
 
       const md = theme("screens.md");

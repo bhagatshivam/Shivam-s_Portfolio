@@ -5,7 +5,7 @@ import { Step, Arrow } from "./parts";
 // the md breakpoint up.
 export default function ArchitectureFigure() {
   return (
-    <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:gap-0">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-0">
       <div>
         <h3 className="font-mono text-label text-text-secondary">Source side</h3>
         <ol className="mt-3">

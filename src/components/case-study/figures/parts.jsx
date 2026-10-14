@@ -7,8 +7,8 @@ export function Step({ label, children, dashed = false }) {
           dashed ? "border-dashed border-border-strong" : "border-border-strong"
         }`}
       >
-        <p className="font-mono text-label text-accent">{label}</p>
-        <div className="mt-1 text-small text-text-secondary">{children}</div>
+        <p className="font-mono text-label text-accent [overflow-wrap:anywhere]">{label}</p>
+        <div className="mt-1 text-small text-text-secondary [overflow-wrap:anywhere]">{children}</div>
       </div>
     </li>
   );

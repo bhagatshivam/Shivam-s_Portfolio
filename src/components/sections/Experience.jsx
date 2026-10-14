@@ -34,7 +34,7 @@ const meta = (entry) => [entry.org, entry.location].filter(Boolean).join(" · ")
 // Education: a bordered card with a prominent heading.
 function Education({ entry }) {
   return (
-    <div className="rounded-lg border border-border bg-surface p-5">
+    <div className="rounded-lg border border-border bg-surface p-5 [overflow-wrap:anywhere]">
       <h3 className="text-h3 text-text-primary">
         <span className="sr-only">{KIND_LABEL.education}: </span>
         {entry.title}
@@ -48,7 +48,7 @@ function Education({ entry }) {
 // Work: deliberately lighter than education. No card, smaller muted heading.
 function Work({ entry }) {
   return (
-    <div>
+    <div className="[overflow-wrap:anywhere]">
       <h3 className="text-body font-medium text-text-secondary">
         <span className="sr-only">{KIND_LABEL.work}: </span>
         {entry.title}

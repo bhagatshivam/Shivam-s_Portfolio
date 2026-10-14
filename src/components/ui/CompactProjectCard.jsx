@@ -37,6 +37,7 @@ export default function CompactProjectCard({ project }) {
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${project.title} repository on GitHub`}
             className="inline-flex items-center gap-2 text-small font-medium text-accent hover:underline"
           >
             <GithubGlyph size={16} />
@@ -48,6 +49,7 @@ export default function CompactProjectCard({ project }) {
         <button
           type="button"
           onClick={() => jumpToSkills(project.skillIds, project.title)}
+          aria-label={`Skills used in ${project.title}`}
           className="font-mono text-label text-text-secondary hover:text-text-primary"
         >
           Skills used ↓
