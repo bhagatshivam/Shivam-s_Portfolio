@@ -454,8 +454,10 @@ export const caseStudies = [
             groups: [
               {
                 heading: "Verified on a real device",
+                // TODO(confirm): folder-permission persistence is deliberately not listed as
+                // verified. It appears only as "designed to persist" under How it works. Add it
+                // back here once you have run the force-stop / reboot / revoked checks.
                 items: [
-                  "SAF folder selection with persisted access.",
                   "EPUB and text-PDF continuous scroll with font, size, spacing and theme controls.",
                   "Image-page fallback for textless and scanned pages.",
                   "Reading position across sessions.",
