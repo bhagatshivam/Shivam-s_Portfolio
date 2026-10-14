@@ -1,5 +1,5 @@
-// Volunteering and certifications, from the CV. Structured here but NOT rendered yet:
-// they get a place on the site in the experience/about chunk.
+// Volunteering and certifications, from the CV. Rendered in the collapsed "Volunteering and
+// certifications" block under the Experience timeline.
 
 export const volunteering = [
   {

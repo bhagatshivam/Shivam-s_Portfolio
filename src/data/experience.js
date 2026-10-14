@@ -1,102 +1,77 @@
-// Study and work on one timeline, oldest first. The CV is the source of truth for dates,
-// titles and wording (SITE_REBUILD_PLAN.md §4).
+// Study and work on one timeline, most recent first (order is the array order). The CV is the
+// source of truth for dates, titles and wording.
 //
-//   kind  "education" | "work" | "milestone"
-//   tone  "default" | "light"; work entries render visually lighter than projects
-//   period is display text; start is "YYYY-MM" and is only used for ordering
+//   kind     "education" | "work" | "milestone"
+//   period   display text
+//   details  bullets for education and work entries
+//   to       milestones only: the page the one-liner links to
 
 export const workFraming =
-  "Worked alongside my MSc. Reliability, accuracy under time pressure, and team coordination.";
+  "Worked alongside my MSc: reliability, accuracy under time pressure, and team coordination.";
 
 export const experience = [
   {
-    id: "be-computer-engineering",
-    kind: "education",
-    tone: "default",
-    start: "2021-09",
-    period: "Sep 2021 – Jun 2025",
-    title: "B.E. Computer Engineering",
-    org: "Savitribai Phule Pune University",
-    location: "Pune, India",
-    summary: "Savitribai Phule Pune University, Pune. CGPA 8.35/10, First Class. Final-year project: Ask the Doc.",
-    details: ["CGPA 8.35/10, First Class", "Final-year project: Ask the Doc"],
+    id: "tesco",
+    kind: "work",
+    period: "Sep 2026 – Present",
+    title: "Online Order Picker (Dotcom)",
+    org: "Tesco",
+    location: "Altrincham",
+    details: [
+      "Pick items for customer online orders, moving around the whole store to find and collect each product accurately.",
+      "Check the warehouse when an item isn't on the shop-floor aisle, and escalate to the floor manager when it still can't be found.",
+      "Rearrange and restock products on the aisles before rush hour; guide customers to products or find items for them.",
+    ],
+  },
+  {
+    id: "vach-built",
+    kind: "milestone",
+    period: "Oct 2026",
+    title: "Vach built, in daily use",
+    to: "/projects/vach",
+  },
+  {
+    id: "dissertation-submitted",
+    kind: "milestone",
+    period: "Sep 2026",
+    title: "MSc dissertation submitted",
+    to: "/projects/ci-pipeline-docs",
+  },
+  {
+    id: "subway",
+    kind: "work",
+    period: "May 2026 – Oct 2026",
+    title: "Sandwich Artist / Team Member",
+    org: "Subway",
+    location: "Manchester",
+    details: [
+      "Prepared the full menu to order during high-volume rush periods, working in a 3-person team to keep service fast and accurate.",
+      "Operated the till (cash and card), and replenished and rotated stock to keep products fresh and well presented.",
+      "Carried out store opening and closing procedures and kept the store to food safety and hygiene standards (Food Safety & Allergens certified).",
+    ],
   },
   {
     id: "msc-advanced-computer-science",
     kind: "education",
-    tone: "default",
-    start: "2025-09",
     period: "Sep 2025 – Sep 2026",
     // TODO(confirm): check the exact programme title against degree paperwork. The CV says
     // "Advanced Computer Science"; the dissertation cover page says "Computer Science".
     title: "MSc Advanced Computer Science",
     org: "University of Manchester",
-    location: "Manchester, UK",
-    summary:
-      "University of Manchester. Global Talent Scholarship recipient; Academic Representative. Dissertation submitted; results expected Nov 2026, conferral Dec 2026.",
+    location: "Manchester",
     details: [
-      "Global Talent Scholarship recipient",
-      "Academic Representative",
-      "Dissertation submitted; results expected November 2026, degree conferral December 2026",
+      "Global Talent Scholarship recipient; Academic Representative facilitating student-faculty communication.",
+      "Dissertation submitted; all coursework complete; results expected November 2026, degree conferral December 2026.",
+      "Relevant modules: Transforming Text into Meaning (NLP/LLMs/RAG), Security & Privacy in Artificial Intelligence, Software Security, Topics in Machine Learning.",
     ],
   },
   {
-    id: "subway",
-    kind: "work",
-    tone: "light",
-    start: "2026-05",
-    period: "May 2026 – Oct 2026",
-    title: "Sandwich Artist / Team Member",
-    org: "Subway",
-    location: "Manchester, UK",
-    summary:
-      "Subway, Manchester. Fast, accurate service through rush periods in a 3-person team; till handling; full open/close procedures.",
-    details: [
-      "Fast, accurate service through rush periods in a 3-person team",
-      "Till handling and full open/close procedures",
-      "Completed Food Safety & Allergens (EMEA) and Sandwich Artist training",
-    ],
-  },
-  {
-    id: "tesco",
-    kind: "work",
-    tone: "light",
-    start: "2026-09",
-    period: "Sep 2026 – present",
-    title: "Online Order Picker (Dotcom)",
-    org: "Tesco",
-    location: "Altrincham, UK",
-    summary:
-      "Tesco, Altrincham. Accurate order picking across the whole store, warehouse checks and escalation when items are missing, restocking aisles before rush hour, helping customers on the floor.",
-    details: [
-      "Accurate order picking across the whole store",
-      "Warehouse checks and escalation when items are missing",
-      "Restocking aisles before rush hour and helping customers on the floor",
-    ],
-  },
-  {
-    id: "dissertation-submitted",
-    kind: "milestone",
-    tone: "default",
-    start: "2026-09",
-    period: "Sep 2026",
-    title: "Dissertation submitted",
-    org: "University of Manchester",
-    location: null,
-    summary: "MSc dissertation submitted: What Is My CI Pipeline Doing?",
-    details: [],
-  },
-  {
-    id: "vach-built",
-    kind: "milestone",
-    tone: "default",
-    start: "2026-10",
-    period: "Oct 2026",
-    // Source: Shivam, not the CV or the plan.
-    title: "Vach built, in daily use",
-    org: null,
-    location: null,
-    summary: "Offline EPUB/PDF reader for Android, in daily use.",
-    details: [],
+    id: "be-computer-engineering",
+    kind: "education",
+    period: "Sep 2021 – Jun 2025",
+    title: "B.E. Computer Engineering",
+    org: "Savitribai Phule Pune University",
+    location: "Pune, India",
+    details: ["CGPA 8.35/10, First Class.", "Final-year project: Ask the Doc."],
   },
 ];

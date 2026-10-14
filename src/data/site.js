@@ -37,15 +37,9 @@ export const site = {
     cv: "/Shivam_Bhagat_CV.pdf",
   },
 
-  contactIntro:
-    "My MSc dissertation is submitted and I'm looking for what comes next. Whether it's a role, a collaboration, or just a conversation about developer tools and AI, I'm reachable.",
+  contactIntro: "I'm looking for full-time software engineering roles in the UK from November 2026.",
 
-  // "Right Now" terminal block.
-  currentlyLines: [
-    { command: "status", value: "open to full-time software engineering roles" },
-    // TODO(confirm): "open to relocation" is carried over from the old site.
-    { command: "location", value: "Manchester, UK (open to relocation)" },
-    { command: "availability", value: "UK, from November 2026" },
-    { command: "dissertation", value: "What Is My CI Pipeline Doing? [SUBMITTED]" },
-  ],
+  // TODO(confirm): add "Karate black belt" to the last sentence if you want it public.
+  about:
+    "I'm an MSc Advanced Computer Science student at the University of Manchester. I studied in Pune, India before moving here for the degree. I like building developer tools and small, practical software, and I care about being able to show that it works: my dissertation spent as much effort on evaluation as on the tool. Outside of code I read, hike and watch anime.",
 };
