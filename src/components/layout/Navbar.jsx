@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import { site } from "../../data/site";
+import CvLink from "../ui/CvLink";
 
 const navLinks = [
   { label: "Work", hash: "#projects" },
   { label: "Skills", hash: "#skills" },
   { label: "Experience", hash: "#experience" },
+  { label: "About", hash: "#about" },
   { label: "Contact", hash: "#contact" },
 ];
 
@@ -48,14 +50,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={site.contact.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-md border border-accent px-3 py-1.5 text-small font-medium text-accent hover:bg-accent hover:text-accent-ink"
-          >
-            CV
-          </a>
+          <CvLink variant="nav" />
           <button
             type="button"
             className="rounded-md p-2 text-text-primary md:hidden"

@@ -18,8 +18,9 @@ function check(url, typePrefix) {
   return cache.get(key);
 }
 
-export function useAssetExists(url, typePrefix) {
-  const [exists, setExists] = useState(false);
+// `initial` is what to assume until the check finishes.
+export function useAssetExists(url, typePrefix, initial = false) {
+  const [exists, setExists] = useState(initial);
 
   useEffect(() => {
     if (!url) return undefined;

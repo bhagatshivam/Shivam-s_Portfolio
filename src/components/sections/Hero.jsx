@@ -1,10 +1,9 @@
-import { Mail, FileText } from "lucide-react";
+import { Mail } from "lucide-react";
 import { site } from "../../data/site";
 import { GithubGlyph, LinkedinGlyph } from "../ui/icons";
 import Reveal from "../ui/Reveal";
+import CvLink from "../ui/CvLink";
 
-const primaryButton =
-  "inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-small font-medium text-accent-ink hover:bg-accent/90";
 const outlineButton =
   "inline-flex items-center gap-2 rounded-md border border-border-strong px-4 py-2.5 text-small font-medium text-text-primary hover:border-accent";
 
@@ -25,10 +24,7 @@ export default function Hero() {
           <p className="mt-2 max-w-3xl text-lead text-text-primary">{site.positioning}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={site.contact.cv} target="_blank" rel="noopener noreferrer" className={primaryButton}>
-              <FileText size={16} aria-hidden="true" />
-              CV
-            </a>
+            <CvLink variant="hero" />
             <a href={site.contact.github} target="_blank" rel="noopener noreferrer" className={outlineButton}>
               <GithubGlyph size={16} />
               GitHub

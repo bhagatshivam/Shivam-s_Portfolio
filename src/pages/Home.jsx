@@ -6,6 +6,7 @@ import Skills from "../components/sections/Skills";
 import Experience from "../components/sections/Experience";
 import About from "../components/sections/About";
 import Contact from "../components/sections/Contact";
+import Footer from "../components/layout/Footer";
 
 export default function Home() {
   usePageMeta({ title: site.title, description: site.metaDescription });
@@ -18,6 +19,7 @@ export default function Home() {
       <section id="experience" aria-labelledby="experience-title" className="border-t border-border"><Experience /></section>
       <section id="about" aria-labelledby="about-title" className="border-t border-border"><About /></section>
       <section id="contact" aria-labelledby="contact-title" className="border-t border-border"><Contact /></section>
+      <Footer />
     </>
   );
 }
