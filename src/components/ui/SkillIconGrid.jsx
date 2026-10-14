@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { skills, clusterColors, clusterLabels } from "../../data/skills";
+import { skills, clusterColors, clusterLabels, clusterOrder } from "../../data/skills";
 import { useSkillFocus } from "../../context/SkillFocusContext";
 
 function SkillIcon({ skill, index, isFocused }) {
@@ -67,8 +67,46 @@ function SkillIcon({ skill, index, isFocused }) {
   );
 }
 
+function SkillCluster({ cluster, focusedSkillIds }) {
+  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
+  const clusterSkills = skills.filter((s) => s.cluster === cluster);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.4 }}
+    >
+      <div className="flex items-center gap-3 mb-5">
+        <span
+          className="w-2.5 h-2.5 rounded-full"
+          style={{ backgroundColor: clusterColors[cluster] }}
+        />
+        <p
+          className="font-display text-xs tracking-widest"
+          style={{ color: clusterColors[cluster] }}
+        >
+          {clusterLabels[cluster].toUpperCase()}
+        </p>
+        <span className="flex-1 h-px bg-border" />
+      </div>
+
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4">
+        {clusterSkills.map((skill, index) => (
+          <SkillIcon
+            key={skill.id}
+            skill={skill}
+            index={index}
+            isFocused={focusedSkillIds.includes(skill.id)}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function SkillIconGrid() {
-  const clusters = ["ai", "web", "tools"];
   const { focusedSkillIds, sourceProject } = useSkillFocus();
 
   return (
@@ -86,45 +124,9 @@ export default function SkillIconGrid() {
         </motion.div>
       )}
 
-      {clusters.map((cluster) => {
-        const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
-        const clusterSkills = skills.filter((s) => s.cluster === cluster);
-
-        return (
-          <motion.div
-            key={cluster}
-            ref={ref}
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4 }}
-          >
-            <div className="flex items-center gap-3 mb-5">
-              <span
-                className="w-2.5 h-2.5 rounded-full"
-                style={{ backgroundColor: clusterColors[cluster] }}
-              />
-              <p
-                className="font-display text-xs tracking-widest"
-                style={{ color: clusterColors[cluster] }}
-              >
-                {clusterLabels[cluster].toUpperCase()}
-              </p>
-              <span className="flex-1 h-px bg-border" />
-            </div>
-
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4">
-              {clusterSkills.map((skill, index) => (
-                <SkillIcon
-                  key={skill.id}
-                  skill={skill}
-                  index={index}
-                  isFocused={focusedSkillIds.includes(skill.id)}
-                />
-              ))}
-            </div>
-          </motion.div>
-        );
-      })}
+      {clusterOrder.map((cluster) => (
+        <SkillCluster key={cluster} cluster={cluster} focusedSkillIds={focusedSkillIds} />
+      ))}
     </div>
   );
 }

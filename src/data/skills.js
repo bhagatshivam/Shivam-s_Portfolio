@@ -4,6 +4,8 @@ export const clusterColors = {
   tools: "#10B981",
 };
 
+export const clusterOrder = ["ai", "web", "tools"];
+
 export const clusterLabels = {
   ai: "AI / ML",
   web: "Web & Frontend",
