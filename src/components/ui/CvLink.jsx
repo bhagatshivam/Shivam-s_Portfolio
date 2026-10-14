@@ -4,9 +4,9 @@ import { useAssetExists } from "../../hooks/useAssetExists";
 
 const STYLES = {
   hero: {
-    link: "inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-3 text-body font-medium text-text-primary hover:border-accent hover:bg-accent/10",
+    link: "inline-flex items-center justify-center gap-2 rounded-md border border-border-strong px-4 py-2.5 text-small sm:px-5 sm:py-3 sm:text-body font-medium text-text-primary hover:border-accent hover:bg-accent/10",
     missing:
-      "inline-flex items-center gap-2 rounded-md border border-dashed border-border-strong px-5 py-3 text-body font-medium text-text-secondary",
+      "inline-flex items-center gap-2 rounded-md border border-dashed border-border-strong px-4 py-2.5 text-small sm:px-5 sm:py-3 sm:text-body font-medium text-text-secondary",
   },
   nav: {
     link: "rounded-md border border-accent px-3 py-1.5 text-small font-medium text-accent hover:bg-accent hover:text-accent-ink",

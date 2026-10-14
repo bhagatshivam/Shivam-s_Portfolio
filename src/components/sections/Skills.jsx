@@ -34,9 +34,8 @@ export default function Skills() {
         <SectionHeader
           id="skills-title"
           number="02"
-          label="Skills"
-          title="Everything I've used, and where."
-          intro="Hover or tap a skill to see which projects used it. Dashed skills are on my CV but not in a project listed here."
+          title="Skills"
+          intro="Everything I've used, and where. Hover or tap a skill to see which projects used it. Dashed skills are on my CV but not in a project listed here."
         />
 
         {/* Project legend: lights up for the skill under the pointer. */}
@@ -86,7 +85,7 @@ export default function Skills() {
                               className={`${base} border-dashed border-border-strong text-text-secondary`}
                             >
                               <SkillIcon id={skill.id} />
-                              {skill.label}
+                              <span className="min-w-0 [overflow-wrap:anywhere]">{skill.label}</span>
                             </span>
                           </li>
                         );
@@ -108,7 +107,7 @@ export default function Skills() {
                             }`}
                           >
                             <SkillIcon id={skill.id} />
-                            {skill.label}
+                            <span className="min-w-0 [overflow-wrap:anywhere]">{skill.label}</span>
                           </button>
                         </li>
                       );
@@ -122,7 +121,7 @@ export default function Skills() {
         </div>
 
         {/* Result line for a pinned skill, or the project that sent you here. */}
-        <div aria-live="polite" className="mt-6 min-h-[3rem]">
+        <div aria-live="polite" className={focusLabel ? "mt-6" : ""}>
           {focusLabel && (
             <div className="card flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-border px-4 py-3 text-small">
               {usedIn.length > 0 ? (

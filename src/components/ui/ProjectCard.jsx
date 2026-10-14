@@ -45,7 +45,7 @@ export default function ProjectCard({ project }) {
           )}
         </h3>
 
-        <p className="line-clamp-2 text-small text-text-secondary">{project.tagline}</p>
+        <p className="text-small text-text-secondary">{project.tagline}</p>
 
         <ul className="flex flex-wrap gap-1.5" aria-label="Tech">
           {project.tech.slice(0, 4).map((t) => (

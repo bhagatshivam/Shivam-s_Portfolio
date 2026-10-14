@@ -69,7 +69,7 @@ function Table({ block }) {
                 <th
                   key={i}
                   scope="col"
-                  className={`px-4 py-2.5 font-mono text-label font-normal text-text-secondary ${
+                  className={`px-2 py-2.5 font-mono text-label font-normal text-text-secondary sm:px-4 ${
                     i > 0 && !block.textual ? "text-right tabular-nums" : ""
                   }`}
                 >
@@ -86,14 +86,14 @@ function Table({ block }) {
                     <th
                       key={i}
                       scope="row"
-                      className={`px-4 py-2.5 font-normal text-text-primary ${block.textual ? "w-[34%] align-top" : ""}`}
+                      className={`px-2 py-2.5 font-normal text-text-primary sm:px-4 [overflow-wrap:anywhere] ${block.textual ? "w-[34%] align-top" : ""}`}
                     >
                       {cell}
                     </th>
                   ) : (
                     <td
                       key={i}
-                      className={`px-4 py-2.5 text-text-primary ${
+                      className={`px-2 py-2.5 text-text-primary sm:px-4 ${
                         block.textual ? "align-top text-text-secondary" : "text-right tabular-nums"
                       }`}
                     >

@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Step, Arrow } from "./parts";
 
 // StoryWanderer's layers. An inline SVG from the sm breakpoint up; below that, the same
@@ -59,10 +60,10 @@ export default function StoryWandererArchitectureFigure() {
       {/* below sm: the same layers, stacked */}
       <ol className="sm:hidden">
         {layers.map((layer, i) => (
-          <span key={layer.label}>
+          <Fragment key={layer.label}>
             {i > 0 && <Arrow />}
             <Step label={layer.label}>{layer.body}</Step>
-          </span>
+          </Fragment>
         ))}
         <Arrow />
         <Step label="Hosting" dashed>

@@ -82,7 +82,7 @@ export default function Experience() {
   return (
     <div className="section-y">
       <div className="page-container">
-        <SectionHeader id="experience-title" number="03" label="Experience" title="Study and work." />
+        <SectionHeader id="experience-title" number="03" title="Experience" intro="Study and work, most recent first." />
 
         <ol aria-label="Study and work, most recent first" className="max-w-4xl">
           {experience.map((entry, i) => {

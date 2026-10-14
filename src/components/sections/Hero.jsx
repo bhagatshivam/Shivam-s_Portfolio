@@ -7,7 +7,7 @@ import CvLink from "../ui/CvLink";
 import HeroVisual from "../ui/HeroVisual";
 
 const outlineButton =
-  "inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-3 text-body font-medium text-text-primary hover:border-accent hover:bg-accent/10";
+  "inline-flex items-center justify-center gap-2 rounded-md border border-border-strong px-4 py-2.5 text-small sm:px-5 sm:py-3 sm:text-body font-medium text-text-primary hover:border-accent hover:bg-accent/10";
 
 function chipTarget(chip) {
   const project = projects.find((p) => p.id === chip.project);
@@ -47,10 +47,10 @@ export default function Hero() {
             ))}
           </ul>
 
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-9 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
             <Link
               to={{ pathname: "/", hash: "#projects" }}
-              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-body font-semibold text-accent-ink hover:bg-accent/90"
+              className="col-span-2 inline-flex items-center justify-center gap-2 rounded-md bg-accent px-4 py-2.5 text-small sm:px-5 sm:py-3 sm:text-body font-semibold text-accent-ink hover:bg-accent/90"
             >
               View work
               <ArrowRight size={16} aria-hidden="true" />

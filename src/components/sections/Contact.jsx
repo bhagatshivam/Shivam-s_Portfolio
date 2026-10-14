@@ -46,42 +46,53 @@ function CvRow() {
 export default function Contact() {
   return (
     <div className="section-y page-container">
-      <SectionHeader id="contact-title" number="05" label="Contact" title="Get in touch." />
+      <SectionHeader id="contact-title" number="05" title="Contact" />
 
-      <Reveal className="max-w-xl">
-        <p className="mb-8 text-body text-text-secondary">{site.contactIntro}</p>
+      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
+        <Reveal>
+          <p className="max-w-[28ch] text-lead text-text-primary">{site.contactIntro}</p>
+          <a
+            href={`mailto:${site.contact.email}`}
+            className="mt-6 inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-body font-semibold text-accent-ink hover:bg-accent/90"
+          >
+            <Mail size={16} aria-hidden="true" />
+            Email me
+          </a>
+        </Reveal>
 
-        <ul className="flex flex-col gap-3">
-          <li>
-            <ContactRow
-              icon={<Mail size={18} aria-hidden="true" />}
-              label="Email"
-              value={site.contact.email}
-              href={`mailto:${site.contact.email}`}
-              external={false}
-            />
-          </li>
-          <li>
-            <ContactRow
-              icon={<LinkedinGlyph size={18} />}
-              label="LinkedIn"
-              value={site.contact.linkedinLabel}
-              href={site.contact.linkedin}
-            />
-          </li>
-          <li>
-            <ContactRow
-              icon={<GithubGlyph size={18} />}
-              label="GitHub"
-              value={site.contact.githubLabel}
-              href={site.contact.github}
-            />
-          </li>
-          <li>
-            <CvRow />
-          </li>
-        </ul>
-      </Reveal>
+        <Reveal delay={0.05}>
+          <ul className="flex flex-col gap-3">
+            <li>
+              <ContactRow
+                icon={<Mail size={18} aria-hidden="true" />}
+                label="Email"
+                value={site.contact.email}
+                href={`mailto:${site.contact.email}`}
+                external={false}
+              />
+            </li>
+            <li>
+              <ContactRow
+                icon={<LinkedinGlyph size={18} />}
+                label="LinkedIn"
+                value={site.contact.linkedinLabel}
+                href={site.contact.linkedin}
+              />
+            </li>
+            <li>
+              <ContactRow
+                icon={<GithubGlyph size={18} />}
+                label="GitHub"
+                value={site.contact.githubLabel}
+                href={site.contact.github}
+              />
+            </li>
+            <li>
+              <CvRow />
+            </li>
+          </ul>
+        </Reveal>
+      </div>
     </div>
   );
 }

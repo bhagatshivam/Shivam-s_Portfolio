@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
+import { useActiveSection } from "../../hooks/useActiveSection";
 import { Menu, X } from "lucide-react";
 import { site } from "../../data/site";
 import CvLink from "../ui/CvLink";
 
 const navLinks = [
-  { label: "Work", hash: "#projects" },
+  { label: "Projects", hash: "#projects" },
   { label: "Skills", hash: "#skills" },
   { label: "Experience", hash: "#experience" },
   { label: "About", hash: "#about" },
-  { label: "Contact", hash: "#contact" },
 ];
+const sectionIds = [...navLinks.map((l) => l.hash.slice(1)), "contact"];
 
 const linkClass = "text-small text-text-secondary hover:text-text-primary";
+const activeClass = "text-small font-medium text-text-primary";
 
 export default function Navbar() {
   // The menu is open only for the location it was opened at, so any navigation closes it.
   const [openedAt, setOpenedAt] = useState(null);
-  const { key } = useLocation();
+  const { key, pathname } = useLocation();
   const menuOpen = openedAt === key;
+  const active = useActiveSection(sectionIds, pathname === "/");
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -42,15 +45,31 @@ export default function Navbar() {
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) => (
-            <Link key={link.hash} to={{ pathname: "/", hash: link.hash }} className={linkClass}>
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = active === link.hash.slice(1);
+            return (
+              <Link
+                key={link.hash}
+                to={{ pathname: "/", hash: link.hash }}
+                aria-current={isActive ? "location" : undefined}
+                className={`relative py-1 ${isActive ? activeClass : linkClass}`}
+              >
+                {link.label}
+                {isActive && <span aria-hidden="true" className="absolute inset-x-0 -bottom-[17px] h-0.5 bg-accent" />}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
           <CvLink variant="nav" />
+          <Link
+            to={{ pathname: "/", hash: "#contact" }}
+            aria-current={active === "contact" ? "location" : undefined}
+            className="rounded-md bg-accent px-3 py-1.5 text-small font-semibold text-accent-ink hover:bg-accent/90"
+          >
+            Contact
+          </Link>
           <button
             type="button"
             className="rounded-md p-2 text-text-primary md:hidden"
@@ -71,7 +90,10 @@ export default function Navbar() {
               <li key={link.hash}>
                 <Link
                   to={{ pathname: "/", hash: link.hash }}
-                  className="block py-3 text-body text-text-primary"
+                  aria-current={active === link.hash.slice(1) ? "location" : undefined}
+                  className={`block py-3 text-body ${
+                    active === link.hash.slice(1) ? "font-semibold text-accent" : "text-text-primary"
+                  }`}
                 >
                   {link.label}
                 </Link>

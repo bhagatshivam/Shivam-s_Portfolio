@@ -11,8 +11,7 @@ export default function Projects() {
         <SectionHeader
           id="projects-title"
           number="01"
-          label="Selected work"
-          title="Selected work."
+          title="Projects"
           intro="Developer tooling, a shipped Android app, full-stack, and applied AI."
         />
 

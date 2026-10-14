@@ -51,6 +51,7 @@ export default {
         "[id]": { scrollMarginTop: "4.5rem" },
         // Long tokens (identifiers, repo URLs) wrap instead of overflowing at large text sizes.
         "code, a": { overflowWrap: "anywhere" },
+        "p, li, h1, h2, h3, h4": { overflowWrap: "break-word" },
       });
 
       const md = theme("screens.md");
