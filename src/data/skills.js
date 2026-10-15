@@ -1,7 +1,8 @@
 // Every skill lists the projects that really used it (see src/data/projects.js), or none when
 // it comes from the CV only. projects.js derives each project's `skillIds` from the
 // `projectIds` below, so this file is the single place to edit the project <-> skill mapping.
-// Rule: a skill appears only if a listed project used it or the CV names it. No levels.
+// Rule: a skill appears only if a listed project used it or the CV names it. No levels. The list
+// is a superset of the CV skills line (VS Code is left out on purpose).
 //
 // cv: true  = on the CV but not tied to a project listed here (shown with a dashed outline).
 // Logos live in skillIconPaths.js (generated); a skill without one gets a monogram.
@@ -22,6 +23,8 @@ export const skills = [
   { id: "python", label: "Python", cluster: "languages", projectIds: ["ci-pipeline-docs", "culinary-rag", "ask-the-doc"] },
   { id: "typescript", label: "TypeScript", cluster: "languages", projectIds: ["vach", "storywanderer"] },
   { id: "javascript", label: "JavaScript", cluster: "languages", projectIds: [], cv: true },
+  { id: "c", label: "C", cluster: "languages", projectIds: [], cv: true },
+  { id: "cpp", label: "C++", cluster: "languages", projectIds: [], cv: true },
 
   // Frontend
   { id: "react", label: "React", cluster: "frontend", projectIds: ["vach", "storywanderer"] },
@@ -30,11 +33,15 @@ export const skills = [
   { id: "shadcn", label: "shadcn/ui", cluster: "frontend", projectIds: ["storywanderer"] },
   { id: "streamlit", label: "Streamlit", cluster: "frontend", projectIds: ["culinary-rag", "ask-the-doc"] },
   { id: "nextjs", label: "Next.js", cluster: "frontend", projectIds: [], cv: true },
+  { id: "html5", label: "HTML5", cluster: "frontend", projectIds: [], cv: true },
 
   // Backend and data
   { id: "supabase", label: "Supabase", cluster: "backend", projectIds: ["storywanderer"] },
   { id: "postgresql", label: "PostgreSQL", cluster: "backend", projectIds: ["storywanderer"] },
   { id: "nodejs", label: "Node.js", cluster: "backend", projectIds: [], cv: true },
+  { id: "rest-apis", label: "REST APIs", cluster: "backend", projectIds: [], cv: true },
+  { id: "mysql", label: "MySQL", cluster: "backend", projectIds: [], cv: true },
+  { id: "mongodb", label: "MongoDB", cluster: "backend", projectIds: [], cv: true },
   { id: "pandas", label: "Pandas", cluster: "backend", projectIds: [], cv: true },
   { id: "numpy", label: "NumPy", cluster: "backend", projectIds: [], cv: true },
 
@@ -48,6 +55,8 @@ export const skills = [
   { id: "pytorch", label: "PyTorch", cluster: "ai", projectIds: [], cv: true },
   { id: "sklearn", label: "scikit-learn", cluster: "ai", projectIds: [], cv: true },
   { id: "opencv", label: "OpenCV", cluster: "ai", projectIds: [], cv: true },
+  { id: "llm-apis", label: "LLM APIs", cluster: "ai", projectIds: [], cv: true },
+  { id: "prompt-engineering", label: "Prompt Engineering", cluster: "ai", projectIds: [], cv: true },
 
   // DevOps and tooling
   { id: "github-actions", label: "GitHub Actions", cluster: "devops", projectIds: ["ci-pipeline-docs", "vach"] },
@@ -55,7 +64,8 @@ export const skills = [
   { id: "mermaid", label: "Mermaid", cluster: "devops", projectIds: ["ci-pipeline-docs"] },
   { id: "golden-file-testing", label: "Golden-file testing", cluster: "devops", projectIds: ["ci-pipeline-docs"] },
   { id: "vitest", label: "Vitest", cluster: "devops", projectIds: ["vach"] },
-  { id: "git", label: "Git", cluster: "devops", projectIds: [], cv: true },
+  { id: "git", label: "Git / GitHub", cluster: "devops", projectIds: [], cv: true },
+  { id: "vercel", label: "Vercel", cluster: "devops", projectIds: [], cv: true },
   { id: "docker", label: "Docker", cluster: "devops", projectIds: [], cv: true },
   { id: "linux", label: "Linux", cluster: "devops", projectIds: [], cv: true },
 

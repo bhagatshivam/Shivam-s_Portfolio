@@ -1,7 +1,10 @@
-import { FileCheck } from "lucide-react";
+import { FileCheck, MessageSquareText, Network, Sparkles } from "lucide-react";
 import { skillIconPaths } from "../../data/skillIconPaths";
 
 // Skills with no logo in simple-icons get a short monogram in the same 20px box.
+// Skills with no brand logo that read better as a plain interface icon.
+const GLYPHS = { "golden-file-testing": FileCheck, "rest-apis": Network, "llm-apis": Sparkles, "prompt-engineering": MessageSquareText };
+
 const MONOGRAMS = { langgraph: "LG", faiss: "FA", "bge-large": "BGE", qwen: "Q", pdfjs: "PDF" };
 
 export default function SkillIconImpl({ id }) {
@@ -13,7 +16,8 @@ export default function SkillIconImpl({ id }) {
       </svg>
     );
   }
-  if (id === "golden-file-testing") return <FileCheck size={20} aria-hidden="true" className="shrink-0" />;
+  const Glyph = GLYPHS[id];
+  if (Glyph) return <Glyph size={20} aria-hidden="true" className="shrink-0" />;
   const text = MONOGRAMS[id] ?? "";
   return (
     <span
