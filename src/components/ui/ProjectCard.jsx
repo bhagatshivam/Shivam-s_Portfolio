@@ -65,11 +65,11 @@ export default function ProjectCard({ project }) {
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${project.title} repository on GitHub`}
+              aria-label={`${project.title} ${project.repoLabel ? "group " : ""}repository on GitHub`}
               className={secondary}
             >
               <GithubGlyph size={14} />
-              Repo
+              {project.repoLabel ?? "Repo"}
             </a>
           ) : (
             project.repoNote && <span className="font-mono text-label text-text-secondary">{project.repoNote}</span>

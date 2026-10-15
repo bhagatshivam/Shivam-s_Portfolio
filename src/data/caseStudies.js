@@ -571,30 +571,32 @@ export const caseStudies = [
         ],
       },
       {
-        id: "why",
-        label: "Why I built it",
+        id: "what-i-built",
+        label: "What I built",
         title: "A whole product, from schema to deployment.",
         blocks: [
           {
             type: "paragraph",
-            text: "I designed and built StoryWanderer end to end: the database schema, authentication, chapter-level content management, the security rules around the data, and a reading interface for long-form fiction, through to a deployment on Vercel.",
+            text: "I designed and built StoryWanderer end to end: the database schema, authentication, chapter-level content management and a reading interface for long-form fiction, through to a deployment on Vercel.",
           },
-          // TODO(confirm): the personal motivation, in the owner's own words. Nothing is invented here.
+          // TODO(confirm): "Why I built it". The owner has not supplied the reason, so this section
+          // describes scope only and the page has no "why" section. When the text arrives, add it
+          // here verbatim (light punctuation fixes only) under label "Why I built it".
         ],
       },
       {
         id: "architecture",
         label: "Architecture",
-        title: "A React front end on Supabase, with the security rules in the database.",
+        title: "A React front end on Supabase, with the access rules in the database.",
         blocks: [
           {
             type: "figure",
             figure: "storywanderer-architecture",
-            caption: "StoryWanderer's layers. Names are those of the Postgres features used; table names are omitted.",
+            caption: "StoryWanderer's layers and data design. Table names are omitted.",
           },
           {
             type: "paragraph",
-            text: "The browser app handles reading, writing and chapter management and talks to Supabase for authentication, data and real-time sync. The data layer is PostgreSQL, and the rules about who can see and change what live there rather than only in the interface:",
+            text: "The browser app handles reading, writing and chapter management and talks to Supabase for authentication, data and real-time sync. The data layer is PostgreSQL. The data design puts the rules about who can see and change what in the database rather than only in the interface:",
           },
           {
             type: "list",
@@ -604,8 +606,10 @@ export const caseStudies = [
               "**Search.** Stored `tsvector` columns support full-text search.",
             ],
           },
-          // TODO(confirm): table and column names, and what each policy allows; add a data-model
-          // table once they are supplied.
+          // TODO(confirm): are row-level security, the comment_authors view and the tsvector search
+          // implemented, or design only? Until the owner answers they are written as data design
+          // ("the design puts...") and are NOT listed under "What works today".
+          // Also needed: table and column names and what each policy allows, for a data-model table.
         ],
       },
       {
@@ -617,8 +621,8 @@ export const caseStudies = [
             type: "list",
             items: [
               "**Supabase as the backend.** PostgreSQL, authentication and real-time sync come from one service instead of a custom server. The cost is that the database design carries the security model, so the schema and its policies have to be right.",
-              "**Security in the database.** Row-level security and the `comment_authors` view keep the rules next to the data they protect.",
-              "**Stored search columns.** Full-text search uses stored `tsvector` columns, not text matching at query time.",
+              "**Access rules in the database.** The design keeps row-level security and the `comment_authors` view next to the data they protect.",
+              "**Stored search columns.** The design uses stored `tsvector` columns for full-text search, not text matching at query time.",
               "**A custom reading UI.** The reader is built for serialised fiction rather than being a generic content page.",
             ],
           },
@@ -640,8 +644,6 @@ export const caseStudies = [
               "Authentication.",
               "Chapter-level content management.",
               "Real-time data sync through Supabase/PostgreSQL.",
-              "Row-level security and the `comment_authors` security view.",
-              "Full-text search over stored `tsvector` columns.",
               "A custom long-form reading interface.",
               "A deployment on Vercel.",
             ],
@@ -662,9 +664,10 @@ export const caseStudies = [
               "**Investigated, not shipped.** Unicode zero-width watermarking and anti-scraping measures.",
             ],
           },
-          // TODO(confirm): is chapter scheduling implemented or design only? Do Playwright tests and
-          // GitHub Actions exist? (Neither is claimed above.) Live URL and repo link: the repo is
-          // treated as private until confirmed.
+          // TODO(confirm): is chapter scheduling built or design only (written as "a design exists")?
+          // Do Playwright tests and GitHub Actions exist (neither is claimed)? Keep or remove the
+          // Lovable line (see "What it is")? Live URL, and repo public URL or private (nothing is
+          // said about either until answered).
         ],
       },
     ],
@@ -675,9 +678,10 @@ export const caseStudies = [
     title: "South Asian Culinary RAG Assistant",
     // Sources: the CV bullets, the project README and assistant_core.py. The README's benchmark
     // numbers are quoted as reported.
-    // TODO(confirm): the repository's file headers and README clone URL name a teammate as the
-    // author of several files. Role wording below is limited to the CV ("Group project, 4
-    // members"; "Owned the retrieval core"). Confirm which parts were yours before this goes live.
+    // TODO(confirm): the CV says "Owned the retrieval core". The group repository's history does
+    // not show that (zero commits under the owner's name; see the authorship table in the PR), so
+    // this page makes no personal-role claim beyond "group project, 4 members". When the owner
+    // can say which parts were theirs, add a "My part" paragraph to "What it is".
     summary:
       "A group project (4 members): a fully local retrieval-augmented chatbot for South Asian recipes, built on FAISS, BGE-Large embeddings, a LangGraph intent router and a local Qwen2.5 model.",
     description:
@@ -694,7 +698,7 @@ export const caseStudies = [
           },
           {
             type: "paragraph",
-            text: "It was a group project with four members. I owned the retrieval core: the FAISS vector store, the BGE-Large embedding pipeline, and the LangGraph intent-routing state machine spanning seven intent categories.",
+            text: "It was a group project with four members. The system spans a FAISS vector store, a BGE-Large embedding pipeline and a LangGraph intent-routing state machine with seven intent categories.",
           },
           {
             type: "stats",
@@ -754,9 +758,11 @@ export const caseStudies = [
         blocks: [
           {
             type: "paragraph",
-            text: "The benchmark covers dish lookups, ingredient-based searches, vague inputs and out-of-scope requests. Mean Recall@3 was 0.9241, intent classification accuracy 0.93 and generation faithfulness 0.8861. Mean latency was 7.5 seconds (maximum 18.6), dominated by local model inference.",
+            text: "The group's benchmark covers dish lookups, ingredient-based searches, vague inputs and out-of-scope requests. It reported a mean Recall@3 of 0.9241, intent classification accuracy of 0.93 and generation faithfulness of 0.8861.",
           },
-          // TODO(confirm): how faithfulness was scored, and the hardware the latency was measured on.
+          // TODO(confirm): how faithfulness was scored (the figure is reported without a method), and
+          // the hardware behind the README's latency numbers. The latency figure is not shown until
+          // the hardware is known.
           {
             type: "table",
             caption: "Intent classification by type, from the project README.",
@@ -786,7 +792,7 @@ export const caseStudies = [
             type: "list",
             items: [
               "**Dish-specific queries are the weakest intent.** Accuracy is 0.90 there, which points to room for better disambiguation.",
-              "**Latency.** Local inference makes answers slow: 7.5 seconds on average.",
+              "**Latency.** Answers come from local model inference, which dominates the response time.",
               "**Scope.** The corpus is South Asian cuisine only; other requests get a fallback reply.",
               "**Small benchmark.** 100 queries, with several intents represented by one query.",
             ],

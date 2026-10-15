@@ -61,7 +61,7 @@ export default function CaseStudyLayout({ entry }) {
             {project.links.github && (
               <a href={project.links.github} target="_blank" rel="noopener noreferrer" className={`${OTHER_LINK} inline-flex items-center gap-2`}>
                 <GithubGlyph size={16} />
-                View on GitHub
+                {project.repoLabel ? "View group repo on GitHub" : "View on GitHub"}
               </a>
             )}
             {project.links.live && (

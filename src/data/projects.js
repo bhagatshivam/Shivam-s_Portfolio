@@ -127,21 +127,18 @@ const projectData = [
     context: "No public users yet",
     status: "in-progress",
     statusLabel: "IN DEVELOPMENT",
-    description:
-      "Full-stack novel-publishing platform designed and built end-to-end, from schema design to a Vercel deployment: authentication, chapter-level content management, and real-time data sync via Supabase/PostgreSQL. In development, no public users yet.",
+    description: "Full-stack novel reading and writing platform built with React, TypeScript and Supabase/PostgreSQL, deployed on Vercel. In development, no public users yet.",
     tagline: "Reading and writing platform on Supabase and PostgreSQL.",
     visual: {
       accent: "#10B981",
       motif: "pages",
       kicker: "In development",
-      facts: ["Supabase / PostgreSQL", "Row-level security", "Full-text search"],
+      facts: ["Supabase / PostgreSQL", "Chapter-level publishing", "Custom long-form reader"],
     },
-    summary:
-      "Full-stack novel-publishing platform on Supabase/PostgreSQL with row-level security and full-text search. In development, no public users yet.",
+    summary: "Reading and writing platform on Supabase and PostgreSQL. In development, no public users yet.",
     highlights: [
-      "Designed and built a full-stack novel-publishing platform end-to-end, from schema design to a Vercel deployment, handling authentication, chapter-level content management, and real-time data sync via Supabase/PostgreSQL.",
-      "Secured the data layer with Postgres row-level security and a dedicated security view for comment authorship, and added stored tsvector columns for full-text search.",
-      "Built a component-driven frontend in React 18, TypeScript, and shadcn/ui, including a custom long-form reading UI optimised for serialised fiction.",
+      "A full-stack novel-publishing platform designed and built end to end, from schema design to a Vercel deployment, with authentication, chapter-level content management and real-time data sync via Supabase/PostgreSQL.",
+      "A component-driven frontend in React 18, TypeScript and shadcn/ui, including a custom long-form reading UI for serialised fiction.",
     ],
     tech: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "Supabase"],
     media: {
@@ -151,7 +148,8 @@ const projectData = [
     // Repo stays private; only link it if it can be made public.
     // TODO(confirm): repo public or private, and the live URL (links.live) once it exists.
     links: { github: null, live: null, apk: null },
-    repoNote: "Private repo",
+    // TODO(confirm): public or private? Until answered nothing is said about the repo (repoNote: "Private repo").
+    repoNote: null,
     github: null,
     // Files go in public/projects/storywanderer/. Missing files are skipped (same pattern as Vach).
     screenshots: [
@@ -169,8 +167,9 @@ const projectData = [
     title: "South Asian Culinary RAG Assistant",
     context: "Group project, 4 members",
     status: "complete",
-    description:
-      "Owned the retrieval core of a fully local RAG chatbot: built the FAISS vector store, BGE-Large embedding pipeline, and a LangGraph intent-routing state machine spanning seven intent categories. Delivered 92.4% Recall@3, 93% intent-classification accuracy, and 88.6% generation faithfulness across a 100-query evaluation benchmark.",
+    // TODO(confirm): the CV says "Owned the retrieval core". The group repo history does not show
+    // that (see the authorship table in the PR), so no personal-role claim is rendered here.
+    description: "Group project (4 members): a fully local RAG chatbot for South Asian recipes, using a FAISS vector store, BGE-Large embeddings and a LangGraph intent router across seven intent categories. The project's 100-query benchmark reported 92.4% Recall@3, 93% intent-classification accuracy and 88.6% generation faithfulness.",
     tagline: "Fully local RAG chatbot. 92.4% Recall@3 on a 100-query benchmark.",
     visual: {
       accent: "#8B5CF6",
@@ -178,14 +177,15 @@ const projectData = [
       kicker: "Group project, 4 members",
       facts: ["92.4% Recall@3", "93% intent accuracy", "100-query benchmark"],
     },
-    summary:
-      "Owned the retrieval core of a fully local RAG chatbot: FAISS, BGE-Large and a LangGraph intent router. 92.4% Recall@3 and 93% intent accuracy on a 100-query benchmark.",
+    summary: "Group project (4 members): fully local RAG chatbot with FAISS, BGE-Large and a LangGraph intent router. 92.4% Recall@3 on a 100-query benchmark.",
     highlights: [
-      "Owned the retrieval core of a fully local RAG chatbot: built the FAISS vector store, BGE-Large embedding pipeline, and a LangGraph intent-routing state machine spanning seven intent categories.",
-      "Delivered 92.4% Recall@3, 93% intent-classification accuracy, and 88.6% generation faithfulness across a 100-query evaluation benchmark.",
-      "Combined semantic retrieval (1024-dim embeddings, L2 thresholding) with LLM-powered generation, exposed through a Streamlit dark-mode UI with live pipeline inspection (intent, entities, raw FAISS scores).",
+      "A fully local RAG chatbot: FAISS vector store, BGE-Large embeddings and a LangGraph intent-routing state machine spanning seven intent categories.",
+      "The project's 100-query benchmark reported 92.4% Recall@3, 93% intent-classification accuracy and 88.6% generation faithfulness.",
+      "Semantic retrieval (1024-dim embeddings, L2 thresholding) feeds LLM-powered generation, shown in a Streamlit dark-mode UI with live pipeline inspection (intent, entities, raw FAISS scores).",
     ],
     tech: ["LangGraph", "FAISS", "BGE-Large Embeddings", "Qwen2.5", "Streamlit", "Python"],
+    // The code lives in a group project repository.
+    repoLabel: "Group repo",
     links: {
       github: "https://github.com/bhagatshivam/South-Asian-Culinary-RAG-Assistant",
       apk: null,
@@ -202,20 +202,18 @@ const projectData = [
     title: "Ask the Doc",
     context: "Bachelor's final-year project",
     status: "complete",
-    description:
-      "Final-year undergraduate project. An end-to-end document-intelligence app combining abstractive summarisation (Pegasus) with extractive QA (RoBERTa-SQuAD2), plus text-to-speech output via gTTS.",
-    tagline: "Document summaries and question answering, with spoken output.",
+    description: "Bachelor's final-year project. A Streamlit app: upload a PDF or enter text, get a summary (google/pegasus-xsum), ask questions about it (deepset/roberta-base-squad2), and hear the summary and answers read aloud with gTTS.",
+    tagline: "Upload a PDF or enter text to get a summary, answers to your questions and audio.",
     visual: {
       accent: "#F59E0B",
       motif: "document",
       kicker: "Final-year project",
       facts: ["Pegasus summaries", "RoBERTa-SQuAD2 QA", "gTTS audio"],
     },
-    summary:
-      "Final-year undergraduate project: abstractive summarisation (Pegasus) plus extractive QA (RoBERTa-SQuAD2), with text-to-speech output via gTTS.",
+    summary: "Bachelor's final-year project. A Streamlit app that summarises a PDF or pasted text (Pegasus), answers questions about it (RoBERTa-SQuAD2) and reads the results aloud (gTTS).",
     highlights: [
-      "Built an end-to-end document-intelligence app combining abstractive summarisation (Pegasus) with extractive QA (RoBERTa-SQuAD2), plus text-to-speech output via gTTS.",
-      "Architected with a modular pipeline separating ingestion, inference, and rendering layers for maintainability.",
+      "Bachelor's final-year project.",
+      "A Streamlit app: upload a PDF or enter text, get a Pegasus summary, ask questions answered by RoBERTa-SQuAD2, and hear both read aloud with gTTS.",
     ],
     tech: ["Streamlit", "HuggingFace Transformers", "Pegasus", "RoBERTa", "gTTS", "Python"],
     links: {
