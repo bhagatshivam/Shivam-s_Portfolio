@@ -9,9 +9,6 @@ export const site = {
   metaDescription:
     "MSc Advanced Computer Science student at the University of Manchester. Dissertation on generating CI pipeline documentation; Vach, an Android PDF/EPUB reader.",
 
-  // TODO(confirm): exact programme title vs degree paperwork (CV: "Advanced Computer Science").
-  degreeLine: "MSc Advanced Computer Science, University of Manchester",
-  positioning: "I build developer tools and AI-backed systems, and I test them properly.",
   // Hero identity line.
   identity: "Software engineer.",
   identityDetail: "I build developer tools and small, practical software.",

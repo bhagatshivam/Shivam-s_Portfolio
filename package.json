@@ -1,14 +1,19 @@
 {
-  "name": "new-shivam-portfolio",
+  "name": "shivam-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Personal portfolio for Shivam Bhagat: a React single-page site with case studies, built with Vite and Tailwind CSS.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
-    "check:contrast": "node scripts/check-contrast.mjs"
+    "lint": "eslint .",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "og": "node scripts/og.mjs",
+    "icons": "node scripts/icons.mjs",
+    "skill-icons": "node scripts/skill-icons.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
