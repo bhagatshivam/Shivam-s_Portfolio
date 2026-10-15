@@ -1,29 +1,29 @@
 {
-  "name": "new-shivam-portfolio",
+  "name": "shivam-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Personal portfolio for Shivam Bhagat: a React single-page site with case studies, built with Vite and Tailwind CSS.",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "og": "node scripts/og.mjs",
+    "icons": "node scripts/icons.mjs",
+    "skill-icons": "node scripts/skill-icons.mjs"
   },
   "dependencies": {
-    "@tsparticles/react": "^4.2.1",
-    "@tsparticles/slim": "^4.2.1",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
     "autoprefixer": "^10.5.0",
-    "d3-drag": "^3.0.0",
-    "d3-force": "^3.0.0",
-    "d3-selection": "^3.0.0",
-    "d3-transition": "^3.0.1",
-    "framer-motion": "^12.40.0",
-    "gsap": "^3.15.0",
     "lucide-react": "^1.21.0",
     "postcss": "^8.5.15",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-intersection-observer": "^10.0.3",
+    "react-router": "^7.18.4",
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
@@ -35,6 +35,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "simple-icons": "^16.35.0",
     "vite": "^8.0.12"
   }
 }

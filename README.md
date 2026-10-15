@@ -1,86 +1,106 @@
 # Shivam Bhagat — Portfolio
 
-A dark, animated single-page portfolio built to showcase projects, skills, and academic journey — designed around a connected, scroll-driven experience rather than a static template.
+My personal portfolio: a single-page React site with a home page (hero, projects, skills, experience, about, contact) and a case-study page for each of the larger projects.
 
-**Live site:** [shivam-s-portfolio-eight.vercel.app](https://shivam-s-portfolio-eight.vercel.app/)
+**Live site:** https://shivam-s-portfolio-eight.vercel.app (the address is set in [`site.config.js`](site.config.js))
 
----
+## Stack
 
-## Overview
-
-This portfolio represents MSc Advanced Computer Science work at the University of Manchester, alongside independent and academic projects spanning AI/ML, full-stack development, and data engineering. The site is built section-by-section around a consistent dark visual language — deep navy background, glowing accent colours, terminal-inspired typography — rather than a generic light-themed resume layout.
-
-## Features
-
-- **Animated hero** — particle constellation background (tsparticles) with a typewriter-style rotating subtitle
-- **Scroll-driven journey map** — an SVG path animates its own drawing (GSAP + ScrollTrigger) tracing the route from Pune to Manchester, paired with academic milestone cards
-- **Interactive project cards** — 3D tilt-on-hover effect, expandable detail panels with full descriptions, tech stacks, and GitHub links
-- **Project → Skills linking** — clicking a project's tech chips jumps to the Skills section and highlights exactly which technologies that project used, connecting proof to claim
-- **Icon-based skills grid** — real technology logos grouped by category (AI/ML, Web & Frontend, Languages & Tools)
-- **Performance-aware rendering** — a lite-mode toggle disables particle and animation-heavy rendering for lower-powered devices, persisted via `localStorage`
-- **Fully responsive** — tested down to 375px mobile viewport
-- **Personal interests section** — beyond-the-resume content (reading, hiking, anime) styled to match the site's visual system rather than breaking from it
-
-## Tech Stack
-
-| Category | Technology |
+| Area | What is used |
 |---|---|
-| Framework | React 18 + Vite |
-| Styling | Tailwind CSS |
-| Animation | Framer Motion, GSAP (ScrollTrigger) |
-| Particles | tsparticles |
-| Scroll detection | react-intersection-observer |
-| Icons | lucide-react, Devicon (CDN) |
-| Deployment | Vercel |
+| UI | React 19, react-router 7 (client-side routing; the case-study pages load as a separate chunk) |
+| Build | Vite 8 with a small build plugin, [`vite.site-plugin.js`](vite.site-plugin.js) |
+| Styling | Tailwind CSS 3, with the design tokens in [`design-tokens.js`](design-tokens.js) |
+| Icons | lucide-react for interface icons; skill logos are SVG paths copied from `simple-icons` at development time ([`scripts/skill-icons.mjs`](scripts/skill-icons.mjs)), so nothing is loaded from a CDN |
+| Fonts | Inter and IBM Plex Mono, Latin subset, from `@fontsource` packages (self-hosted) |
+| Hosting | Vercel (`vercel.json`: clean URLs plus a single-page-app rewrite) |
 
-## Running locally
+There are no animation libraries. Motion is CSS only, plus one small canvas on the hero. A "lite mode" toggle (bottom right) switches all of it off, and it is on by default when the visitor's system asks for reduced motion.
+
+The build plugin writes, from the data files: a static HTML page for each case study (so link previews and crawlers see the right title and description without running JavaScript), `sitemap.xml`, `robots.txt`, the canonical and Open Graph tags, and the JSON-LD block.
+
+## Running it
+
+Needs Node 22.
 
 ```bash
-git clone https://github.com/bhagatshivam/<repo-name>.git
-cd <repo-name>
-npm install
-npm run dev
+npm ci
+npm run dev        # http://localhost:5173
+npm run build      # production build into dist/
+npm run preview    # serve dist/ at http://localhost:4173
 ```
 
-The dev server runs at `http://localhost:5173` by default.
+## Scripts
 
-> Note: a CV file is expected at `public/Shivam_Bhagat_CV.pdf` for the Hero section's download link to resolve correctly.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Vite dev server |
+| `npm run build` | Production build (also generates the per-route HTML, sitemap and robots.txt) |
+| `npm run preview` | Serves the production build locally |
+| `npm run lint` | ESLint |
+| `npm run check:contrast` | WCAG AA contrast check of every colour pair in `design-tokens.js`; fails if one is below its threshold |
+| `npm run check:links` | Crawls a running build (default `http://localhost:4173`, so run `npm run preview` first) and checks every internal and external link |
+| `npm run og` | Regenerates `public/og.png` (the Open Graph image) from the tokens and `src/data/site.js` |
+| `npm run icons` | Regenerates the favicon set in `public/` |
+| `npm run skill-icons` | Regenerates `src/data/skillIconPaths.js` from `simple-icons` after a skill is added |
 
-## Project Structure
+`check:links`, `og` and `icons` need a Chromium through Playwright. Playwright is deliberately not a dependency of the project: install it globally (`npm i -g playwright`) or set `CHROMIUM_PATH`. See [`scripts/lib/browser.mjs`](scripts/lib/browser.mjs).
 
-```
-src/
-├── components/
-│   ├── layout/      # Navbar, performance toggle
-│   ├── sections/    # One component per page section
-│   └── ui/          # Reusable pieces (cards, particle field, icon grid, etc.)
-├── context/         # App-wide state (performance mode, project↔skill linking)
-├── data/            # Content as data — projects, skills, journey milestones, interests
-├── hooks/           # Custom hooks (scroll progress, reduced motion, mouse position)
-└── App.jsx
-```
+## Where the content lives
 
-Content (projects, skills, copy) lives in `src/data/` as plain JS objects, kept separate from presentation components — updating a project's description or adding a new skill doesn't require touching any component logic.
+All wording is data, in `src/data/`. Components only render it.
 
-## Featured Projects
+| File | Holds |
+|---|---|
+| `site.js` | Name, hero copy, availability line, contact details, About text |
+| `projects.js` | The five projects: cards, status, tech chips, links, screenshots |
+| `skills.js` | Every skill, its group and the projects that used it (project cards and the Skills section both read this) |
+| `experience.js`, `extras.js` | The experience timeline; volunteering and certifications |
+| `caseStudies.js` | The case-study pages, as structured sections and blocks |
+| `seo.js` | Page titles, descriptions and structured data helpers |
+| `skillIconPaths.js` | Generated logo paths; do not edit by hand |
 
-- **South Asian Culinary RAG Assistant** — retrieval-augmented generation chatbot, Recall@3 of 0.924
-- **CI Pipeline Documentation Tool** — MSc dissertation; LLM-powered YAML-to-documentation generator
-- **StoryWanderer** — full-stack web novel publishing platform (React, Supabase)
-- **Fashion-MNIST CNN Classifier** — sub-100K-parameter CNN, 92.35% validation accuracy
-- **Real-Time Drowsiness Detection** — YOLOv5-based driver fatigue detection
-- **Ask the Doc** — generative AI document summarisation and Q&A tool
-- **Gantt Chart Task Manager** — interactive project scheduling app
-- **Transaction Data Analysis** — e-commerce business intelligence dashboarding
+Wherever a statement still needs the owner's confirmation, the code carries a `TODO(confirm)` comment and the page does not state it as fact. Search for `TODO(confirm)` to see them all.
 
-Full details, tech stacks, and repo links for each are available on the live site.
+## Setting the production URL
 
-## Contact
+Set `SITE_URL` in [`site.config.js`](site.config.js) (no trailing slash) and rebuild. It feeds the canonical link, the Open Graph tags, `sitemap.xml`, `robots.txt`, the JSON-LD block and `npm run og`.
 
-- **Email:** bhagatshivam082@gmail.com
-- **LinkedIn:** [linkedin.com/in/shivam-bhagat](https://www.linkedin.com/in/shivam-bhagat)
-- **GitHub:** [github.com/bhagatshivam](https://github.com/bhagatshivam)
+## The CV
 
----
+The Download CV buttons point at `public/Shivam_Bhagat_CV.pdf`. If the file is missing, the buttons turn into an inactive "not available" label instead of a dead link. To update the CV, replace that file.
 
-*Open to Software Engineering, AI/ML, and Data Engineering graduate roles in the UK from October 2026.*
+## Adding a case study
+
+1. In `src/data/projects.js`, set `caseStudy: "<slug>"` on the project (and `featured: true` for a home-page card).
+2. In `src/data/caseStudies.js`, add an entry with the same `slug` and `projectId`, a `title`, a `summary` (the lede), a `description` (the meta description) and `sections`. The block types are listed at the top of that file: `paragraph`, `subheading`, `list`, `table`, `stats`, `callout` and `figure`.
+3. For a diagram, add a component in `src/components/case-study/figures/`, register it in `figures/index.js` and use it with `{ type: "figure", figure: "<id>", caption }`. A figure marked `bare` draws its own frame (the screenshot gallery does this) and may render nothing.
+4. Rebuild. The route, the static HTML page, the sitemap entry, the page title and the previous/next links all follow from the data.
+
+## Adding screenshots
+
+Images are optional. A file that is missing is skipped: the project card falls back to a generated visual, and the gallery in the case study is hidden until at least one file exists. Put the files in `public/projects/<project>/` (create the folder) and keep the exact names below.
+
+**Vach** (`public/projects/vach/`, phone screenshots)
+
+- `library.png`
+- `reading-sepia.png`
+- `reading-night.png`
+- `reading-beige.png`
+- Optional screen recording: `demo.mp4` with a poster frame `poster.jpg`. It never autoplays.
+
+**StoryWanderer** (`public/projects/storywanderer/`, browser screenshots, 16:10 works best)
+
+- `home.png`
+- `reader.png`
+- `editor.png`
+
+The names and captions are listed in the `screenshots` arrays in `src/data/projects.js`.
+
+## Continuous integration
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on every pull request and on pushes to `main`: `npm ci`, `npm run lint`, `npm run check:contrast` and `npm run build` on Node 22. Vercel builds a preview for each pull request; production deployment is configured in Vercel, not in this repo.
+
+## Licence
+
+MIT, see [`LICENSE`](LICENSE).
