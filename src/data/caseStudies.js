@@ -546,7 +546,7 @@ export const caseStudies = [
     summary:
       "A reading and writing platform for serialised fiction, built full stack on React, TypeScript and Supabase/PostgreSQL. It is in development and has no public users yet.",
     description:
-      "StoryWanderer: a reading and writing platform for serialised fiction, built with React, TypeScript and Supabase/PostgreSQL. In development, no public users yet.",
+      "StoryWanderer: a reading and writing platform for serialised fiction on React, TypeScript and Supabase/PostgreSQL. In development, no public users yet.",
     sections: [
       {
         id: "what-it-is",
@@ -685,7 +685,7 @@ export const caseStudies = [
     summary:
       "A group project (4 members): a fully local retrieval-augmented chatbot for South Asian recipes, built on FAISS, BGE-Large embeddings, a LangGraph intent router and a local Qwen2.5 model.",
     description:
-      "South Asian Culinary RAG Assistant: a fully local RAG chatbot using FAISS, BGE-Large and LangGraph, with 92.4% Recall@3 and 93% intent accuracy on a 100-query benchmark.",
+      "South Asian Culinary RAG Assistant, a group project: a fully local RAG chatbot using FAISS, BGE-Large and LangGraph. 92.4% Recall@3 on a 100-query benchmark.",
     sections: [
       {
         id: "what-it-is",
