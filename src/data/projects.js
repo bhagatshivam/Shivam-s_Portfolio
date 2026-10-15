@@ -145,10 +145,9 @@ const projectData = [
       variant: "browser",
       alt: "StoryWanderer screens",
     },
-    // Repo stays private; only link it if it can be made public.
-    // TODO(confirm): repo public or private, and the live URL (links.live) once it exists.
+    // TODO(confirm): repo public (add the URL to links.github) or private (set repoNote to
+    // "Private repo"), and the live URL (links.live). Until answered, nothing is said about either.
     links: { github: null, live: null, apk: null },
-    // TODO(confirm): public or private? Until answered nothing is said about the repo (repoNote: "Private repo").
     repoNote: null,
     github: null,
     // Files go in public/projects/storywanderer/. Missing files are skipped (same pattern as Vach).
