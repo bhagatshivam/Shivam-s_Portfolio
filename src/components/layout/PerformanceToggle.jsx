@@ -1,28 +1,25 @@
 import { Zap, Eye } from "lucide-react";
-import { motion } from "framer-motion";
 import { usePerformance } from "../../context/PerformanceContext";
 
 export default function PerformanceToggle() {
-  const { isLiteMode, toggleLiteMode } = usePerformance();
+  const { isLiteMode, toggleLiteMode, isSystemDefault } = usePerformance();
+
+  const title = isLiteMode
+    ? isSystemDefault
+      ? "Lite mode is on because your system prefers reduced motion. Click to switch to the full experience."
+      : "Lite mode is on. Click to switch to the full experience."
+    : "Switch to lite mode (no animation).";
 
   return (
-    <motion.button
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 2, duration: 0.3 }}
+    <button
+      type="button"
       onClick={toggleLiteMode}
-      aria-label={isLiteMode ? "Switch to full experience" : "Switch to lite mode"}
-      title={isLiteMode ? "Full experience" : "Lite mode"}
-      className="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full flex items-center justify-center border border-border bg-surface hover:border-accent-blue transition-all duration-300 group"
-      style={{
-        boxShadow: isLiteMode ? "none" : "0 0 12px rgba(79,142,247,0.3)",
-      }}
+      aria-pressed={isLiteMode}
+      aria-label="Lite mode"
+      title={title}
+      className="fixed bottom-4 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border-strong bg-surface text-text-secondary hover:border-accent hover:text-text-primary"
     >
-      {isLiteMode ? (
-        <Eye size={16} className="text-text-secondary group-hover:text-accent-blue transition-colors duration-200" />
-      ) : (
-        <Zap size={16} className="text-accent-blue" />
-      )}
-    </motion.button>
+      {isLiteMode ? <Eye size={16} aria-hidden="true" /> : <Zap size={16} aria-hidden="true" />}
+    </button>
   );
 }

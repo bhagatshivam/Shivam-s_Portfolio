@@ -1,81 +1,35 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { projects } from "../../data/projects";
-import ProjectCard from "../ui/ProjectCard";
+import { featuredProjects, moreProjects } from "../../data/projects";
+import ProjectFeature, { ProjectRow } from "../ui/ProjectCard";
+import SectionHeader, { SectionShell } from "../ui/SectionHeader";
 
 export default function Projects() {
-  const { ref: headingRef, inView: headingInView } = useInView({ threshold: 0.3, triggerOnce: true });
-  const [showAll, setShowAll] = useState(false);
-
-  const visibleProjects = showAll ? projects : projects.slice(0, 5);
-  const firstRow = visibleProjects.slice(0, 3);
-  const secondRow = visibleProjects.slice(3, 5);
-  const extraRow = visibleProjects.slice(5, 8);
-
   return (
-    <div className="py-24 px-6">
-      <motion.div
-        ref={headingRef}
-        initial={{ opacity: 0, y: 20 }}
-        animate={headingInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-16"
-      >
-        <p className="font-display text-xs text-accent-purple tracking-widest mb-3">[ SECTION 03 ]</p>
-        <h2 className="font-display text-3xl md:text-4xl text-text-primary">Projects</h2>
-        <p className="font-body text-text-secondary mt-3 text-sm">
-          RAG pipelines, computer vision, and full-stack platforms.
-        </p>
-      </motion.div>
-
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-        {firstRow.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+    <SectionShell
+      header={
+        <SectionHeader
+          id="projects-title"
+          title="Projects"
+          intro="Four things I built and measured. Each one has a page with the architecture, the numbers and what still goes wrong."
+        />
+      }
+    >
+      <ol className="divide-y divide-border border-y border-border">
+        {featuredProjects.map((project, i) => (
+          <li key={project.id} className="py-10 first:pt-0 md:py-14 md:first:pt-0">
+            <ProjectFeature project={project} flip={i % 2 === 1} />
+          </li>
         ))}
-      </div>
+      </ol>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center mt-8 md:max-w-[700px]">
-        {secondRow.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+      <h3 className="mt-14 text-h4 text-text-primary">Also built</h3>
+      <p className="mt-1 text-small text-text-secondary">Earlier and smaller work, still with the numbers that go with it.</p>
+      <ul className="mt-5 divide-y divide-border border-y border-border">
+        {moreProjects.map((project) => (
+          <li key={project.id}>
+            <ProjectRow project={project} />
+          </li>
         ))}
-      </div>
-
-      <AnimatePresence>
-        {showAll && extraRow.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4 }}
-            className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mt-8 overflow-hidden"
-          >
-            {extraRow.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {projects.length > 5 && (
-        <div className="flex justify-center mt-12">
-          <button
-            onClick={() => setShowAll((prev) => !prev)}
-            className="flex items-center gap-2 font-display text-sm text-accent-blue border border-accent-blue rounded-full px-5 py-2 hover:bg-accent-blue hover:text-background transition-all duration-200"
-          >
-            {showAll ? (
-              <>
-                Show Less <ChevronUp size={16} />
-              </>
-            ) : (
-              <>
-                View More Projects <ChevronDown size={16} />
-              </>
-            )}
-          </button>
-        </div>
-      )}
-    </div>
+      </ul>
+    </SectionShell>
   );
 }
