@@ -41,12 +41,12 @@ export default function ProjectMedia({ project }) {
   const shot = shots[0];
   return (
     <div
-      className="flex h-full items-center justify-center overflow-hidden rounded-lg border border-border p-4 sm:p-5"
+      className="flex h-full items-start justify-center overflow-hidden rounded-lg border border-border p-4 sm:p-5"
       style={{
         background: `linear-gradient(to bottom, color-mix(in srgb, ${project.visual.accent} 10%, rgb(var(--color-surface))), rgb(var(--color-band)))`,
       }}
     >
-      <BrowserFrame src={shot.src} alt={shot.alt} className="w-full" onError={() => markFailed(shot.src)} />
+      <BrowserFrame src={shot.src} alt={shot.alt} className="w-full" aspect="aspect-square" onError={() => markFailed(shot.src)} />
     </div>
   );
 }

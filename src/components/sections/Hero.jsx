@@ -23,11 +23,8 @@ export default function Hero() {
             {site.availability}
           </p>
 
-          <h1 className="mt-8 text-display text-text-primary">
-            {site.heroHeadline[0]}
-            <br />
-            {site.heroHeadline[1]}
-          </h1>
+          <h1 className="mt-8 text-display text-text-primary">{site.heroHeadline[0]}</h1>
+          <p className="mt-3 font-display text-h3 font-medium text-text-secondary">{site.heroRole}</p>
 
           <p className="mt-6 max-w-[56ch] text-lead text-text-secondary">{site.heroLead}</p>
 

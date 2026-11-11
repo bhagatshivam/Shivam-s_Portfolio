@@ -10,7 +10,8 @@ export const site = {
     "Software engineer, MSc Advanced Computer Science at the University of Manchester. Builds developer tools, reading apps and LLM systems, and proves they work.",
 
   // Hero. The headline is the one thing on the page allowed to be loud.
-  heroHeadline: ["Working software,", "with the numbers to show it."],
+  heroHeadline: ["Shivam Bhagat"],
+  heroRole: "Software engineer",
   heroLead:
     "Developer tools, reading apps and LLM systems, each shipped with tests, CI and a measured result. MSc Advanced Computer Science at the University of Manchester, graduating December 2026.",
   // Proof chips under the lead; `project` links to that project's page when it has one.

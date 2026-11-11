@@ -163,9 +163,9 @@ const projectData = [
     repoNote: "Private repo",
     github: null,
     screenshots: [
-      { src: "/projects/storywanderer/home.png", alt: "StoryWanderer home page", caption: "Home" },
-      { src: "/projects/storywanderer/reader.png", alt: "StoryWanderer chapter reader", caption: "Reader" },
-      { src: "/projects/storywanderer/editor.png", alt: "StoryWanderer chapter editor", caption: "Editor" },
+      { src: "/projects/storywanderer/novel.png", alt: "StoryWanderer novel page: cover, tags, chapter list and reading progress", caption: "Novel page" },
+      { src: "/projects/storywanderer/reader.png", alt: "StoryWanderer chapter reader with author's note and reading controls", caption: "Reader" },
+      { src: "/projects/storywanderer/characters.png", alt: "StoryWanderer characters page with voting", caption: "Characters" },
     ],
     color: "#2E7D4F",
   },
