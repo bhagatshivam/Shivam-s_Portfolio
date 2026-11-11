@@ -20,20 +20,22 @@ export default function ProjectMedia({ project }) {
   if (variant === "phone") {
     return (
       <div
-        className="flex h-full min-h-[18rem] items-end justify-center gap-4 overflow-hidden rounded-lg border border-border px-6 pt-6"
+        className="relative h-full min-h-[22rem] overflow-hidden rounded-lg border border-border"
         style={{
           background: `linear-gradient(to bottom, color-mix(in srgb, ${project.visual.accent} 10%, rgb(var(--color-surface))), rgb(var(--color-band)))`,
         }}
       >
-        {shots.slice(0, 2).map((shot, i) => (
-          <PhoneFrame
-            key={shot.src}
-            src={shot.src}
-            alt={shot.alt}
-            className={`w-[42%] max-w-[11rem] ${i === 1 ? "translate-y-6" : ""}`}
-            onError={() => markFailed(shot.src)}
-          />
-        ))}
+        <div className="absolute inset-x-0 top-6 flex justify-center px-5">
+          {shots.slice(0, 2).map((shot, i) => (
+            <PhoneFrame
+              key={shot.src}
+              src={shot.src}
+              alt={shot.alt}
+              className={`w-[58%] shadow-[0_24px_50px_-24px_rgb(var(--color-night)/0.5)] ${i === 1 ? "-ml-[20%] translate-y-12" : "relative z-10"}`}
+              onError={() => markFailed(shot.src)}
+            />
+          ))}
+        </div>
       </div>
     );
   }

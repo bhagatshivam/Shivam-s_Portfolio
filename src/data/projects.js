@@ -110,10 +110,10 @@ const projectData = [
     // Missing files never render as broken images: they are skipped, and if none load the
     // card and the case study fall back to the generated visual.
     screenshots: [
-      { src: "/projects/vach/library.png", alt: "Vach library screen", caption: "Library" },
-      { src: "/projects/vach/reading-sepia.png", alt: "Vach reading screen in the sepia theme", caption: "Reading: sepia" },
-      { src: "/projects/vach/reading-night.png", alt: "Vach reading screen in the night theme", caption: "Reading: night" },
-      { src: "/projects/vach/reading-beige.png", alt: "Vach reading screen in the beige theme", caption: "Reading: beige" },
+      { src: "/projects/vach/library.png", alt: "Vach library: continue-reading bar, search, sort and a list of EPUBs with progress", caption: "Library" },
+      { src: "/projects/vach/reading.png", alt: "Vach reading screen: continuous scroll in a serif face on a sepia background", caption: "Reading" },
+      { src: "/projects/vach/settings.png", alt: "Vach reading settings: font family, size, line height and theme", caption: "Reading settings" },
+      { src: "/projects/vach/library-recent.png", alt: "Vach library sorted by recently read", caption: "Library, recently read" },
     ],
     video: {
       src: "/projects/vach/demo.mp4",
