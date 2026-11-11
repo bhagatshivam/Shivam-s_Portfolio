@@ -1,5 +1,5 @@
 import plugin from "tailwindcss/plugin";
-import { colors, fonts, fontSize, layout } from "./design-tokens.js";
+import { colors, darkColors, fonts, fontSize, layout } from "./design-tokens.js";
 
 const toChannels = (hex) => {
   const n = parseInt(hex.slice(1), 16);
@@ -7,9 +7,10 @@ const toChannels = (hex) => {
 };
 
 // Tokens become CSS variables (as RGB channels) so Tailwind's opacity utilities keep working.
-const colorVars = Object.fromEntries(
-  Object.entries(colors).map(([name, hex]) => [`--color-${name}`, toChannels(hex)])
-);
+const toVars = (palette) =>
+  Object.fromEntries(Object.entries(palette).map(([name, hex]) => [`--color-${name}`, toChannels(hex)]));
+const colorVars = toVars(colors);
+const darkVars = toVars(darkColors);
 const themeColors = Object.fromEntries(
   Object.keys(colors).map((name) => [name, `rgb(var(--color-${name}) / <alpha-value>)`])
 );
@@ -35,7 +36,12 @@ export default {
   plugins: [
     plugin(function ({ addBase, addComponents, theme }) {
       addBase({
-        ":root": colorVars,
+        ":root": { ...colorVars, colorScheme: "light" },
+        // Night mode: the OS setting unless the reader has chosen, then their choice.
+        '@media (prefers-color-scheme: dark)': {
+          ':root:not([data-theme="light"])': { ...darkVars, colorScheme: "dark" },
+        },
+        ':root[data-theme="dark"]': { ...darkVars, colorScheme: "dark" },
         html: { backgroundColor: "rgb(var(--color-background))" },
         body: {
           backgroundColor: "rgb(var(--color-background))",

@@ -453,7 +453,7 @@ export const caseStudies = [
               {
                 heading: "Verified on a real device",
                 items: [
-                  "Folder permission survives force-stop, reopen and reboot without asking again (it is the phone I read on every day).",
+                  "Folder permission survives force-stop, reopen and reboot without asking again.",
                   "EPUB and text-PDF continuous scroll with font, size, spacing and theme controls.",
                   "Image-page fallback for textless and scanned pages.",
                   "Reading position across sessions.",
@@ -488,7 +488,7 @@ export const caseStudies = [
         blocks: [
           {
             type: "paragraph",
-            text: "Vach is about 95% complete, in daily use, and still being refined.",
+            text: "Vach is about 95% complete and still being refined.",
           },
           {
             type: "list",

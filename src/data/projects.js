@@ -70,15 +70,14 @@ const projectData = [
     caseStudy: "vach",
     featured: true,
     title: "Vach: offline PDF & EPUB reader for Android",
-    context: "Personal product, in daily use",
+    context: "Personal product, solo build",
     status: "complete",
-    statusLabel: "In daily use",
     year: "2026",
     plain:
       "An Android reading app for people with a folder of ebooks on their phone. Pick the folder once and every PDF and EPUB inside opens in one smooth continuous scroll, with adjustable fonts and day/night themes. Fully offline, no ads, no accounts, no tracking.",
     description:
       "Android reader (React/TypeScript in a Capacitor native shell) for a personal offline library of EPUB and PDF novels. A custom Kotlin plugin uses Android's Storage Access Framework so folder permission persists across restarts and reboots instead of asking every time. Webnovel-style continuous scroll, font/size/theme controls, per-book reading position, image-page fallback for scanned PDFs, password-protected PDFs. GitHub Actions builds a debug APK on every push and a signed release on version tags.",
-    tagline: "Offline PDF and EPUB reader for Android. No ads, no telemetry, used every day.",
+    tagline: "Offline PDF and EPUB reader for Android. No ads, no accounts, no telemetry.",
     points: [
       "Hybrid architecture: React/TypeScript UI in a Capacitor shell plus a Kotlin plugin I wrote for persistent folder access.",
       "Document pipeline: EPUB parsing with HTML sanitisation, PDF text reflow with pdf.js, scanned-page fallback, per-book reading position.",

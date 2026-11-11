@@ -1,7 +1,7 @@
 // WCAG 2.1 contrast check for every text/background and accent/background pair the site
 // uses. Exits non-zero if any pair is below its threshold.
 //   normal text >= 4.5:1, large text and UI components/focus rings >= 3:1
-import { colors } from "../design-tokens.js";
+import { colors, darkColors } from "../design-tokens.js";
 
 const channel = (v) => {
   const c = v / 255;
@@ -34,14 +34,17 @@ for (const bg of surfaces) {
 }
 
 let failed = 0;
-console.log("foreground".padEnd(16), "background".padEnd(16), "ratio".padStart(6), " need  use");
-for (const { fg, bg, min, use } of pairs) {
-  const r = ratio(colors[fg], colors[bg]);
-  const ok = r >= min;
-  if (!ok) failed++;
-  console.log(
-    fg.padEnd(16), bg.padEnd(16), r.toFixed(2).padStart(6), `${min}:1`.padStart(5), ok ? "PASS" : "FAIL", use
-  );
+for (const [label, palette] of [["day", colors], ["night", darkColors]]) {
+  console.log(`\n${label}`);
+  console.log("foreground".padEnd(16), "background".padEnd(16), "ratio".padStart(6), " need  use");
+  for (const { fg, bg, min, use } of pairs) {
+    const r = ratio(palette[fg], palette[bg]);
+    const ok = r >= min;
+    if (!ok) failed++;
+    console.log(
+      fg.padEnd(16), bg.padEnd(16), r.toFixed(2).padStart(6), `${min}:1`.padStart(5), ok ? "PASS" : "FAIL", use
+    );
+  }
 }
 if (failed) {
   console.error(`\n${failed} pair(s) below WCAG AA.`);

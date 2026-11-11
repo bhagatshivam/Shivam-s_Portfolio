@@ -6,7 +6,15 @@
     <title>%SEO_TITLE%</title>
     <meta name="description" content="%SEO_DESCRIPTION%" />
     <link rel="canonical" href="%SEO_URL%" />
-    <meta name="theme-color" content="#0B0D12" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F6F9" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1320" />
+    <script>
+      // Apply a saved day/night choice before first paint so the page never flashes.
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />

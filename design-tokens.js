@@ -45,6 +45,34 @@ export const colors = {
   "night-amber": "#F3B64B",
 };
 
+// Night mode: the same system in the dark. Paper becomes deep navy, ink becomes light, the
+// verified green lifts so it still reads on a dark ground, and the output surface goes a step
+// darker than the page so it stays distinct. The toggle lives in the navbar; the OS setting is
+// the default.
+export const darkColors = {
+  background: "#0E1320",
+  band: "#121A2A",
+  surface: "#161F31",
+  "surface-raised": "#1B2538",
+  border: "#27324A",
+  "border-strong": "#8290AA",
+  "text-primary": "#E9EEF7",
+  "text-secondary": "#A9B4C9",
+  accent: "#5FD6A3",
+  "accent-soft": "#123B2E",
+  "accent-ink": "#06130D",
+  status: "#F2B85A",
+  "status-soft": "#3A2A0E",
+
+  night: "#070B14",
+  "night-raised": "#0E1526",
+  "night-border": "#22304A",
+  "night-text": "#E6EBF4",
+  "night-muted": "#98A3B8",
+  "night-accent": "#5EDBA6",
+  "night-amber": "#F3B64B",
+};
+
 export const fonts = {
   sans: [
     '"Inter Variable"',
@@ -78,7 +106,7 @@ export const fonts = {
 
 // [font-size, { lineHeight, letterSpacing, fontWeight }]
 export const fontSize = {
-  display: ["clamp(2.6rem, 1.2rem + 5.2vw, 5.4rem)", { lineHeight: "0.98", letterSpacing: "-0.03em", fontWeight: "600" }],
+  display: ["clamp(2.5rem, 1.1rem + 4.6vw, 4.8rem)", { lineHeight: "0.98", letterSpacing: "-0.03em", fontWeight: "600" }],
   h2: ["clamp(1.9rem, 1.4rem + 2vw, 2.9rem)", { lineHeight: "1.05", letterSpacing: "-0.025em", fontWeight: "600" }],
   h3: ["clamp(1.35rem, 1.2rem + 0.6vw, 1.7rem)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "600" }],
   h4: ["1.125rem", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],

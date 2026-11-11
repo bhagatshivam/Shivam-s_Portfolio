@@ -10,13 +10,13 @@ export const site = {
     "Software engineer, MSc Advanced Computer Science at the University of Manchester. Builds developer tools, reading apps and LLM systems, and proves they work.",
 
   // Hero. The headline is the one thing on the page allowed to be loud.
-  heroHeadline: ["I build software", "and prove it works."],
+  heroHeadline: ["Working software,", "with the numbers to show it."],
   heroLead:
     "Developer tools, reading apps and LLM systems, each shipped with tests, CI and a measured result. MSc Advanced Computer Science at the University of Manchester, graduating December 2026.",
   // Proof chips under the lead; `project` links to that project's page when it has one.
   heroChips: [
     { project: "ci-pipeline-docs", label: "95.5% fact recall", detail: "dissertation tool, pre-registered evaluation" },
-    { project: "vach", label: "In daily use", detail: "Vach, an Android reader I built for myself" },
+    { project: "vach", label: "Shipped", detail: "Vach, an offline Android reader, built solo" },
     { project: "storywanderer", label: "Live", detail: "StoryWanderer, a full-stack publishing platform" },
   ],
   // Facts strip under the hero.

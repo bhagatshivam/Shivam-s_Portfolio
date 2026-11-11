@@ -4,6 +4,7 @@ import { useActiveSection } from "../../hooks/useActiveSection";
 import { Menu, X } from "lucide-react";
 import { site } from "../../data/site";
 import CvLink from "../ui/CvLink";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { label: "Projects", hash: "#projects" },
@@ -62,6 +63,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <CvLink variant="nav" />
           <Link
             to={{ pathname: "/", hash: "#contact" }}

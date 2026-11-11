@@ -75,6 +75,10 @@ html[data-lite="true"] .hover-lift:hover {
 
 /* Graph paper: a faint 32px grid behind the hero only, fading out towards the bottom so the
    page below it is plain. One CSS gradient, no image. */
+html {
+  transition: background-color 0.25s ease;
+}
+
 .graph-paper {
   background-image:
     linear-gradient(to right, rgb(var(--color-border) / 0.55) 1px, transparent 1px),

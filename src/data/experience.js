@@ -28,7 +28,7 @@ export const experience = [
     id: "vach-built",
     kind: "milestone",
     period: "Oct 2026",
-    title: "Vach built, installed, in daily use",
+    title: "Vach built and released",
     to: "/projects/vach",
   },
   {
