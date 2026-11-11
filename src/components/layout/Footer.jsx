@@ -5,8 +5,8 @@ import { site } from "../../data/site";
 export default function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="page-container flex flex-wrap items-center justify-between gap-4 py-6 font-mono text-label text-text-secondary">
-        <p>© 2026 {site.name}</p>
+      <div className="page-container flex flex-wrap items-center justify-between gap-4 py-6 font-display text-label text-text-secondary">
+        <p>© 2026 {site.name}. Built with React, Vite and Tailwind; no tracking, no cookies.</p>
         <Link
           to={{ pathname: "/", hash: "#hero" }}
           className="inline-flex items-center gap-1.5 hover:text-text-primary"

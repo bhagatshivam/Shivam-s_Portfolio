@@ -1,13 +1,22 @@
-/* Fonts: only the Latin subset of what the site uses, from the @fontsource packages (see the
-   aliases in vite.config.js). Inter is one variable file (weights 400-600); IBM Plex Mono is 400
-   only. font-display: swap, with a fallback face sized to match Inter so the swap does not
-   shift the layout. The Inter file is preloaded in the built HTML (vite.site-plugin.js). */
+/* Fonts: Latin subsets only, from the @fontsource packages (aliases in vite.config.js).
+   Inter is one variable file (weights 400-700); Bricolage Grotesque is one variable file with
+   the optical-size axis, so display sizes get the tighter cut; IBM Plex Mono is 400 only.
+   font-display: swap, with fallback faces sized to match so the swap does not shift layout. */
 @font-face {
   font-family: "Inter Variable";
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
   src: url("@inter-files/inter-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("@bricolage-files/bricolage-grotesque-latin-opsz-normal.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -27,6 +36,15 @@
   descent-override: 22.48%;
   line-gap-override: 0%;
   size-adjust: 107.4%;
+}
+
+@font-face {
+  font-family: "Bricolage Fallback";
+  src: local("Arial");
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 104%;
 }
 
 @tailwind base;
@@ -50,24 +68,54 @@ html[data-lite="true"] .hover-lift:hover {
   box-shadow: none;
 }
 
-/* Hero backdrop: two static colour glows. No animation, so nothing to switch off in lite mode. */
-.hero-glow {
-  background-image: radial-gradient(48rem 26rem at 88% -4%, rgb(var(--color-accent) / 0.2), transparent 70%),
-    radial-gradient(36rem 22rem at 6% 78%, rgb(var(--color-accent-2) / 0.12), transparent 70%);
+#root {
+  position: relative;
+  z-index: 1;
 }
 
-.text-gradient {
-  background-image: linear-gradient(90deg, rgb(var(--color-accent)), rgb(var(--color-accent-2)));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Graph paper: a faint 32px grid behind the hero only, fading out towards the bottom so the
+   page below it is plain. One CSS gradient, no image. */
+.graph-paper {
+  background-image:
+    linear-gradient(to right, rgb(var(--color-border) / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--color-border) / 0.55) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
 }
 
-/* Scroll reveal: one 8px fade/slide, once. Lite mode renders plain markup (see Reveal.jsx). */
+/* A tick drawn in CSS: used wherever the page says something was checked. */
+.tick::before {
+  content: "";
+  display: inline-block;
+  width: 0.45em;
+  height: 0.8em;
+  margin-right: 0.6em;
+  margin-bottom: 0.1em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  vertical-align: baseline;
+}
+
+/* The one page-load sequence: hero lines rise one after another. Nothing else on the page
+   animates on load; sections below use a single, short reveal when they scroll in. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Scroll reveal: one short fade/slide, once. Lite mode renders plain markup (see Reveal.jsx). */
 .reveal {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transform: translateY(14px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-in {
@@ -75,15 +123,58 @@ html[data-lite="true"] .hover-lift:hover {
   transform: none;
 }
 
-@keyframes reveal-load {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
+.reveal-load {
+  animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* The hero terminal types its lines in; each line is hidden until its turn. */
+.term-line {
+  opacity: 0;
+  animation: term-in 0.01s linear both;
+  animation-delay: var(--t, 0s);
+}
+
+@keyframes term-in {
+  to {
+    opacity: 1;
   }
 }
 
-.reveal-load {
-  animation: reveal-load 0.3s ease-out both;
+html[data-lite="true"] .term-line {
+  opacity: 1;
+  animation: none;
+}
+
+/* Terminal caret in the hero. */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.2em;
+  background: currentColor;
+  animation: blink 1s steps(1) infinite;
+}
+
+/* Underline that draws in from the left on hover: used for text links in copy. */
+.link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-draw:hover,
+.link-draw:focus-visible {
+  background-size: 100% 1px;
 }
 
 /* Case-study figure numbers count only the figures that actually render. */
@@ -98,7 +189,7 @@ html[data-lite="true"] .hover-lift:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -107,7 +198,7 @@ html[data-lite="true"] .hover-lift:hover {
 
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--color-border));
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

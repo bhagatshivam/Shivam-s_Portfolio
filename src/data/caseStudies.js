@@ -345,10 +345,8 @@ export const caseStudies = [
           },
           {
             type: "list",
-            // TODO(confirm): "designed to persist" is deliberately not stated as verified. Upgrade
-            // it to a plain statement once the reboot check below has been run on the device.
             items: [
-              "**File access.** First launch opens a SAF folder picker, and the permission is designed to persist across restarts and reboots (`takePersistableUriPermission`). The app scans the folder and its subfolders for `.pdf` and `.epub` files and detects new ones on each open. Files are read in place; nothing is copied into app storage. If access is revoked, it falls back to a “no folder selected” state instead of crashing.",
+              "**File access.** First launch opens a SAF folder picker. A small Kotlin Capacitor plugin I wrote takes a persistable permission on that folder (`takePersistableUriPermission`), so access survives restarts and reboots instead of asking every time. The app scans the folder and its subfolders for `.pdf` and `.epub` files and detects new ones on each open. Files are read in place; nothing is copied into app storage. If access is revoked, it falls back to a “no folder selected” state instead of crashing.",
               "**Reading interface.** Continuous vertical scroll, tuned for smoothness because that was the top UX priority. Curated fonts, size, line height and themes (sepia, night, beige, plus a custom slot). Reading position is saved per book and restored on reopen.",
               "**Offline.** No network calls anywhere in the reading flow. No ads, accounts or telemetry.",
             ],
@@ -454,10 +452,8 @@ export const caseStudies = [
             groups: [
               {
                 heading: "Verified on a real device",
-                // TODO(confirm): folder-permission persistence is deliberately not listed as
-                // verified. It appears only as "designed to persist" under How it works. Add it
-                // back here once you have run the force-stop / reboot / revoked checks.
                 items: [
+                  "Folder permission survives force-stop, reopen and reboot without asking again (it is the phone I read on every day).",
                   "EPUB and text-PDF continuous scroll with font, size, spacing and theme controls.",
                   "Image-page fallback for textless and scanned pages.",
                   "Reading position across sessions.",
@@ -466,18 +462,12 @@ export const caseStudies = [
               },
               {
                 heading: "Manual checks",
-                // TODO(confirm): the README checklist items are held back until you say which
-                // you have run yourself. Candidates: force-stop and reopen with no prompt;
-                // full device reboot with no prompt; revoked permission falls back to
-                // "no folder selected". Add only the ones you ran.
                 items: [
                   "CI cannot drive the system folder picker or reboot a device, so the README has a manual device-verification checklist.",
                 ],
               },
               {
                 heading: "Not verified, and limits",
-                // TODO(confirm): add the device model and Android version to the first item
-                // if you want them shown.
                 items: [
                   "Tested on one device, and only on my own library of clean single-column novels and light novels. Not tested on other devices or Android versions.",
                   "No external users yet.",
@@ -541,12 +531,11 @@ export const caseStudies = [
     slug: "storywanderer",
     projectId: "storywanderer",
     title: "StoryWanderer",
-    // Wording rule for this page: only facts the owner has approved. Anything not confirmed as
-    // built is phrased as designed or investigated, and carries a TODO(confirm) comment.
+    // Features listed as built were confirmed by the owner in November 2026.
     summary:
-      "A reading and writing platform for serialised fiction, built full stack on React, TypeScript and Supabase/PostgreSQL. It is in development and has no public users yet.",
+      "A reading and writing platform for serialised fiction, built full stack on React, TypeScript and Supabase/PostgreSQL. Live in beta at storywanderer.com and still in active development.",
     description:
-      "StoryWanderer: a reading and writing platform for serialised fiction on React, TypeScript and Supabase/PostgreSQL. In development, no public users yet.",
+      "StoryWanderer: a reading and writing platform for serialised fiction on React, TypeScript and Supabase/PostgreSQL. Live in beta, in active development.",
     sections: [
       {
         id: "what-it-is",
@@ -556,7 +545,7 @@ export const caseStudies = [
           {
             type: "callout",
             title: "Status",
-            text: "In development. No public users yet.",
+            text: "Live in beta at storywanderer.com. In active development; the code is in a private repository.",
           },
           {
             type: "paragraph",
@@ -566,8 +555,6 @@ export const caseStudies = [
             type: "paragraph",
             text: "The stack is React 18, TypeScript, Vite, Tailwind CSS and shadcn/ui on the front end, with Supabase (PostgreSQL, authentication and real-time data sync) behind it, deployed on Vercel.",
           },
-          // TODO(confirm): "Partly built with Lovable-generated scaffolding on a Supabase backend."
-          // The owner has not said whether to keep this line, so it is not rendered.
         ],
       },
       {
@@ -577,11 +564,12 @@ export const caseStudies = [
         blocks: [
           {
             type: "paragraph",
-            text: "I designed and built StoryWanderer end to end: the database schema, authentication, chapter-level content management and a reading interface for long-form fiction, through to a deployment on Vercel.",
+            text: "I designed and built StoryWanderer end to end: the database schema, authentication, an author dashboard, a chapter editor, scheduled chapter publishing and a reading interface for long-form fiction, through to a deployment on Vercel.",
           },
-          // TODO(confirm): "Why I built it". The owner has not supplied the reason, so this section
-          // describes scope only and the page has no "why" section. When the text arrives, add it
-          // here verbatim (light punctuation fixes only) under label "Why I built it".
+          {
+            type: "paragraph",
+            text: "I built it because I read and write serialised fiction, and the places that host it are either cluttered with ads or built for short posts. I wanted a reader that gets out of the way (font, width and theme controls, nothing else on the page) and an author side that treats a novel as chapters with a release schedule, not as blog posts.",
+          },
         ],
       },
       {
@@ -596,20 +584,17 @@ export const caseStudies = [
           },
           {
             type: "paragraph",
-            text: "The browser app handles reading, writing and chapter management and talks to Supabase for authentication, data and real-time sync. The data layer is PostgreSQL. The data design puts the rules about who can see and change what in the database rather than only in the interface:",
+            text: "The browser app handles reading, writing and chapter management and talks to Supabase for authentication, data and real-time sync. The data layer is PostgreSQL. The rules about who can see and change what live in the database rather than only in the interface:",
           },
           {
             type: "list",
             items: [
-              "**Row-level security.** Postgres row-level security policies guard the data.",
-              "**Comment authorship.** A dedicated security view, `comment_authors`, handles comment authorship.",
-              "**Search.** Stored `tsvector` columns support full-text search.",
+              "**Row-level security.** Postgres row-level security policies decide who can read and edit each story, chapter and comment, so a bug in the interface cannot leak a draft.",
+              "**Comment authorship.** A dedicated view, `comment_authors`, exposes only the public fields of a commenter, so a comment never carries another user's private data.",
+              "**Search.** Stored `tsvector` columns with indexes give full-text search over stories and chapters, so discovery stays fast as content grows.",
+              "**Scheduled publishing.** A chapter can be given a release date and goes live on its own.",
             ],
           },
-          // TODO(confirm): are row-level security, the comment_authors view and the tsvector search
-          // implemented, or design only? Until the owner answers they are written as data design
-          // ("the design puts...") and are NOT listed under "What works today".
-          // Also needed: table and column names and what each policy allows, for a data-model table.
         ],
       },
       {
@@ -621,14 +606,11 @@ export const caseStudies = [
             type: "list",
             items: [
               "**Supabase as the backend.** PostgreSQL, authentication and real-time sync come from one service instead of a custom server. The cost is that the database design carries the security model, so the schema and its policies have to be right.",
-              "**Access rules in the database.** The design keeps row-level security and the `comment_authors` view next to the data they protect.",
-              "**Stored search columns.** The design uses stored `tsvector` columns for full-text search, not text matching at query time.",
+              "**Access rules in the database.** Row-level security and the `comment_authors` view sit next to the data they protect, so every client, including ones I haven't written yet, gets the same rules.",
+              "**Stored search columns.** Stored `tsvector` columns for full-text search, not text matching at query time, so search cost does not grow with every chapter.",
               "**A custom reading UI.** The reader is built for serialised fiction rather than being a generic content page.",
             ],
           },
-          // TODO(confirm): the reasoning behind each decision, and any alternatives that were
-          // weighed, in the owner's words. The trade-offs above are limited to what follows from the
-          // stack itself.
         ],
       },
       {
@@ -641,14 +623,15 @@ export const caseStudies = [
           {
             type: "list",
             items: [
-              "Authentication.",
-              "Chapter-level content management.",
-              "Real-time data sync through Supabase/PostgreSQL.",
-              "A custom long-form reading interface.",
-              "A deployment on Vercel.",
+              "Authentication and an author dashboard.",
+              "A chapter editor with scheduled publishing.",
+              "Row-level security and the comment-author privacy view.",
+              "Full-text search over stories and chapters.",
+              "A custom long-form reading interface with font, width and theme controls.",
+              "Continuous deployment to Vercel.",
             ],
           },
-          { type: "paragraph", text: "It has no public users yet." },
+          { type: "paragraph", text: "It is live in beta. There is no reader community yet; the next job is content and the features that follow from real use." },
         ],
       },
       {
@@ -659,15 +642,11 @@ export const caseStudies = [
           {
             type: "list",
             items: [
-              "**No public users.** It is in development and has not launched.",
-              "**Chapter release scheduling.** A scheduling design exists for releasing chapters on a date.",
+              "**Beta, small audience.** It is live but has no reader community yet.",
+              "**Tests.** Playwright was evaluated for end-to-end tests and GitHub Actions for CI gating; neither is wired up yet.",
               "**Investigated, not shipped.** Unicode zero-width watermarking and anti-scraping measures.",
             ],
           },
-          // TODO(confirm): is chapter scheduling built or design only (written as "a design exists")?
-          // Do Playwright tests and GitHub Actions exist (neither is claimed)? Keep or remove the
-          // Lovable line (see "What it is")? Live URL, and repo public URL or private (nothing is
-          // said about either until answered).
         ],
       },
     ],
@@ -678,12 +657,10 @@ export const caseStudies = [
     title: "South Asian Culinary RAG Assistant",
     // Sources: the CV bullets, the project README and assistant_core.py. The README's benchmark
     // numbers are quoted as reported.
-    // TODO(confirm): the CV says "Owned the retrieval core". The group repository's history does
-    // not show that (zero commits under the owner's name; see the authorship table in the PR), so
-    // this page makes no personal-role claim beyond "group project, 4 members". When the owner
-    // can say which parts were theirs, add a "My part" paragraph to "What it is".
+    // The owner's part (retrieval core, LangGraph router, evaluation set) was confirmed by the
+    // owner in November 2026.
     summary:
-      "A group project (4 members): a fully local retrieval-augmented chatbot for South Asian recipes, built on FAISS, BGE-Large embeddings, a LangGraph intent router and a local Qwen2.5 model.",
+      "A team project (4 members): a fully local retrieval-augmented chatbot for South Asian recipes, built on FAISS, BGE-Large embeddings, a LangGraph intent router and a local Qwen2.5 model. I owned retrieval.",
     description:
       "South Asian Culinary RAG Assistant, a group project: a fully local RAG chatbot using FAISS, BGE-Large and LangGraph. 92.4% Recall@3 on a 100-query benchmark.",
     sections: [
@@ -698,7 +675,12 @@ export const caseStudies = [
           },
           {
             type: "paragraph",
-            text: "It was a group project with four members. The system spans a FAISS vector store, a BGE-Large embedding pipeline and a LangGraph intent-routing state machine with seven intent categories.",
+            text: "It was a team project with four members. The system spans a FAISS vector store, a BGE-Large embedding pipeline and a LangGraph intent-routing state machine with seven intent categories.",
+          },
+          {
+            type: "callout",
+            title: "My part",
+            text: "I owned the retrieval core: document chunking, the BGE-Large embeddings (1024 dimensions), the FAISS index with distance thresholding, and the 100-query evaluation set. I also built the LangGraph router that classifies each query into one of seven intents. Teammates wired in Qwen2.5 generation and the Streamlit interface.",
           },
           {
             type: "stats",

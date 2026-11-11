@@ -6,38 +6,69 @@ import ProjectMedia from "./ProjectMedia";
 import StatusChip from "./StatusChip";
 import Tag from "./Tag";
 
-const buttonBase =
-  "inline-flex items-center gap-2 rounded-md px-3.5 py-2 text-small font-medium";
-const primary = `${buttonBase} bg-accent text-accent-ink hover:bg-accent/90`;
-const secondary = `${buttonBase} border border-border-strong text-text-primary hover:border-accent hover:bg-accent/10`;
+const linkClass =
+  "inline-flex items-center gap-1.5 rounded-md border border-border-strong px-3 py-1.5 font-display text-small font-semibold text-text-primary hover:border-accent hover:text-accent";
 
-// Home-page project card: media or branded visual, status, a two-line tagline, tech chips and
-// actions (Case study, Repo, Live only where they exist). Detail lives in the case study.
-export default function ProjectCard({ project }) {
+function Links({ project, primary = true }) {
+  const { github, live } = project.links;
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {primary && project.caseStudy && (
+        <Link to={`/projects/${project.caseStudy}`} className="btn btn-primary !py-2 !text-small">
+          Read the case study
+          <ArrowRight size={15} aria-hidden="true" />
+        </Link>
+      )}
+      {github ? (
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.title} ${project.repoLabel ? "group " : ""}repository on GitHub`}
+          className={linkClass}
+        >
+          <GithubGlyph size={14} />
+          {project.repoLabel ?? "Code"}
+        </a>
+      ) : (
+        project.repoNote && <span className="text-small text-text-secondary">{project.repoNote}</span>
+      )}
+      {live && (
+        <a href={live} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} live site`} className={linkClass}>
+          <ExternalLink size={14} aria-hidden="true" />
+          Live site
+        </a>
+      )}
+    </div>
+  );
+}
+
+// Home-page feature row: media on one side, the case on the other. The media side alternates
+// so the page reads as a sequence of distinct projects rather than a grid of equal tiles.
+export default function ProjectFeature({ project, flip = false }) {
   const { jumpToSkills, focusedProjectIds } = useSkillFocus();
   const highlighted = focusedProjectIds.includes(project.id);
-  const { github, live } = project.links;
 
   return (
     <article
       id={`project-${project.id}`}
-      className={`hover-lift card relative flex h-full flex-col overflow-hidden rounded-xl border hover:border-accent/50 has-[:focus-visible]:border-accent ${
-        highlighted ? "border-accent" : "border-border"
-      }`}
+      className={`grid grid-cols-[minmax(0,1fr)] gap-8 md:grid-cols-12 md:gap-10 ${highlighted ? "outline outline-2 outline-offset-8 outline-accent" : ""}`}
     >
-      <ProjectMedia project={project} />
+      <div className={`md:col-span-5 ${flip ? "md:order-2" : ""}`}>
+        <ProjectMedia project={project} />
+      </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <div className={`min-w-0 md:col-span-7 ${flip ? "md:order-1" : ""}`}>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-small text-text-secondary">
           <StatusChip project={project} />
-          <span className="font-mono text-label text-text-secondary">
-            {[project.context, project.year].filter(Boolean).join(" · ")}
-          </span>
+          <span>{project.context}</span>
+          <span aria-hidden="true" className="h-3 w-px bg-border" />
+          <span>{project.year}</span>
         </div>
 
-        <h3 className="text-h3 text-text-primary">
+        <h3 className="mt-3 text-h3 text-text-primary">
           {project.caseStudy ? (
-            <Link to={`/projects/${project.caseStudy}`} className="hover:underline">
+            <Link to={`/projects/${project.caseStudy}`} className="hover:text-accent">
               {project.title}
             </Link>
           ) : (
@@ -45,56 +76,63 @@ export default function ProjectCard({ project }) {
           )}
         </h3>
 
-        <p className="text-small text-text-secondary">{project.tagline}</p>
+        <p className="mt-3 max-w-[62ch] text-body text-text-secondary">{project.plain}</p>
 
-        <ul className="flex flex-wrap gap-1.5" aria-label="Tech">
-          {project.tech.slice(0, 4).map((t) => (
+        {project.points?.length > 0 && (
+          <ul className="mt-4 max-w-[62ch] space-y-2 text-small text-text-primary">
+            {project.points.map((point) => (
+              <li key={point} className="flex gap-3">
+                <span aria-hidden="true" className="tick mt-[0.15em] shrink-0 text-accent" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Built with">
+          {project.tech.map((t) => (
+            <Tag key={t}>{t}</Tag>
+          ))}
+          <li>
+            <button
+              type="button"
+              onClick={() => jumpToSkills(project.skillIds, project.title)}
+              aria-label={`See every skill used in ${project.title}`}
+              className="rounded-md px-2 py-1 font-display text-label leading-none text-accent hover:underline"
+            >
+              All skills used
+            </button>
+          </li>
+        </ul>
+
+        <div className="mt-6">
+          <Links project={project} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// Compact row for the "also built" list.
+export function ProjectRow({ project }) {
+  return (
+    <article id={`project-${project.id}`} className="grid gap-x-8 gap-y-2 py-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h4 className="text-h4 text-text-primary">{project.title}</h4>
+          <span className="text-small text-text-secondary">
+            {project.context}, {project.year}
+          </span>
+        </div>
+        <p className="mt-1.5 max-w-[70ch] text-small text-text-secondary">{project.plain}</p>
+        <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Built with">
+          {project.tech.map((t) => (
             <Tag key={t}>{t}</Tag>
           ))}
         </ul>
-
-        <div className="mt-auto flex flex-wrap items-center gap-2 pt-3">
-          {project.caseStudy && (
-            <Link to={`/projects/${project.caseStudy}`} className={primary}>
-              Case study
-              <ArrowRight size={14} aria-hidden="true" />
-            </Link>
-          )}
-          {github ? (
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} ${project.repoLabel ? "group " : ""}repository on GitHub`}
-              className={secondary}
-            >
-              <GithubGlyph size={14} />
-              {project.repoLabel ?? "Repo"}
-            </a>
-          ) : (
-            project.repoNote && <span className="font-mono text-label text-text-secondary">{project.repoNote}</span>
-          )}
-          {live && (
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} live site`}
-              className={secondary}
-            >
-              <ExternalLink size={14} aria-hidden="true" />
-              Live
-            </a>
-          )}
-          <button
-            type="button"
-            onClick={() => jumpToSkills(project.skillIds, project.title)}
-            aria-label={`Skills used in ${project.title}`}
-            className="ml-auto font-mono text-label text-text-secondary hover:text-text-primary"
-          >
-            Skills ↓
-          </button>
-        </div>
+      </div>
+      <div className="md:pt-1">
+        <Links project={project} primary={false} />
       </div>
     </article>
   );

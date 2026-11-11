@@ -12,10 +12,10 @@ My personal portfolio: a single-page React site with a home page (hero, projects
 | Build | Vite 8 with a small build plugin, [`vite.site-plugin.js`](vite.site-plugin.js) |
 | Styling | Tailwind CSS 3, with the design tokens in [`design-tokens.js`](design-tokens.js) |
 | Icons | lucide-react for interface icons; skill logos are SVG paths copied from `simple-icons` at development time ([`scripts/skill-icons.mjs`](scripts/skill-icons.mjs)), so nothing is loaded from a CDN |
-| Fonts | Inter and IBM Plex Mono, Latin subset, from `@fontsource` packages (self-hosted) |
+| Fonts | Bricolage Grotesque (headings), Inter (text) and IBM Plex Mono (program output), Latin subsets, from `@fontsource` packages (self-hosted) |
 | Hosting | Vercel (`vercel.json`: clean URLs plus a single-page-app rewrite) |
 
-There are no animation libraries. Motion is CSS only, plus one small canvas on the hero. A "lite mode" toggle (bottom right) switches all of it off, and it is on by default when the visitor's system asks for reduced motion.
+There are no animation libraries. The only motion is the hero panel typing in real output from the dissertation tool, in CSS. A "lite mode" toggle (bottom right) switches all of it off, and it is on by default when the visitor's system asks for reduced motion.
 
 The build plugin writes, from the data files: a static HTML page for each case study (so link previews and crawlers see the right title and description without running JavaScript), `sitemap.xml`, `robots.txt`, the canonical and Open Graph tags, and the JSON-LD block.
 

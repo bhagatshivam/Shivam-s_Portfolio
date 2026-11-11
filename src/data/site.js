@@ -1,65 +1,83 @@
-// Site-wide copy that used to be hardcoded in components. Wording rules: SITE_REBUILD_PLAN.md §1.
-// Never "graduated", never "Available now", no graduate-role wording.
+// Site-wide copy. Wording matches the November 2026 CVs: never "graduated", never "available
+// now", visa kept to one small line.
 
 export const site = {
-  // Used in the navbar, the hero heading and the page titles. The full legal name stays on the CV.
+  // Used in the navbar, the hero heading and the page titles.
   name: "Shivam Bhagat",
   title: "Shivam Bhagat | Software Engineer",
-  // Under 160 characters, from approved text only.
+  // Under 160 characters.
   metaDescription:
-    "MSc Advanced Computer Science student at the University of Manchester. Dissertation on generating CI pipeline documentation; Vach, an Android PDF/EPUB reader.",
+    "Software engineer, MSc Advanced Computer Science at the University of Manchester. Builds developer tools, reading apps and LLM systems, and proves they work.",
 
-  // Hero identity line.
-  identity: "Software engineer.",
-  identityDetail: "I build developer tools and small, practical software.",
-  // One line of proof, from the dissertation evaluation (§9: Table 3.2, §3.2).
-  heroProof:
-    "My MSc dissertation tool captured 95.5% of 201 pre-registered facts across 10 held-out pipelines; a naive raw-YAML-to-LLM baseline captured 53.2%.",
-  // Proof chips under the proof line; `project` links to that project's page when it has one.
+  // Hero. The headline is the one thing on the page allowed to be loud.
+  heroHeadline: ["I build software", "and prove it works."],
+  heroLead:
+    "Developer tools, reading apps and LLM systems, each shipped with tests, CI and a measured result. MSc Advanced Computer Science at the University of Manchester, graduating December 2026.",
+  // Proof chips under the lead; `project` links to that project's page when it has one.
   heroChips: [
-    { project: "ci-pipeline-docs", label: "MSc dissertation", detail: "CI pipeline documentation tool" },
-    { project: "vach", label: "Vach", detail: "Android PDF/EPUB reader" },
-    { project: "storywanderer", label: "StoryWanderer", detail: "full-stack reading platform" },
+    { project: "ci-pipeline-docs", label: "95.5% fact recall", detail: "dissertation tool, pre-registered evaluation" },
+    { project: "vach", label: "In daily use", detail: "Vach, an Android reader I built for myself" },
+    { project: "storywanderer", label: "Live", detail: "StoryWanderer, a full-stack publishing platform" },
   ],
-  // Facts strip at the foot of the hero.
+  // Facts strip under the hero.
   heroFacts: [
-    { label: "Master's", value: "MSc Advanced Computer Science, Manchester" },
-    { label: "Bachelor's", value: "B.E. Computer Engineering, Pune" },
-    { label: "Looking for", value: "UK roles from November 2026" },
+    { label: "Study", value: "MSc Advanced Computer Science, University of Manchester" },
+    { label: "Before that", value: "B.E. Computer Engineering (Honours in AI & ML), Pune" },
+    { label: "Looking for", value: "Graduate or junior software engineering roles in the UK" },
+    { label: "Right to work", value: "UK Graduate visa (2 years)" },
   ],
 
   // Exact wording; keep identical on the site, CV and LinkedIn.
-  availability: "Available for full-time software engineering roles in the UK from November 2026",
-
-  // TODO(confirm): check against gov.uk and the real visa timeline (the Graduate Route starts
-  // after the Home Office grants it, which follows the university confirming completion).
-  // The wording must be true on the day the site goes live. NOT rendered anywhere yet.
-  workRights: "Graduate Route right to work, no sponsorship required",
-
-  // Proof strip (not rendered yet). Sources are the dissertation tables in the plan's §9.
-  // TODO(confirm): which three numbers lead the strip.
-  proofStrip: [
-    { value: "95.5%", label: "of 201 pre-registered facts captured (192/201)", source: "Table 3.2" },
-    { value: "53.2%", label: "for a naive raw-YAML-to-LLM baseline (107/201)", source: "Table 3.2" },
-    { value: "10", label: "held-out pipelines", source: "§3.2" },
-  ],
+  availability: "Open to graduate and junior software engineering roles in the UK",
 
   contact: {
     email: "bhagatshivam082@gmail.com",
-    linkedin: "https://www.linkedin.com/in/shivam-bhagat",
+    linkedin: "https://www.linkedin.com/in/shivam-bhagat/",
     linkedinLabel: "linkedin.com/in/shivam-bhagat",
     github: "https://github.com/bhagatshivam",
     githubLabel: "github.com/bhagatshivam",
     cv: "/Shivam_Bhagat_CV.pdf",
   },
 
-  contactIntro: "I'm looking for full-time software engineering roles in the UK from November 2026.",
+  contactHeadline: "Let's build something that works.",
+  contactIntro:
+    "I'm looking for a graduate or junior software engineering role in the UK, in a team that cares about reliable products. If that's you, I'd like to hear from you.",
 
-  // The first three sentences of `about`, shown directly under the hero.
-  aboutShort:
-    "I'm an MSc Advanced Computer Science student at the University of Manchester. I studied in Pune, India before moving here for the degree. I like building developer tools and small, practical software, and I care about being able to show that it works.",
+  // About: what the projects have in common, and the person behind them.
+  aboutLead:
+    "I came to Manchester from Pune, India, for the MSc. The three things I've shipped since all started as something I wanted to exist: a tool that documents CI pipelines so the docs stop going stale, a reading app without ads, and a place to publish serialised fiction.",
+  aboutBody: [
+    "The habit that runs through all of them is checking. My dissertation spent as much effort on evaluation as on the tool itself: 201 facts written down before any output existed, a baseline to beat, and a public file listing what the tool still gets wrong. I'd rather say less and have every claim hold up.",
+    "I work in small, reviewable pull requests, write the tests first when I can, and use AI coding tools the way I'd use a very fast junior colleague: with a plan, a review, and credit in the commit message.",
+  ],
+  // Beyond the code. Each one is true, specific and short.
+  beyond: [
+    {
+      id: "writing",
+      title: "I write fantasy",
+      text: "Under the pen name BookWanderer. Vach and StoryWanderer both exist because I read and write a lot of long-form fiction.",
+    },
+    {
+      id: "karate",
+      title: "Karate black belt",
+      text: "Earned early, and the reason I'm comfortable with slow, repetitive practice until something is right.",
+    },
+    {
+      id: "reading",
+      title: "Anime and novels",
+      text: "Mostly fantasy with a proper magic system. Ask me about hard versus soft magic and I'll talk for a while.",
+    },
+    {
+      id: "languages",
+      title: "Three languages",
+      text: "English (C1), Hindi and Marathi. Currently also learning guitar, badly, and cooking my way round Manchester.",
+    },
+  ],
 
-  // TODO(confirm): add "Karate black belt" to the last sentence if you want it public.
-  about:
-    "I'm an MSc Advanced Computer Science student at the University of Manchester. I studied in Pune, India before moving here for the degree. I like building developer tools and small, practical software, and I care about being able to show that it works: my dissertation spent as much effort on evaluation as on the tool. Outside of code I read, hike and watch anime.",
+  // The three numbers that summarise the dissertation evaluation (Table 3.2, §3.2).
+  proofStrip: [
+    { value: "95.5%", label: "of 201 pre-registered facts captured, with zero false statements" },
+    { value: "53.2%", label: "for the same LLM handed the raw YAML instead" },
+    { value: "439", label: "automated tests across 38 modules, run in CI on every push" },
+  ],
 };

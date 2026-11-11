@@ -7,7 +7,6 @@ import { caseStudyTitle } from "../../data/seo";
 import { GithubGlyph } from "../ui/icons";
 import StatusChip from "../ui/StatusChip";
 import Tag from "../ui/Tag";
-import SectionHeader from "../ui/SectionHeader";
 import { getCaseStudy } from "../../data/caseStudies";
 import Block from "./Blocks";
 
@@ -47,12 +46,12 @@ export default function CaseStudyLayout({ entry }) {
         <header className="pb-10 pt-10 md:pb-14 md:pt-16">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <StatusChip project={project} />
-            <span className="font-mono text-label text-text-secondary">
-              Case study · {[project.context, project.year].filter(Boolean).join(" · ")}
+            <span className="font-display text-label text-text-secondary">
+              Case study, {[project.context, project.year].filter(Boolean).join(", ")}
             </span>
           </div>
 
-          <h1 className="mt-5 max-w-3xl text-display text-text-primary [overflow-wrap:anywhere] md:[overflow-wrap:normal]">
+          <h1 className="mt-5 max-w-3xl text-[clamp(2.2rem,1.4rem+3vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-text-primary [overflow-wrap:anywhere] md:[overflow-wrap:normal]">
             {entry.title}
           </h1>
           <p className="mt-5 max-w-[60ch] text-lead text-text-secondary">{entry.summary}</p>
@@ -70,13 +69,13 @@ export default function CaseStudyLayout({ entry }) {
               </a>
             )}
             {!project.links.github && project.repoNote && (
-              <span className="font-mono text-label text-text-secondary">{project.repoNote}</span>
+              <span className="font-display text-label text-text-secondary">{project.repoNote}</span>
             )}
             <button
               type="button"
               onClick={() => jumpToSkills(project.skillIds, project.title)}
               aria-label={`Skills used in ${project.title}`}
-              className="font-mono text-label text-text-secondary hover:text-text-primary"
+              className="font-display text-label text-text-secondary hover:text-text-primary"
             >
               Skills used ↓
             </button>
@@ -89,7 +88,7 @@ export default function CaseStudyLayout({ entry }) {
           </ul>
 
           <nav aria-label="On this page" className="mt-10 max-w-[70ch] border-t border-border pt-4">
-            <p className="font-mono text-label text-text-secondary">On this page</p>
+            <p className="font-display text-label text-text-secondary">On this page</p>
             <ol className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
               {entry.sections.map((section, i) => (
                 <li key={section.id}>
@@ -97,7 +96,7 @@ export default function CaseStudyLayout({ entry }) {
                     to={{ pathname: `/projects/${entry.slug}`, hash: `#${section.id}` }}
                     className="text-small text-text-secondary hover:text-text-primary"
                   >
-                    <span className="font-mono text-label text-accent">{String(i + 1).padStart(2, "0")}</span>{" "}
+                    <span className="font-display text-label text-accent">{String(i + 1).padStart(2, "0")}</span>{" "}
                     {section.label}
                   </Link>
                 </li>
@@ -113,12 +112,15 @@ export default function CaseStudyLayout({ entry }) {
             aria-labelledby={`${section.id}-title`}
             className="border-t border-border py-12 md:py-16"
           >
-            <SectionHeader
-              id={`${section.id}-title`}
-              number={String(i + 1).padStart(2, "0")}
-              label={section.label}
-              title={section.title}
-            />
+            <div className="mb-8 md:mb-10">
+              <p className="font-display text-label font-semibold text-accent">
+                {String(i + 1).padStart(2, "0")}
+                <span className="ml-2 text-text-secondary">{section.label}</span>
+              </p>
+              <h2 id={`${section.id}-title`} className="mt-2 max-w-3xl text-h2 text-text-primary">
+                {section.title}
+              </h2>
+            </div>
             <div className="space-y-6">
               {section.blocks.map((block, b) => (
                 <Block key={b} block={block} project={project} />
@@ -133,7 +135,7 @@ export default function CaseStudyLayout({ entry }) {
               to={`/projects/${prev.caseStudy}`}
               className="hover-lift card rounded-xl border border-border p-5 hover:border-accent/50"
             >
-              <span className="inline-flex items-center gap-1.5 font-mono text-label text-text-secondary">
+              <span className="inline-flex items-center gap-1.5 font-display text-label text-text-secondary">
                 <ArrowLeft size={14} aria-hidden="true" /> Previous
               </span>
               <span className="mt-2 block text-h3 text-text-primary">{getCaseStudy(prev.caseStudy)?.title ?? prev.title}</span>
@@ -146,7 +148,7 @@ export default function CaseStudyLayout({ entry }) {
               to={`/projects/${next.caseStudy}`}
               className="hover-lift card rounded-xl border border-border p-5 text-left hover:border-accent/50 sm:text-right"
             >
-              <span className="inline-flex items-center gap-1.5 font-mono text-label text-text-secondary">
+              <span className="inline-flex items-center gap-1.5 font-display text-label text-text-secondary">
                 Next <ArrowRight size={14} aria-hidden="true" />
               </span>
               <span className="mt-2 block text-h3 text-text-primary">{getCaseStudy(next.caseStudy)?.title ?? next.title}</span>

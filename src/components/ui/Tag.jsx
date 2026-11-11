@@ -1,6 +1,6 @@
 export default function Tag({ children }) {
   return (
-    <li className="rounded border border-border px-2 py-1 font-mono text-[11px] leading-none text-text-secondary">
+    <li className="rounded-md border border-border bg-surface px-2 py-1 font-display text-label leading-none text-text-secondary">
       {children}
     </li>
   );

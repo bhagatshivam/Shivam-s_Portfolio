@@ -1,28 +1,35 @@
-import { featuredProjects } from "../../data/projects";
-import ProjectCard from "../ui/ProjectCard";
-import Reveal from "../ui/Reveal";
-import SectionHeader from "../ui/SectionHeader";
+import { featuredProjects, moreProjects } from "../../data/projects";
+import ProjectFeature, { ProjectRow } from "../ui/ProjectCard";
+import SectionHeader, { SectionShell } from "../ui/SectionHeader";
 
-// Six-column grid on large screens: three cards on the first row, two wider ones below.
 export default function Projects() {
   return (
-    <div className="section-y">
-      <div className="page-container">
+    <SectionShell
+      header={
         <SectionHeader
           id="projects-title"
-          number="01"
           title="Projects"
-          intro="Developer tooling, a shipped Android app, full-stack, and applied AI."
+          intro="Four things I built and measured. Each one has a page with the architecture, the numbers and what still goes wrong."
         />
+      }
+    >
+      <ol className="divide-y divide-border border-y border-border">
+        {featuredProjects.map((project, i) => (
+          <li key={project.id} className="py-10 first:pt-0 md:py-14 md:first:pt-0">
+            <ProjectFeature project={project} flip={i % 2 === 1} />
+          </li>
+        ))}
+      </ol>
 
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-2 lg:grid-cols-6">
-          {featuredProjects.map((project, i) => (
-            <Reveal key={project.id} delay={(i % 3) * 0.05} className={i < 3 ? "lg:col-span-2" : i === 4 ? "md:col-span-2 lg:col-span-3" : "lg:col-span-3"}>
-              <ProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </div>
+      <h3 className="mt-14 text-h4 text-text-primary">Also built</h3>
+      <p className="mt-1 text-small text-text-secondary">Earlier and smaller work, still with the numbers that go with it.</p>
+      <ul className="mt-5 divide-y divide-border border-y border-border">
+        {moreProjects.map((project) => (
+          <li key={project.id}>
+            <ProjectRow project={project} />
+          </li>
+        ))}
+      </ul>
+    </SectionShell>
   );
 }

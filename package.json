@@ -16,6 +16,7 @@
     "skill-icons": "node scripts/skill-icons.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource/ibm-plex-mono": "^5.3.0",
     "autoprefixer": "^10.5.0",

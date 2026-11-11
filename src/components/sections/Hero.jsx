@@ -4,10 +4,7 @@ import { site } from "../../data/site";
 import { projects } from "../../data/projects";
 import Reveal from "../ui/Reveal";
 import CvLink from "../ui/CvLink";
-import HeroVisual from "../ui/HeroVisual";
-
-const outlineButton =
-  "inline-flex items-center justify-center gap-2 rounded-md border border-border-strong px-4 py-2.5 text-small sm:px-5 sm:py-3 sm:text-body font-medium text-text-primary hover:border-accent hover:bg-accent/10";
+import HeroTerminal from "../ui/HeroTerminal";
 
 function chipTarget(chip) {
   const project = projects.find((p) => p.id === chip.project);
@@ -16,62 +13,59 @@ function chipTarget(chip) {
 
 export default function Hero() {
   return (
-    <div className="hero-glow relative overflow-hidden pb-12 pt-28 md:pb-16 md:pt-36">
-      <HeroVisual />
-      <div className="page-container relative">
+    <div className="relative overflow-hidden pb-14 pt-28 md:pb-20 md:pt-36">
+      <div aria-hidden="true" className="graph-paper absolute inset-0" />
+
+      <div className="page-container relative grid grid-cols-[minmax(0,1fr)] items-start gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
         <Reveal immediate>
-          {/* Static dot: nothing on this page loops. */}
-          <p className="inline-flex items-start gap-2.5 rounded-2xl border border-accent/40 bg-accent/10 px-3.5 py-2 text-small text-text-primary">
-            <span aria-hidden="true" className="mt-[0.5em] h-2 w-2 shrink-0 rounded-full bg-accent" />
+          <p className="inline-flex items-center gap-2 rounded-md bg-accent-soft px-3 py-1.5 font-display text-label font-semibold text-accent">
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
             {site.availability}
           </p>
 
-          <h1 className="mt-7 text-display text-text-primary">{site.name}</h1>
+          <h1 className="mt-8 text-display text-text-primary">
+            {site.heroHeadline[0]}
+            <br />
+            {site.heroHeadline[1]}
+          </h1>
 
-          <p className="mt-5 max-w-4xl text-lead text-text-primary">
-            <span className="text-gradient font-semibold">{site.identity}</span> {site.identityDetail}
-          </p>
-          <p className="mt-4 max-w-3xl text-body text-text-secondary">{site.heroProof}</p>
+          <p className="mt-6 max-w-[56ch] text-lead text-text-secondary">{site.heroLead}</p>
 
-          <ul className="mt-6 flex flex-wrap gap-2.5" aria-label="Featured work">
+          <ul className="mt-7 flex flex-wrap gap-2" aria-label="Three things to check">
             {site.heroChips.map((chip) => (
               <li key={chip.project}>
                 <Link
                   to={chipTarget(chip)}
-                  className="inline-flex flex-wrap items-baseline gap-x-2 rounded-full border border-border-strong bg-surface/80 px-4 py-2 text-small hover:border-accent hover:bg-accent/10"
+                  className="group inline-flex items-baseline gap-x-2 rounded-md border border-border bg-surface px-3 py-1.5 text-small hover:border-accent"
                 >
-                  <span className="font-semibold text-text-primary">{chip.label}</span>
-                  <span className="text-text-secondary">{chip.detail}</span>
+                  <span className="tick whitespace-nowrap font-display font-semibold text-accent">{chip.label}</span>
+                  <span className="text-text-secondary group-hover:text-text-primary">{chip.detail}</span>
                 </Link>
               </li>
             ))}
           </ul>
 
-          <div className="mt-9 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
-            <Link
-              to={{ pathname: "/", hash: "#projects" }}
-              className="col-span-2 inline-flex items-center justify-center gap-2 rounded-md bg-accent px-4 py-2.5 text-small sm:px-5 sm:py-3 sm:text-body font-semibold text-accent-ink hover:bg-accent/90"
-            >
-              View work
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to={{ pathname: "/", hash: "#projects" }} className="btn btn-primary">
+              See the projects
               <ArrowRight size={16} aria-hidden="true" />
             </Link>
             <CvLink variant="hero" />
-            <Link to={{ pathname: "/", hash: "#contact" }} className={outlineButton}>
-              Contact
-            </Link>
           </div>
 
-          {/* Work-rights sentence (site.workRights) is deliberately not rendered until confirmed. */}
+          <dl className="mt-12 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-4 border-t border-border pt-6 text-small sm:grid-cols-4">
+            {site.heroFacts.map((fact) => (
+              <div key={fact.label}>
+                <dt className="font-display text-label text-text-secondary">{fact.label}</dt>
+                <dd className="mt-0.5 font-medium text-text-primary">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
 
-        <dl className="mt-14 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
-          {site.heroFacts.map((fact) => (
-            <div key={fact.label} className="bg-background/90 px-5 py-4">
-              <dt className="font-mono text-label text-text-secondary">{fact.label}</dt>
-              <dd className="mt-1 text-small font-medium text-text-primary">{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
+        <Reveal immediate delay={0.15} className="lg:pt-6">
+          <HeroTerminal />
+        </Reveal>
       </div>
     </div>
   );

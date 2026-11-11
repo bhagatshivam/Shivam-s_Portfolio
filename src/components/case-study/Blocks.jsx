@@ -21,7 +21,7 @@ function List({ block }) {
   const Tag = block.ordered ? "ol" : "ul";
   return (
     <Tag
-      className={`${PROSE} space-y-2.5 pl-5 text-body text-text-secondary marker:font-mono marker:text-accent ${
+      className={`${PROSE} space-y-2.5 pl-5 text-body text-text-secondary marker:text-accent ${
         block.ordered ? "list-decimal" : "list-disc"
       }`}
     >
@@ -38,7 +38,7 @@ function Panel({ block }) {
   // A bordered block of labelled lists (used for "Limits and what is not verified").
   return (
     <aside className={`${PROSE} rounded-xl border border-border-strong bg-surface p-5 md:p-6`}>
-      <p className="font-mono text-label text-accent">{block.title}</p>
+      <p className="font-display text-label text-accent">{block.title}</p>
       <div className="mt-4 space-y-6">
         {block.groups.map((group) => (
           <div key={group.heading}>
@@ -69,7 +69,7 @@ function Table({ block }) {
                 <th
                   key={i}
                   scope="col"
-                  className={`px-2 py-2.5 font-mono text-label font-normal text-text-secondary sm:px-4 ${
+                  className={`px-2 py-2.5 font-display text-label font-normal text-text-secondary sm:px-4 ${
                     i > 0 && !block.textual ? "text-right tabular-nums" : ""
                   }`}
                 >
@@ -106,7 +106,7 @@ function Table({ block }) {
           </tbody>
         </table>
       </div>
-      <figcaption className="mt-2 font-mono text-label text-text-secondary">{block.caption}</figcaption>
+      <figcaption className="mt-2 font-display text-label text-text-secondary">{block.caption}</figcaption>
     </figure>
   );
 }
@@ -131,7 +131,7 @@ function Stats({ block }) {
 function Callout({ block }) {
   return (
     <aside className={`${PROSE} rounded-lg border border-border border-l-2 border-l-accent bg-surface px-5 py-4`}>
-      <p className="font-mono text-label text-accent">{block.title}</p>
+      <p className="font-display text-label text-accent">{block.title}</p>
       <p className="mt-2 text-body text-text-primary">
         <Inline text={block.text} />
       </p>
@@ -150,7 +150,7 @@ function Figure({ block, project }) {
         <Component data={block.data} project={project} />
       </div>
       {/* "Figure N." comes from a CSS counter, so a figure that renders nothing is skipped. */}
-      <figcaption className="figure-caption mt-3 font-mono text-label text-text-secondary">
+      <figcaption className="figure-caption mt-3 font-display text-label text-text-secondary">
         <Inline text={block.caption} />
       </figcaption>
     </figure>

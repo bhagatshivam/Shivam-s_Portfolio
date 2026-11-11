@@ -13,8 +13,8 @@ const navLinks = [
 ];
 const sectionIds = [...navLinks.map((l) => l.hash.slice(1)), "contact"];
 
-const linkClass = "text-small text-text-secondary hover:text-text-primary";
-const activeClass = "text-small font-medium text-text-primary";
+const linkClass = "font-display text-small font-medium text-text-secondary hover:text-text-primary";
+const activeClass = "font-display text-small font-semibold text-text-primary";
 
 export default function Navbar() {
   // The menu is open only for the location it was opened at, so any navigation closes it.
@@ -31,7 +31,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:rounded focus:bg-accent focus:px-3 focus:py-1.5 focus:text-small focus:text-accent-ink"
@@ -40,7 +40,7 @@ export default function Navbar() {
       </a>
 
       <div className="page-container flex h-14 items-center justify-between gap-4">
-        <Link to="/" className="text-small font-semibold text-text-primary">
+        <Link to="/" className="font-display text-body font-semibold tracking-tight text-text-primary">
           {site.name}
         </Link>
 
@@ -66,7 +66,7 @@ export default function Navbar() {
           <Link
             to={{ pathname: "/", hash: "#contact" }}
             aria-current={active === "contact" ? "location" : undefined}
-            className="rounded-md bg-accent px-3 py-1.5 text-small font-semibold text-accent-ink hover:bg-accent/90"
+            className="rounded-md bg-accent px-3 py-1.5 font-display text-small font-semibold text-accent-ink hover:bg-text-primary"
           >
             Contact
           </Link>

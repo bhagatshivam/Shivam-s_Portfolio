@@ -14,7 +14,7 @@ export default function NotFound() {
 
   return (
     <div className="page-container pb-24 pt-28 md:pt-40">
-      <p className="font-mono text-label text-text-secondary">
+      <p className="font-display text-label text-text-secondary">
         <span className="text-accent">404</span> / Not found
       </p>
       <h1 className="mt-3 max-w-3xl text-h2 text-text-primary">This page does not exist.</h1>

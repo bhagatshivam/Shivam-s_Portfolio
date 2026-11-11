@@ -55,13 +55,15 @@ export default function sitePlugin() {
       if (!index) return;
       let template = index.source.toString();
 
-      // Preload the critical font.
-      const font = Object.keys(bundle).find((f) => /inter-latin-wght-normal.*\.woff2$/.test(f));
-      if (font) {
-        template = template.replace(
-          "</head>",
-          `    <link rel="preload" href="/${font}" as="font" type="font/woff2" crossorigin />\n  </head>`
-        );
+      // Preload the two critical fonts (body sans and the display serif).
+      const critical = Object.keys(bundle).filter((f) =>
+        /(inter-latin-wght-normal|fraunces-latin-wght-normal).*\.woff2$/.test(f)
+      );
+      if (critical.length) {
+        const links = critical
+          .map((font) => `    <link rel="preload" href="/${font}" as="font" type="font/woff2" crossorigin />`)
+          .join("\n");
+        template = template.replace("</head>", `${links}\n  </head>`);
       }
 
       // Inline the stylesheet.

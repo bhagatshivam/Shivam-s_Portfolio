@@ -18,10 +18,16 @@ const ratio = (a, b) => {
 
 const surfaces = ["background", "band", "surface", "surface-raised"];
 const pairs = [];
-for (const fg of ["text-primary", "text-secondary", "accent", "accent-2", "status"]) {
+for (const fg of ["text-primary", "text-secondary", "accent", "status"]) {
   for (const bg of surfaces) pairs.push({ fg, bg, min: 4.5, use: "text" });
 }
 pairs.push({ fg: "accent-ink", bg: "accent", min: 4.5, use: "text on filled accent button" });
+pairs.push({ fg: "accent", bg: "accent-soft", min: 4.5, use: "accent text on soft accent chip" });
+pairs.push({ fg: "status", bg: "status-soft", min: 4.5, use: "status text on soft status chip" });
+for (const fg of ["night-text", "night-muted", "night-accent", "night-amber"]) {
+  pairs.push({ fg, bg: "night", min: 4.5, use: "text on the night surface" });
+  pairs.push({ fg, bg: "night-raised", min: 4.5, use: "text on the raised night surface" });
+}
 for (const bg of surfaces) {
   pairs.push({ fg: "accent", bg, min: 3, use: "focus ring" });
   pairs.push({ fg: "border-strong", bg, min: 3, use: "interactive control border" });

@@ -11,6 +11,7 @@ export default defineConfig({
     alias: {
       '@inter-files': path.resolve('node_modules/@fontsource-variable/inter/files'),
       '@plex-files': path.resolve('node_modules/@fontsource/ibm-plex-mono/files'),
+      '@bricolage-files': path.resolve('node_modules/@fontsource-variable/bricolage-grotesque/files'),
     },
   },
 })
